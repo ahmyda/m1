@@ -1,94 +1,2146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon</title>
-  <style>
-    :root {
-      --primary: #3f51b5;
-      --bg: #f4f6fb;
-      --card-bg: #ffffff;
-      --text: #2c2c2c;
-      --muted: #6b7280;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA Study Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #1abc9c;
+            --light-bg: #ecf0f1;
+            --light-card: #ffffff;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        /* Dark mode */
+        .dark-mode {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #1abc9c;
+            --light-bg: #2c3e50;
+            --light-card: #34495e;
+            --dark-text: #ecf0f1;
+            --light-text: #bdc3c7;
+        }
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #eef2ff, #f9fafb);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      text-align: center;
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-      max-width: 500px;
-      width: 100%;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            padding-bottom: 40px;
+            font-size: 100%;
+        }
 
-    h1 {
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-    p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
 
-    .back-link {
-      display: inline-block;
-      padding: 10px 24px;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.2s;
-    }
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-    .back-link:hover,
-    .back-link:focus {
-      background: #303f9f;
-      transform: translateY(-2px);
-      outline: none;
-    }
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 20px;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-    }
-  </style>
+        .header-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .theme-toggle, .font-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover, .font-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            margin: 20px 15px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 120px;
+            background: none;
+            border: none;
+            padding: 18px 5px;
+            font-weight: 600;
+            color: var(--light-text);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .tab-btn i {
+            font-size: 1.3rem;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: rgba(44, 62, 80, 0.08);
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            right: 15%;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px 2px 0 0;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .section-card {
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+            border-left: 6px solid var(--primary);
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(44, 62, 80, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            background: rgba(26, 188, 156, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .subsection-title {
+            color: rgb(116, 6, 6);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Tables - Optimized for Mobile */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: rgba(44, 62, 80, 0.05);
+            border-radius: 3px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+            font-size: 0.95rem;
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(44, 62, 80, 0.03);
+        }
+
+        table tr:hover {
+            background-color: rgba(44, 62, 80, 0.08);
+        }
+
+        /* Mobile Table Styling */
+        @media (max-width: 768px) {
+            table {
+                min-width: 500px;
+            }
+            
+            table th, table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* List Styling */
+        ul, ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Interactive Elements */
+        .toggle-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 0;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background-color: rgba(44, 62, 80, 0.03);
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+        }
+
+        .hidden-content.active {
+            max-height: 1000px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .quiz-progress {
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(44, 62, 80, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--dark-text);
+            line-height: 1.5;
+            background: rgba(44, 62, 80, 0.05);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--accent);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .quiz-option {
+            padding: 18px;
+            border: 2px solid rgba(44, 62, 80, 0.1);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quiz-option:hover {
+            background-color: rgba(44, 62, 80, 0.05);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.selected {
+            background-color: rgba(44, 62, 80, 0.1);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-color: var(--danger);
+        }
+
+        .option-letter {
+            width: 36px;
+            height: 36px;
+            background: rgba(44, 62, 80, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark-text);
+            flex-shrink: 0;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .quiz-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quiz-btn:hover:not(:disabled) {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .quiz-btn:disabled {
+            background-color: var(--light-text);
+            cursor: not-allowed;
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .concept-card {
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            border-top: 6px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            background: rgba(44, 62, 80, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 2px 5px;
+        }
+
+        .badge-key {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--secondary);
+        }
+
+        .badge-term {
+            background: rgba(26, 188, 156, 0.1);
+            color: var(--accent);
+        }
+
+        .badge-theory {
+            background: rgba(241, 196, 15, 0.1);
+            color: var(--warning);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-tabs {
+                margin: 15px 10px;
+            }
+            
+            .tab-btn {
+                padding: 15px 5px;
+                font-size: 0.85rem;
+                min-width: 100px;
+            }
+            
+            .tab-btn i {
+                font-size: 1.1rem;
+            }
+            
+            .section-card, .quiz-container {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .section-title i {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 400px) {
+            header {
+                padding: 15px 0;
+            }
+            
+            header h1 {
+                font-size: 1.3rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            header p {
+                font-size: 0.9rem;
+                padding: 0 10px;
+            }
+            
+            .header-controls {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 10px auto 0;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .nav-tabs {
+                margin: 10px 5px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .tab-btn {
+                min-width: 90px;
+                padding: 12px 3px;
+                font-size: 0.75rem;
+            }
+            
+            .tab-btn i {
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 0 10px;
+            }
+            
+            .section-card, .quiz-container, .concept-card {
+                padding: 15px 10px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+                gap: 10px;
+            }
+            
+            .section-title i {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .subsection-title {
+                font-size: 1rem;
+                margin: 15px 0 10px;
+            }
+            
+            .quiz-question {
+                font-size: 1rem;
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .quiz-option {
+                padding: 10px;
+                gap: 8px;
+            }
+            
+            .option-letter {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quiz-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+            }
+            
+            .toggle-btn {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            ul, ol {
+                padding-left: 20px;
+                margin: 10px 0;
+            }
+            
+            li {
+                margin-bottom: 5px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Content Styling */
+        .quote {
+            background: rgba(44, 62, 80, 0.05);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent);
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: rgba(26, 188, 156, 0.1);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .definition-box {
+            background: rgba(52, 152, 219, 0.05);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .theory-box {
+            background: rgba(241, 196, 15, 0.05);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            border-left: 3px solid var(--warning);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(44, 62, 80, 0.1);
+        }
+
+        /* Stage Timeline */
+        .stage-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .stage-timeline:before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent);
+        }
+
+        .stage-item {
+            position: relative;
+            padding-left: 70px;
+            margin-bottom: 30px;
+        }
+
+        .stage-circle {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--light-card);
+        }
+
+        .stage-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stage-age {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Coming Soon!</h1>
-    <p>This module is under construction and will be added soon.</p>
-    <a href="index.html" class="back-link">← Back to Modules</a>
-  </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="font-toggle" id="font-toggle" title="Increase font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+            </div>
+            
+            <h1>
+                <i class="fas fa-language"></i>
+                Second Language Acquisition Study Guide
+            </h1>
+            <p>Master 1 - Module: Second Language Acquisition | Instructor: M. BENABDERAHMANE</p>
+        </div>
+    </header>
+    
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs container">
+        <button class="tab-btn active" data-target="overview">
+            <i class="fas fa-book"></i>
+            <span>Key Concepts</span>
+        </button>
+        <button class="tab-btn" data-target="theories">
+            <i class="fas fa-brain"></i>
+            <span>Theories</span>
+        </button>
+        <button class="tab-btn" data-target="stages">
+            <i class="fas fa-chart-line"></i>
+            <span>Stages</span>
+        </button>
+        <button class="tab-btn" data-target="quiz">
+            <i class="fas fa-question-circle"></i>
+            <span>Quiz</span>
+        </button>
+    </div>
+    
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Key Concepts Section -->
+        <section id="overview" class="content-section active">
+            <!-- Introduction -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Introduction to Second Language Acquisition
+                </h2>
+                
+                <p><strong>Second Language Acquisition (SLA)</strong> is the study of how people learn a language subsequent to their native (first) language. It investigates the processes, factors, and outcomes of learning additional languages.</p>
+                
+                <div class="highlight-box">
+                    <h3>Core Terminology</h3>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <h4 class="concept-title">
+                                <i class="fas fa-baby"></i>
+                                L1 vs L2
+                            </h4>
+                            <p><strong>Mother Tongue (L1):</strong> First language acquired naturally in infancy</p>
+                            <p><strong>Second/Foreign Language (L2):</strong> Any language learned after L1</p>
+                            <ul>
+                                <li><em>Second Language:</em> Learned where widely spoken (immersion)</li>
+                                <li><em>Foreign Language:</em> Learned outside native-speaking context</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="concept-card">
+                            <h4 class="concept-title">
+                                <i class="fas fa-exchange-alt"></i>
+                                Input vs Output
+                            </h4>
+                            <p><strong>Input (Krashen):</strong> Language data learner hears/reads</p>
+                            <ul>
+                                <li>Must be comprehensible (i+1)</li>
+                                <li>Massive exposure needed</li>
+                                <li>Relevant to learner's needs</li>
+                            </ul>
+                            <p><strong>Output (Swain):</strong> Language learner produces</p>
+                            <ul>
+                                <li>Noticing function</li>
+                                <li>Hypothesis testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Foundational SLA Concepts</div>
+                
+                <div class="concept-grid">
+                    <!-- Interlanguage -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-bridge"></i>
+                            Interlanguage
+                        </h3>
+                        <p><strong>Definition:</strong> Unique linguistic system developed by L2 learners, intermediate between L1 and L2 (Selinker, 1972)</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li><strong>Systematic:</strong> Rule-governed, not random</li>
+                                <li><strong>Permeable:</strong> Open to new input and change</li>
+                                <li><strong>Variable:</strong> Changes with context</li>
+                                <li><strong>Dynamic:</strong> Constantly evolving</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Significance:</strong> Moved focus from error analysis to understanding learner's internal system</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-term">Systematic</span>
+                            <span class="badge badge-term">Dynamic</span>
+                            <span class="badge badge-term">Rule-governed</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Transfer -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-random"></i>
+                            Transfer
+                        </h3>
+                        <p><strong>Definition:</strong> Influence of L1 structures on L2 learning</p>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <h4 style="color: var(--success); margin-bottom: 5px;">Positive Transfer</h4>
+                                <p>L1 structure aligns with L2, facilitating learning</p>
+                                <p><em>Example:</em> Cognates between similar languages</p>
+                            </div>
+                            
+                            <div style="flex: 1; min-width: 150px;">
+                                <h4 style="color: var(--danger); margin-bottom: 5px;">Negative Transfer (Interference)</h4>
+                                <p>L1 structure conflicts with L2, causing errors</p>
+                                <p><em>Example:</em> Word order errors, phonological interference</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fossilization -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-pause-circle"></i>
+                            Fossilization
+                        </h3>
+                        <p><strong>Definition:</strong> Cessation of interlanguage development before reaching target language norms (Selinker, 1972)</p>
+                        
+                        <p><strong>Characteristics:</strong></p>
+                        <ul>
+                            <li>Persistent errors despite exposure/instruction</li>
+                            <li>Common in phonology and morphology</li>
+                            <li>May relate to neural commitment or psychological factors</li>
+                        </ul>
+                        
+                        <div class="definition-box">
+                            <p><strong>Debated Aspects:</strong> Permanency, universality, causes</p>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-term">Plateau</span>
+                            <span class="badge badge-term">Persistent Errors</span>
+                            <span class="badge badge-term">Ceased Development</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Error vs Mistake -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Error vs Mistake
+                        </h3>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <h4 style="color: var(--primary); margin-bottom: 5px;">Error</h4>
+                                <p><strong>Competence issue</strong></p>
+                                <ul>
+                                    <li>Systematic deviation</li>
+                                    <li>Reveals knowledge gaps</li>
+                                    <li>Resistant to self-correction</li>
+                                    <li>Shows interlanguage stage</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="flex: 1; min-width: 150px;">
+                                <h4 style="color: var(--secondary); margin-bottom: 5px;">Mistake</h4>
+                                <p><strong>Performance issue</strong></p>
+                                <ul>
+                                    <li>Random, non-systematic</li>
+                                    <li>Due to fatigue, inattention</li>
+                                    <li>Can self-correct when prompted</li>
+                                    <li>Doesn't reflect competence level</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Three Perspectives on Language</div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Perspective</th>
+                                <th>Key Theorist</th>
+                                <th>View of Language</th>
+                                <th>Implications for SLA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Human Capacity</strong></td>
+                                <td>Chomsky</td>
+                                <td>Innate cognitive faculty, Universal Grammar</td>
+                                <td>Biological predisposition, innate language acquisition device</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Human Behavior</strong></td>
+                                <td>Skinner</td>
+                                <td>Observable verbal behaviors, habit formation</td>
+                                <td>Importance of input, output, practice, reinforcement</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Social Phenomenon</strong></td>
+                                <td>Vygotsky</td>
+                                <td>Tool for social interaction, cultural mediation</td>
+                                <td>Learning through negotiation, context, identity, power dynamics</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="subsection-title">Language Competence Models</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Linguistic Competence (Chomsky)</h4>
+                        <p>Underlying, unconscious knowledge of language system (grammar, syntax, morphology)</p>
+                    </div>
+                    
+                    <div style="background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Linguistic Performance</h4>
+                        <p>Actual use of language in concrete situations, affected by nonlinguistic factors (fatigue, memory)</p>
+                    </div>
+                    
+                    <div style="background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Communicative Competence (Hymes, 1972)</h4>
+                        <p>Knowing when, where, and how to use language appropriately in social contexts (sociolinguistic, discourse, strategic competence)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Acquisition vs Learning -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Acquisition vs Learning
+                </h2>
+                
+                <div class="quote">
+                    <p>"Acquisition is the way people develop ability in a first language... Learning is the process that results in knowing about language." - Stephen Krashen</p>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Acquisition</th>
+                                <th>Learning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Process</strong></td>
+                                <td>Subconscious, implicit</td>
+                                <td>Conscious, explicit</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Similarity</strong></td>
+                                <td>Like L1 acquisition</td>
+                                <td>Formal instruction</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Focus</strong></td>
+                                <td>Meaning of communication</td>
+                                <td>Form of language</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Result</strong></td>
+                                <td>Spontaneous, fluent use</td>
+                                <td>Knowledge about language</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Function</strong></td>
+                                <td>Primary language ability</td>
+                                <td>"Monitor" for editing output</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Conditions</strong></td>
+                                <td>Meaningful interaction</td>
+                                <td>Time + focus on form + rule knowledge</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Krashen's Monitor Model</h3>
+                    <p><strong>Acquisition-Learning Hypothesis:</strong> Distinct processes for developing language ability</p>
+                    <p><strong>Monitor Hypothesis:</strong> Learned knowledge acts as editor for acquired language</p>
+                    <p><strong>Conditions for Monitor Use:</strong> Time, focus on form, knowledge of the rule</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Theories Section -->
+        <section id="theories" class="content-section">
+            <!-- Rationalism -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Rationalism in SLA
+                </h2>
+                
+                <p><strong>Rationalism</strong> is a philosophical tradition privileging reason as the primary source of knowledge, associated with Descartes, Spinoza, and Leibniz. It fundamentally challenges empiricist claims that all knowledge derives from sensory experience.</p>
+                
+                <div class="highlight-box">
+                    <h3>Core Concepts of Rationalism</h3>
+                    <div class="concept-grid">
+                        <div class="concept-card">
+                            <h4 class="concept-title">
+                                <i class="fas fa-brain"></i>
+                                Innate Ideas
+                            </h4>
+                            <p>Knowledge exists prior to experience, hardwired into human cognitive architecture</p>
+                        </div>
+                        
+                        <div class="concept-card">
+                            <h4 class="concept-title">
+                                <i class="fas fa-book"></i>
+                                Prior Knowledge
+                            </h4>
+                            <p>Certain truths known independently of sensory input through pure reason</p>
+                        </div>
+                        
+                        <div class="concept-card">
+                            <h4 class="concept-title">
+                                <i class="fas fa-sitemap"></i>
+                                Deductive Reasoning
+                            </h4>
+                            <p>Truth derived through logical inference from self-evident axioms</p>
+                        </div>
+                        
+                        <div class="concept-card">
+                            <h4 class="concept-title">
+                                <i class="fas fa-project-diagram"></i>
+                                Mind-World Correspondence
+                            </h4>
+                            <p>Rational structure of mind mirrors rational structure of reality</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Rationalist View of Language Acquisition</div>
+                
+                <div class="definition-box">
+                    <p><strong>Key Idea:</strong> Language acquisition is not learning but linguistic maturation/growth</p>
+                    <p><strong>Role of Input:</strong> Triggers parameter setting and provides lexicon evidence</p>
+                    <p><strong>Syntax Principles:</strong> Never learned - already specified by Universal Grammar</p>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Description</th>
+                                <th>Rationalist Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Initial State</strong></td>
+                                <td>Learner begins with innate capacity</td>
+                                <td>Universal Grammar: innate principles + unset parameters</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Input Triggers</strong></td>
+                                <td>Exposure to language data</td>
+                                <td>Input triggers parameter setting, not data to be learned</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Parameter Setting</strong></td>
+                                <td>Language-specific rules acquired</td>
+                                <td>Language faculty fixes parameters based on linguistic data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Steady State</strong></td>
+                                <td>Mature linguistic competence</td>
+                                <td>Internalized grammar of target language emerges</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="subsection-title">SLA Questions from Rationalist Perspective</div>
+                
+                <div style="background: rgba(44, 62, 80, 0.05); padding: 20px; border-radius: var(--border-radius); margin: 15px 0;">
+                    <ol>
+                        <li>Do adult L2 learners retain access to Universal Grammar?</li>
+                        <li>Can parameters be reset, or do L1 settings constrain L2 development?</li>
+                        <li>Does adult L2 acquisition rely more on general cognitive mechanisms?</li>
+                    </ol>
+                    <p style="margin-top: 15px;"><em>Research positions vary: Some argue for continued UG access (Flynn & Martohardjono, 1994), others propose greater reliance on cognitive mechanisms in adults.</em></p>
+                </div>
+                
+                <button class="toggle-btn" id="criticism-btn">
+                    <i class="fas fa-chevron-down"></i>
+                    Criticisms of Rationalism
+                </button>
+                <div class="hidden-content" id="criticism-content">
+                    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="color: var(--danger); margin-bottom: 10px;">Empiricist Critiques</h4>
+                            <ul>
+                                <li><strong>Poverty of stimulus argument challenged:</strong> Input may be richer than claimed (Pullum & Scholz, 2002)</li>
+                                <li>Corpus studies show child-directed speech contains informative grammatical patterns</li>
+                                <li>If sufficient positive evidence exists, need for innate knowledge diminishes</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4 style="color: var(--danger); margin-bottom: 10px;">Usage-Based Critiques</h4>
+                            <ul>
+                                <li><strong>Alternative explanations without innate knowledge</strong> (Tomasello, 2003)</li>
+                                <li>Development proceeds from concrete to abstract patterns gradually</li>
+                                <li>Processes of generalization and categorization explain acquisition</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(231, 76, 60, 0.05); padding: 20px; border-radius: var(--border-radius); margin: 15px 0;">
+                        <h4>Additional Criticisms</h4>
+                        <ul>
+                            <li><strong>Cross-Linguistic Variation:</strong> Languages show more diversity than principles-and-parameters predicts</li>
+                            <li><strong>Individual Variation:</strong> Children show different acquisition rates/paths, suggesting learning rather than uniform biological maturation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Major Theories -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-theater-masks"></i>
+                    Major Theories of Language Acquisition
+                </h2>
+                
+                <div class="concept-grid">
+                    <!-- Behaviorist Theory -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-robot"></i>
+                            Behaviorist Theory
+                        </h3>
+                        <p><strong>Theorist:</strong> B.F. Skinner (1957)</p>
+                        
+                        <div class="theory-box">
+                            <p><strong>Core Idea:</strong> Language acquisition as habit formation through operant conditioning</p>
+                        </div>
+                        
+                        <p><strong>Mechanisms:</strong></p>
+                        <ul>
+                            <li>Imitation of adult speech</li>
+                            <li>Reinforcement of correct forms</li>
+                            <li>Stimulus-response associations</li>
+                            <li>Environmental shaping</li>
+                        </ul>
+                        
+                        <p><strong>Limitations:</strong> Cannot explain creative language use beyond learned patterns</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-theory">Imitation</span>
+                            <span class="badge badge-theory">Reinforcement</span>
+                            <span class="badge badge-theory">Habit Formation</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Nativist Theory -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-dna"></i>
+                            Nativist Theory
+                        </h3>
+                        <p><strong>Theorist:</strong> Noam Chomsky (1965)</p>
+                        
+                        <div class="theory-box">
+                            <p><strong>Core Idea:</strong> Humans possess innate linguistic knowledge (Universal Grammar)</p>
+                        </div>
+                        
+                        <p><strong>Key Concepts:</strong></p>
+                        <ul>
+                            <li>Language Acquisition Device (LAD)</li>
+                            <li>Universal principles and parameters</li>
+                            <li>Poverty of the stimulus argument</li>
+                            <li>Innate biological predisposition</li>
+                        </ul>
+                        
+                        <p><strong>Strength:</strong> Explains rapid acquisition despite limited input</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-theory">Innate Capacity</span>
+                            <span class="badge badge-theory">UG</span>
+                            <span class="badge badge-theory">LAD</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactionist Theory -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-users"></i>
+                            Interactionist Theory
+                        </h3>
+                        <p><strong>Theorists:</strong> Jerome Bruner (1983), Lev Vygotsky (1978)</p>
+                        
+                        <div class="theory-box">
+                            <p><strong>Core Idea:</strong> Language emerges through social interaction and cognitive development</p>
+                        </div>
+                        
+                        <p><strong>Key Concepts:</strong></p>
+                        <ul>
+                            <li>Scaffolding by proficient speakers</li>
+                            <li>Zone of Proximal Development</li>
+                            <li>Communicative functions drive development</li>
+                            <li>Social context crucial</li>
+                        </ul>
+                        
+                        <p><strong>Emphasis:</strong> Dynamic interplay of cognitive and social factors</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-theory">Scaffolding</span>
+                            <span class="badge badge-theory">ZPD</span>
+                            <span class="badge badge-theory">Social Interaction</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Current Understanding</div>
+                
+                <div class="highlight-box">
+                    <p><strong>Integration of Perspectives:</strong> Current research suggests acquisition involves combination of mechanisms:</p>
+                    <ul>
+                        <li><strong>Innate predispositions</strong> constrain possible grammars</li>
+                        <li><strong>Statistical learning</strong> identifies patterns in input</li>
+                        <li><strong>Social motivation</strong> drives communicative development</li>
+                        <li><strong>Multiple cognitive systems</strong> integrate in acquisition</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Signs of Progress -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Signs of Progress in SLA
+                </h2>
+                
+                <p><strong>Interlanguage Development:</strong> L2 learners progress through predictable stages with characteristic errors that signal cognitive growth. Mistakes are evidence of evolving linguistic systems.</p>
+                
+                <div class="definition-box">
+                    <p><strong>Selinker's Interlanguage Theory (1972):</strong> Five central processes shaping interlanguage:</p>
+                    <ol>
+                        <li><strong>Language Transfer:</strong> Influence from L1 structures</li>
+                        <li><strong>Transfer of Training:</strong> Impact of instructional methods</li>
+                        <li><strong>Learning Strategies:</strong> Conscious approaches to acquisition</li>
+                        <li><strong>Communication Strategies:</strong> Techniques for maintaining interaction</li>
+                        <li><strong>Overgeneralization:</strong> Extending rules beyond appropriate contexts</li>
+                    </ol>
+                </div>
+                
+                <div class="subsection-title">Six Key Signs of L2 Development</div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sign</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                                <th>What It Indicates</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Overgeneralization</strong></td>
+                                <td>Applying learned rules too broadly</td>
+                                <td>"good" instead of "went"</td>
+                                <td>Rule acquisition, active learning</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. U-Shaped Development</strong></td>
+                                <td>Temporary regression after correct usage</td>
+                                <td>Using "came" then "comed"</td>
+                                <td>Mental grammar restructuring</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Increased Complexity</strong></td>
+                                <td>Using sophisticated structures with errors</td>
+                                <td>Complex sentences with mistakes</td>
+                                <td>Risk-taking, system expansion</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Self-Correction</strong></td>
+                                <td>Monitoring and fixing own errors</td>
+                                <td>Correcting grammar during speech</td>
+                                <td>Metalinguistic awareness development</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Variability Reduction</strong></td>
+                                <td>More consistent performance</td>
+                                <td>Same accuracy across contexts</td>
+                                <td>Automatization, consolidation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6. Productive Use</strong></td>
+                                <td>Generating novel utterances</td>
+                                <td>New sentences not memorized</td>
+                                <td>Internalized system building</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="subsection-title">Practice: Analyzing Developmental Errors</div>
+                
+                <div style="background: rgba(26, 188, 156, 0.1); padding: 20px; border-radius: var(--border-radius); margin: 15px 0;">
+                    <p><strong>Sample EFL Learner Errors for Analysis:</strong></p>
+                    <ol>
+                        <li>"I good to the market yesterday." (Overgeneralization of -ed past tense)</li>
+                        <li>"My brother is more taller than me." (Double comparative)</li>
+                        <li>"Although I was tired, but I finished my homework." (L1 transfer - conjunction redundancy)</li>
+                        <li>Consistent use of "I have seen" instead of mixing "I saw/I have seen" (Avoidance of simple past)</li>
+                        <li>"I have... I had a good time at the party." (Self-correction attempt)</li>
+                        <li>"He comed home" (after previously using "came" correctly) (U-shaped development)</li>
+                    </ol>
+                    
+                    <p style="margin-top: 15px;"><strong>Discussion Question:</strong> How can recognizing developmental signs change our perspective on learner errors?</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stages Section -->
+        <section id="stages" class="content-section">
+            <!-- First Language Acquisition Stages -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-baby"></i>
+                    First Language Acquisition Stages
+                </h2>
+                
+                <p>First language acquisition progresses through identifiable developmental stages, showing systematic properties of language development.</p>
+                
+                <div class="stage-timeline">
+                    <!-- Pre-linguistic Stage -->
+                    <div class="stage-item">
+                        <div class="stage-circle"></div>
+                        <div class="stage-title">Pre-linguistic Stage</div>
+                        <div class="stage-age">0-12 months</div>
+                        <div class="stage-description">
+                            <ul>
+                                <li><strong>Crying:</strong> Initial vocalizations</li>
+                                <li><strong>Cooing (2 months):</strong> Soft, vowel-like sounds</li>
+                                <li><strong>Canonical babbling (6-10 months):</strong> Reduplicated syllables ("bababa")</li>
+                                <li><strong>Perceptual narrowing:</strong> Attuning to native language phonology</li>
+                                <li><strong>Categorical perception:</strong> Discerning phonetic contrasts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- One-Word Stage -->
+                    <div class="stage-item">
+                        <div class="stage-circle"></div>
+                        <div class="stage-title">One-Word Stage (Holophrastic)</div>
+                        <div class="stage-age">12-18 months</div>
+                        <div class="stage-description">
+                            <ul>
+                                <li><strong>First true words:</strong> Reference familiar objects, people, actions</li>
+                                <li><strong>Holophrastic speech:</strong> Single word conveys complete idea ("milk" = "I want milk")</li>
+                                <li><strong>Comprehension > Production:</strong> Understand more than can produce</li>
+                                <li><strong>Vocabulary:</strong> ~50 words by 18 months</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Two-Word Stage -->
+                    <div class="stage-item">
+                        <div class="stage-circle"></div>
+                        <div class="stage-title">Two-Word Stage (Telegraphic)</div>
+                        <div class="stage-age">18-24 months</div>
+                        <div class="stage-description">
+                            <ul>
+                                <li><strong>Word combinations:</strong> Express semantic relationships</li>
+                                <li><strong>Telegraphic speech:</strong> "Daddy go", "eat cookie", "Mommy shoe"</li>
+                                <li><strong>Emergent syntax:</strong> Understanding without function words/inflections</li>
+                                <li><strong>Vocabulary explosion:</strong> Rapid expansion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Multi-Word Stage -->
+                    <div class="stage-item">
+                        <div class="stage-circle"></div>
+                        <div class="stage-title">Multi-Word Stage</div>
+                        <div class="stage-age">24-30 months</div>
+                        <div class="stage-description">
+                            <ul>
+                                <li><strong>Expanded sentences:</strong> Beyond two words</li>
+                                <li><strong>Inclusion of function words:</strong> Articles, prepositions, conjunctions</li>
+                                <li><strong>Inflectional morphology:</strong> Verb tenses, plurals</li>
+                                <li><strong>Overgeneralization:</strong> "good" (went), "mouses" (mice) - shows rule learning</li>
+                                <li><strong>Active rule-governed learning:</strong> Not mere imitation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Later Stages of Language Development</div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Age</th>
+                                <th>Key Developments</th>
+                                <th>Theoretical Connections</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Preschool Period</strong></td>
+                                <td>3-5 years</td>
+                                <td>
+                                    <ul>
+                                        <li>Complex sentences (embedded clauses, passive voice)</li>
+                                        <li>Mastery of grammatical morphemes (Brown, 1973)</li>
+                                        <li>Vocabulary expansion</li>
+                                        <li>Narrative abilities with temporal sequencing</li>
+                                        <li>Pragmatic skills (turn-taking, politeness markers)</li>
+                                    </ul>
+                                </td>
+                                <td>Bruner's social interactionist approach</td>
+                            </tr>
+                            <tr>
+                                <td><strong>School-Age Period</strong></td>
+                                <td>6-12 years</td>
+                                <td>
+                                    <ul>
+                                        <li>Metalinguistic awareness development</li>
+                                        <li>Literacy acquisition influencing linguistic knowledge</li>
+                                        <li>Academic language registers</li>
+                                        <li>Decontextualized discourse</li>
+                                        <li>Vocabulary: thousands of new words annually</li>
+                                    </ul>
+                                </td>
+                                <td>Explicit grammatical understanding through education</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adolescence</strong></td>
+                                <td>13+ years</td>
+                                <td>
+                                    <ul>
+                                        <li>Advanced pragmatic competence</li>
+                                        <li>Understanding indirect speech, irony, sarcasm</li>
+                                        <li>Comprehension of abstract/metaphorical language</li>
+                                        <li>Control over stylistic variation and register</li>
+                                        <li>Sophisticated written language</li>
+                                    </ul>
+                                </td>
+                                <td>Social context adaptation, advanced cognitive development</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Second Language Acquisition Factors -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-user-graduate"></i>
+                    Second Language Acquisition Factors
+                </h2>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-user-clock"></i>
+                            Age Factors
+                        </h3>
+                        <p><strong>Critical Period Hypothesis:</strong> Optimal period for language acquisition</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Younger Learners:</strong> Often better pronunciation, intuitive grammar</p>
+                            <p><strong>Older Learners:</strong> Better at explicit learning, metalinguistic awareness</p>
+                        </div>
+                        
+                        <p><strong>Age-Related Questions for Rationalism:</strong></p>
+                        <ul>
+                            <li>Does age-related decline support UG-based approaches?</li>
+                            <li>Is there continued UG access in adulthood?</li>
+                            <li>How does CPH relate to parameter setting?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-brain"></i>
+                            Cognitive Factors
+                        </h3>
+                        <p><strong>Aptitude:</strong> Innate ability for language learning</p>
+                        <p><strong>Learning Strategies:</strong> Conscious approaches to acquisition</p>
+                        <p><strong>Metalinguistic Awareness:</strong> Ability to think about language</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Working Memory:</strong> Crucial for processing linguistic input</p>
+                            <p><strong>Automatization:</strong> Developing automatic language use</p>
+                        </div>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-heart"></i>
+                            Affective Factors
+                        </h3>
+                        <p><strong>Motivation:</strong> Integrative vs. instrumental</p>
+                        <p><strong>Anxiety:</strong> Can facilitate or hinder learning</p>
+                        <p><strong>Self-confidence:</strong> Belief in ability to learn</p>
+                        <p><strong>Attitude:</strong> Toward target language and culture</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Affective Filter (Krashen):</strong> Emotional barrier to acquisition</p>
+                        </div>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-globe-americas"></i>
+                            Social Factors
+                        </h3>
+                        <p><strong>Input Quality:</strong> Comprehensible, abundant, relevant</p>
+                        <p><strong>Interaction Opportunities:</strong> Meaningful communication</p>
+                        <p><strong>Social Identity:</strong> Relationship with target language community</p>
+                        <p><strong>Power Dynamics:</strong> Social positioning affecting acquisition</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Vygotskyan Perspective:</strong> Learning through social interaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quiz Section -->
+        <section id="quiz" class="content-section">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 class="section-title"><i class="fas fa-question-circle"></i> SLA Quiz</h2>
+                    <div class="quiz-progress">Question <span id="current-question">1</span> of <span id="total-questions">5</span></div>
+                </div>
+                
+                <div id="quiz-content">
+                    <div class="quiz-question" id="question-text">Loading question...</div>
+                    
+                    <div class="quiz-options" id="options-container">
+                        <!-- Options will be generated here -->
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button id="prev-btn" class="quiz-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button id="next-btn" class="quiz-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <div id="results-container" style="display: none;">
+                    <div class="quiz-results">
+                        <h2 style="color: var(--primary);">Quiz Completed!</h2>
+                        <div class="quiz-score" id="score">0/5</div>
+                        <p id="result-message" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;"></p>
+                        
+                        <div id="review-container" class="result-details">
+                            <!-- Review will be inserted here -->
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px;">
+                            <button id="restart-quiz" class="quiz-btn"><i class="fas fa-redo"></i> Retry Quiz</button>
+                            <button id="new-quiz" class="quiz-btn" style="background-color: var(--accent);"><i class="fas fa-random"></i> New Questions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Quiz Instructions</h2>
+                <p>This quiz tests your understanding of Second Language Acquisition concepts from the course materials. Questions cover key terminology, theories, stages of acquisition, and signs of progress.</p>
+                <p>Select an answer by clicking on it, then use the navigation buttons to move between questions. After completing the quiz, you'll receive detailed feedback with explanations.</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><i class="fas fa-language"></i> Second Language Acquisition Study Guide - Master 1</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Module: Second Language Acquisition | Instructor: M. BENABDERAHMANE</p>
+            <p style="margin-top: 5px; font-size: 0.8rem;">Based on SLA_1, SLA_2, SLA_3, and SLA_4 PDF materials</p>
+        </div>
+    </footer>
+
+    <script>
+        // ====== CORE APPLICATION OBJECT ======
+        const App = {
+            // State
+            currentQuiz: null,
+            fontSizeLevel: 0,
+            fontSizes: ['100%', '110%', '120%', '90%'],
+            
+            // Initialize the application
+            init() {
+                this.setupEventListeners();
+                this.initializeQuiz();
+                this.initializeTables();
+                this.fixNavigationForMobile();
+            },
+            
+            // Setup all event listeners
+            setupEventListeners() {
+                // Theme toggle
+                document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+                
+                // Font size toggle
+                document.getElementById('font-toggle').addEventListener('click', () => this.toggleFontSize());
+                
+                // Tab navigation
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchTab(e.target.closest('.tab-btn')));
+                });
+                
+                // Toggle buttons
+                document.querySelectorAll('.toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.toggleContent(e.target));
+                });
+                
+                // Quiz buttons
+                document.getElementById('prev-btn').addEventListener('click', () => this.prevQuestion());
+                document.getElementById('next-btn').addEventListener('click', () => this.nextQuestion());
+                document.getElementById('restart-quiz').addEventListener('click', () => this.restartQuiz());
+                document.getElementById('new-quiz').addEventListener('click', () => this.newQuiz());
+                
+                // Window resize listener
+                window.addEventListener('resize', () => {
+                    this.fixNavigationForMobile();
+                });
+            },
+            
+            // ====== THEME & UI FUNCTIONS ======
+            toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    document.getElementById('theme-toggle').title = "Toggle light mode";
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    document.getElementById('theme-toggle').title = "Toggle dark mode";
+                }
+            },
+            
+            toggleFontSize() {
+                this.fontSizeLevel = (this.fontSizeLevel + 1) % this.fontSizes.length;
+                document.body.style.fontSize = this.fontSizes[this.fontSizeLevel];
+                document.getElementById('font-toggle').title = `Font size: ${this.fontSizes[this.fontSizeLevel]}`;
+            },
+            
+            switchTab(clickedBtn) {
+                const target = clickedBtn.getAttribute('data-target');
+                
+                // Update active tab
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                clickedBtn.classList.add('active');
+                
+                // Show target section
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === target) {
+                        section.classList.add('active');
+                    }
+                });
+                
+                // Initialize quiz if on quiz tab
+                if (target === 'quiz') {
+                    this.initializeQuiz();
+                }
+            },
+            
+            toggleContent(button) {
+                const targetId = button.id.replace('-btn', '-content');
+                const content = document.getElementById(targetId);
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('active');
+                
+                if (content.classList.contains('active')) {
+                    icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                } else {
+                    icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                }
+            },
+            
+            // ====== TABLE HANDLING FUNCTIONS ======
+            initializeTables() {
+                // Add data labels to all table cells for mobile
+                document.querySelectorAll('table').forEach(table => {
+                    if (table.dataset.labelsAdded) return;
+                    
+                    const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
+                    if (headers.length === 0) return;
+                    
+                    table.querySelectorAll('td').forEach((cell, index) => {
+                        const headerIndex = index % headers.length;
+                        if (headers[headerIndex]) {
+                            cell.setAttribute('data-label', headers[headerIndex]);
+                        }
+                    });
+                    
+                    table.dataset.labelsAdded = 'true';
+                });
+            },
+            
+            fixNavigationForMobile() {
+                const navTabs = document.querySelector('.nav-tabs');
+                if (!navTabs) return;
+                
+                if (window.innerWidth <= 400) {
+                    navTabs.style.overflowX = 'auto';
+                    navTabs.style.flexWrap = 'nowrap';
+                    navTabs.style.whiteSpace = 'nowrap';
+                } else {
+                    navTabs.style.overflowX = 'visible';
+                    navTabs.style.flexWrap = 'wrap';
+                    navTabs.style.whiteSpace = 'normal';
+                }
+            },
+            
+            // ====== QUIZ SYSTEM ======
+            questionPool: [
+                {
+                    question: "According to Krashen's Monitor Model, what is the primary role of 'learning' (conscious knowledge)?",
+                    options: [
+                        "To become subconscious acquisition through practice",
+                        "To serve as a Monitor or editor for acquired language",
+                        "To replace acquired language in formal contexts",
+                        "To facilitate pronunciation acquisition"
+                    ],
+                    correct: 1,
+                    explanation: "Krashen distinguishes acquisition (subconscious) from learning (conscious). Learned knowledge functions primarily as a 'Monitor' to edit or polish language output generated by the acquired system.",
+                    topic: "Acquisition vs Learning"
+                },
+                {
+                    question: "Which concept refers to 'the unique linguistic system a second language learner develops, intermediate between L1 and L2'?",
+                    options: [
+                        "Fossilization",
+                        "Interlanguage",
+                        "Language Transfer",
+                        "Communicative Competence"
+                    ],
+                    correct: 1,
+                    explanation: "Interlanguage, introduced by Larry Selinker (1972), is the systematic, rule-governed linguistic system that L2 learners construct as they acquire a new language.",
+                    topic: "Key Concepts"
+                },
+                {
+                    question: "According to rationalist theory, how is language primarily acquired?",
+                    options: [
+                        "Through imitation and reinforcement",
+                        "As linguistic maturation triggered by input",
+                        "Through explicit instruction and rule learning",
+                        "By social interaction and negotiation of meaning"
+                    ],
+                    correct: 1,
+                    explanation: "Rationalists view language acquisition as linguistic maturation or growth, where input triggers parameter setting of innate Universal Grammar principles rather than teaching completely new knowledge.",
+                    topic: "Rationalism"
+                },
+                {
+                    question: "What is the key difference between an 'error' and a 'mistake' in SLA?",
+                    options: [
+                        "Errors are pronunciation issues, mistakes are grammar issues",
+                        "Errors are systematic competence issues, mistakes are performance slips",
+                        "Errors occur in writing, mistakes occur in speaking",
+                        "Errors are permanent, mistakes are temporary"
+                    ],
+                    correct: 1,
+                    explanation: "Errors are systematic deviations revealing gaps in the learner's underlying competence, while mistakes are random performance slips due to factors like fatigue or inattention that the learner can self-correct.",
+                    topic: "Error Analysis"
+                },
+                {
+                    question: "Which stage of first language acquisition is characterized by 'holophrastic speech' where single words convey complete ideas?",
+                    options: [
+                        "Pre-linguistic Stage (0-12 months)",
+                        "One-Word Stage (12-18 months)",
+                        "Two-Word Stage (18-24 months)",
+                        "Multi-Word Stage (24-30 months)"
+                    ],
+                    correct: 1,
+                    explanation: "The One-Word Stage (12-18 months) features holophrastic speech where a single word like 'milk' can mean 'I want milk' or 'That is milk,' showing that comprehension exceeds production at this stage.",
+                    topic: "Stages of Acquisition"
+                },
+                {
+                    question: "What does 'positive transfer' refer to in SLA?",
+                    options: [
+                        "Positive reinforcement from teachers",
+                        "When L1 structures align with L2, facilitating learning",
+                        "The positive attitude of learners toward the target language",
+                        "Transfer of positive learning strategies from L1 to L2"
+                    ],
+                    correct: 1,
+                    explanation: "Positive transfer occurs when structures in the learner's L1 align with those in the L2, accelerating acquisition (e.g., cognates between similar languages).",
+                    topic: "Transfer"
+                },
+                {
+                    question: "Which of these is a key criticism of rationalist approaches to language acquisition?",
+                    options: [
+                        "They ignore the role of input completely",
+                        "They cannot explain individual variation in acquisition",
+                        "They overemphasize social interaction",
+                        "They focus only on written language"
+                    ],
+                    correct: 1,
+                    explanation: "Critics argue that if language acquisition reflects biological maturation of an innate faculty, we should expect highly uniform developmental trajectories, yet children show considerable individual variation in acquisition rate and path.",
+                    topic: "Rationalism Critiques"
+                },
+                {
+                    question: "According to Selinker's Interlanguage Theory, which process involves 'extending target language rules beyond appropriate contexts'?",
+                    options: [
+                        "Language Transfer",
+                        "Transfer of Training",
+                        "Overgeneralization",
+                        "Communication Strategies"
+                    ],
+                    correct: 2,
+                    explanation: "Overgeneralization is one of Selinker's five central processes shaping interlanguage, where learners apply learned rules too broadly (e.g., 'good' instead of 'went').",
+                    topic: "Interlanguage"
+                },
+                {
+                    question: "What is the main focus of interactionist theories of language acquisition?",
+                    options: [
+                        "Innate linguistic knowledge and Universal Grammar",
+                        "Habit formation through reinforcement",
+                        "Social context, scaffolding, and communicative functions",
+                        "Cognitive information processing mechanisms"
+                    ],
+                    correct: 2,
+                    explanation: "Interactionist theories (Bruner, Vygotsky) emphasize the role of social context, scaffolding by proficient speakers, and communicative functions in language development.",
+                    topic: "Theories"
+                },
+                {
+                    question: "Which sign of L2 development involves 'temporary regression after initial correct usage'?",
+                    options: [
+                        "Overgeneralization",
+                        "U-Shaped Development",
+                        "Increased Complexity",
+                        "Self-Correction"
+                    ],
+                    correct: 1,
+                    explanation: "U-Shaped Development refers to when learners temporarily regress after initially using a form correctly (e.g., using 'came' then later 'comed'), indicating restructuring of their mental grammar.",
+                    topic: "Signs of Progress"
+                }
+            ],
+            
+            initializeQuiz() {
+                this.currentQuiz = {
+                    questions: this.getRandomQuestions(5),
+                    currentIndex: 0,
+                    userAnswers: [],
+                    completed: false
+                };
+                
+                this.displayQuestion(0);
+                this.updateQuizUI();
+            },
+            
+            getRandomQuestions(count) {
+                const shuffled = [...this.questionPool].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            },
+            
+            displayQuestion(index) {
+                if (!this.currentQuiz) return;
+                
+                const question = this.currentQuiz.questions[index];
+                document.getElementById('question-text').textContent = question.question;
+                
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                
+                const letters = ['A', 'B', 'C', 'D'];
+                question.options.forEach((option, i) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'quiz-option';
+                    if (this.currentQuiz.userAnswers[index] === i) {
+                        optionElement.classList.add('selected');
+                    }
+                    
+                    optionElement.innerHTML = `
+                        <div class="option-letter">${letters[i]}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    
+                    optionElement.addEventListener('click', () => this.selectOption(i));
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                document.getElementById('current-question').textContent = index + 1;
+                document.getElementById('total-questions').textContent = this.currentQuiz.questions.length;
+                document.getElementById('prev-btn').disabled = index === 0;
+                
+                const nextBtn = document.getElementById('next-btn');
+                if (index === this.currentQuiz.questions.length - 1) {
+                    nextBtn.textContent = this.currentQuiz.userAnswers[index] !== undefined ? 'Finish Quiz' : 'Finish (Select Answer First)';
+                } else {
+                    nextBtn.textContent = 'Next';
+                }
+                
+                nextBtn.disabled = this.currentQuiz.userAnswers[index] === undefined;
+            },
+            
+            selectOption(optionIndex) {
+                if (!this.currentQuiz) return;
+                
+                const options = document.querySelectorAll('.quiz-option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                options[optionIndex].classList.add('selected');
+                
+                this.currentQuiz.userAnswers[this.currentQuiz.currentIndex] = optionIndex;
+                document.getElementById('next-btn').disabled = false;
+                
+                if (this.currentQuiz.currentIndex === this.currentQuiz.questions.length - 1) {
+                    document.getElementById('next-btn').textContent = 'Finish Quiz';
+                }
+            },
+            
+            prevQuestion() {
+                if (!this.currentQuiz || this.currentQuiz.currentIndex === 0) return;
+                
+                this.currentQuiz.currentIndex--;
+                this.displayQuestion(this.currentQuiz.currentIndex);
+            },
+            
+            nextQuestion() {
+                if (!this.currentQuiz) return;
+                
+                if (this.currentQuiz.currentIndex < this.currentQuiz.questions.length - 1) {
+                    this.currentQuiz.currentIndex++;
+                    this.displayQuestion(this.currentQuiz.currentIndex);
+                } else {
+                    this.showResults();
+                }
+            },
+            
+            showResults() {
+                if (!this.currentQuiz) return;
+                
+                let score = 0;
+                const results = [];
+                const letters = ['A', 'B', 'C', 'D'];
+                
+                this.currentQuiz.questions.forEach((q, i) => {
+                    const userAnswer = this.currentQuiz.userAnswers[i];
+                    const isCorrect = userAnswer === q.correct;
+                    
+                    if (isCorrect) score++;
+                    
+                    results.push({
+                        question: q.question,
+                        options: q.options,
+                        userAnswer: userAnswer,
+                        correctAnswer: q.correct,
+                        isCorrect: isCorrect,
+                        explanation: q.explanation,
+                        topic: q.topic
+                    });
+                });
+                
+                // Display score
+                document.getElementById('score').textContent = `${score}/${this.currentQuiz.questions.length}`;
+                
+                // Feedback message
+                let message = "";
+                if (score === this.currentQuiz.questions.length) {
+                    message = "Excellent! You have mastered the key concepts of Second Language Acquisition.";
+                } else if (score >= this.currentQuiz.questions.length * 0.7) {
+                    message = "Very good! You have a strong understanding of SLA concepts.";
+                } else if (score >= this.currentQuiz.questions.length * 0.5) {
+                    message = "Fair understanding. Review the explanations below to improve your knowledge.";
+                } else {
+                    message = "Review the course materials and try again. Focus on understanding the key concepts.";
+                }
+                
+                document.getElementById('result-message').textContent = message;
+                
+                // Generate review
+                const reviewContainer = document.getElementById('review-container');
+                reviewContainer.innerHTML = '<h3 style="color: var(--secondary); margin-bottom: 20px;">Detailed Review</h3>';
+                
+                results.forEach((result, index) => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.className = `question-review ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                    reviewDiv.style.cssText = "background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid " + (result.isCorrect ? "var(--success)" : "var(--danger)") + ";";
+                    
+                    let optionsHtml = '';
+                    result.options.forEach((option, optIndex) => {
+                        let optionClass = '';
+                        if (optIndex === result.correctAnswer) {
+                            optionClass = 'correct';
+                        } else if (optIndex === result.userAnswer && !result.isCorrect) {
+                            optionClass = 'incorrect';
+                        }
+                        
+                        optionsHtml += `
+                            <div class="quiz-option ${optionClass}" style="margin: 8px 0; cursor: default; padding: 12px;">
+                                <div class="option-letter">${letters[optIndex]}</div>
+                                <div class="option-text">${option}</div>
+                                ${optIndex === result.correctAnswer ? '<span style="color: var(--success); margin-left: 10px;"><i class="fas fa-check-circle"></i> Correct</span>' : ''}
+                                ${optIndex === result.userAnswer && !result.isCorrect ? '<span style="color: var(--danger); margin-left: 10px;"><i class="fas fa-times-circle"></i> Your choice</span>' : ''}
+                            </div>
+                        `;
+                    });
+                    
+                    reviewDiv.innerHTML = `
+                        <h4 style="color: ${result.isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom: 10px;">
+                            Question ${index + 1}: ${result.isCorrect ? '<i class="fas fa-check"></i> Correct' : '<i class="fas fa-times"></i> Incorrect'}
+                            <span style="font-size: 0.9rem; color: var(--light-text); background: rgba(108, 117, 125, 0.1); padding: 3px 8px; border-radius: 12px; margin-left: 10px;">${result.topic}</span>
+                        </h4>
+                        <p style="margin-bottom: 15px; font-weight: 500;">${result.question}</p>
+                        ${optionsHtml}
+                        <div style="background: rgba(26, 188, 156, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 0.95rem;">
+                            <strong>Explanation:</strong> ${result.explanation}
+                        </div>
+                    `;
+                    
+                    reviewContainer.appendChild(reviewDiv);
+                });
+                
+                // Show results
+                document.getElementById('quiz-content').style.display = 'none';
+                document.getElementById('results-container').style.display = 'block';
+                this.currentQuiz.completed = true;
+            },
+            
+            restartQuiz() {
+                if (!this.currentQuiz) return;
+                
+                this.currentQuiz.currentIndex = 0;
+                this.currentQuiz.userAnswers = [];
+                this.displayQuestion(0);
+                document.getElementById('quiz-content').style.display = 'block';
+                document.getElementById('results-container').style.display = 'none';
+            },
+            
+            newQuiz() {
+                this.initializeQuiz();
+            },
+            
+            updateQuizUI() {
+                if (!this.currentQuiz) return;
+                
+                document.getElementById('total-questions').textContent = this.currentQuiz.questions.length;
+                document.getElementById('quiz-content').style.display = 'block';
+                document.getElementById('results-container').style.display = 'none';
+            }
+        };
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            App.init();
+        });
+    </script>
 </body>
 </html>
