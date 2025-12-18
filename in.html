@@ -1,94 +1,1680 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon</title>
-  <style>
-    :root {
-      --primary: #3f51b5;
-      --bg: #f4f6fb;
-      --card-bg: #ffffff;
-      --text: #2c2c2c;
-      --muted: #6b7280;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intercultural Communication Study Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #9b59b6;
+            --intercultural: #1abc9c;
+            --light-bg: #ecf0f1;
+            --light-card: #ffffff;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --border-radius: 12px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        /* Dark mode */
+        .dark-mode {
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --accent: #1abc9c;
+            --light-bg: #2c3e50;
+            --light-card: #34495e;
+            --dark-text: #ecf0f1;
+            --light-text: #bdc3c7;
+        }
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #eef2ff, #f9fafb);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      text-align: center;
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-      max-width: 500px;
-      width: 100%;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+            padding-bottom: 50px;
+            font-size: 100%;
+            transition: var(--transition);
+        }
 
-    h1 {
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            border-bottom: 5px solid var(--accent);
+        }
 
-    .back-link {
-      display: inline-block;
-      padding: 10px 24px;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.2s;
-    }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-    .back-link:hover,
-    .back-link:focus {
-      background: #303f9f;
-      transform: translateY(-2px);
-      outline: none;
-    }
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 20px;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-    }
-  </style>
+        .header-controls {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .theme-toggle, .font-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover, .font-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.08);
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            margin: 25px auto;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            flex-wrap: wrap;
+            max-width: 95%;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 140px;
+            background: none;
+            border: none;
+            padding: 20px 10px;
+            font-weight: 600;
+            color: var(--light-text);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .tab-btn i {
+            font-size: 1.4rem;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: rgba(44, 62, 80, 0.08);
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            right: 15%;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px 2px 0 0;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.6s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .section-card {
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            border-left: 6px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .section-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(44, 62, 80, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 1.6rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            background: rgba(155, 89, 182, 0.1);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .subsection-title {
+            color: var(--secondary);
+            margin: 30px 0 18px;
+            font-size: 1.4rem;
+            padding-left: 15px;
+            border-left: 5px solid var(--intercultural);
+        }
+
+        /* Tables */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: rgba(44, 62, 80, 0.05);
+            border-radius: 4px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        table td {
+            padding: 16px 15px;
+            border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+            font-size: 0.98rem;
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(44, 62, 80, 0.03);
+        }
+
+        table tr:hover {
+            background-color: rgba(44, 62, 80, 0.08);
+        }
+
+        /* Interactive Elements */
+        .toggle-btn {
+            background-color: var(--intercultural);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            margin: 15px 0;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+        }
+
+        .hidden-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+            background-color: rgba(44, 62, 80, 0.03);
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+        }
+
+        .hidden-content.active {
+            max-height: 2000px;
+            padding: 25px;
+            margin-top: 15px;
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .concept-card {
+            background-color: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            border-top: 6px solid var(--intercultural);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .concept-title {
+            color: var(--primary);
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            background: rgba(44, 62, 80, 0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 3px 5px;
+        }
+
+        .badge-key {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--secondary);
+        }
+
+        .badge-theory {
+            background: rgba(155, 89, 182, 0.1);
+            color: var(--accent);
+        }
+
+        .badge-culture {
+            background: rgba(26, 188, 156, 0.1);
+            color: var(--intercultural);
+        }
+
+        /* Quote and Special Boxes */
+        .quote {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.05), rgba(52, 152, 219, 0.05));
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border-left: 6px solid var(--secondary);
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(26, 188, 156, 0.1), rgba(52, 152, 219, 0.1));
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+            border-left: 6px solid var(--intercultural);
+        }
+
+        .definition-box {
+            background: rgba(52, 152, 219, 0.05);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .theory-box {
+            background: rgba(155, 89, 182, 0.05);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* Cultural Dimensions Cards */
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .dimension-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .dimension-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .dimension-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+        }
+
+        /* Cultural Shock Timeline */
+        .shock-timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .shock-timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .shock-item {
+            position: relative;
+            width: 45%;
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            background: var(--light-card);
+            box-shadow: var(--box-shadow);
+        }
+
+        .shock-item:nth-child(odd) {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .shock-item:nth-child(even) {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .shock-item:nth-child(odd):before {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 30px;
+            width: 15px;
+            height: 15px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid var(--light-card);
+        }
+
+        .shock-item:nth-child(even):before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 15px;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 4px solid var(--light-card);
+        }
+
+        .shock-stage {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--light-text);
+            font-size: 0.95rem;
+            padding-top: 25px;
+            border-top: 1px solid rgba(44, 62, 80, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-card {
+                padding: 25px;
+            }
+            
+            .shock-timeline:before {
+                left: 30px;
+            }
+            
+            .shock-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+            }
+            
+            .shock-item:nth-child(odd):before,
+            .shock-item:nth-child(even):before {
+                left: -45px;
+                right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            header p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+            
+            .header-controls {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 20px auto 0;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .nav-tabs {
+                margin: 15px 10px;
+            }
+            
+            .tab-btn {
+                min-width: 120px;
+                padding: 15px 5px;
+                font-size: 0.9rem;
+            }
+            
+            .section-card {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .concept-grid, .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding: 20px 0;
+            }
+            
+            .nav-tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                flex-wrap: nowrap;
+            }
+            
+            .tab-btn {
+                min-width: 110px;
+            }
+            
+            .toggle-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            table th, table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Ideas Section */
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .idea-card {
+            background: var(--light-card);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .idea-card:hover {
+            border-color: var(--intercultural);
+            transform: translateY(-5px);
+        }
+
+        .idea-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 188, 156, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--intercultural);
+            font-size: 1.5rem;
+        }
+
+        .idea-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Coming Soon!</h1>
-    <p>This module is under construction and will be added soon.</p>
-    <a href="index.html" class="back-link">← Back to Modules</a>
-  </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="font-toggle" id="font-toggle" title="Adjust font size">
+                    <i class="fas fa-text-height"></i>
+                </button>
+            </div>
+            
+            <h1>
+                <i class="fas fa-globe-americas"></i>
+                Intercultural Communication Study Guide
+            </h1>
+            <p>Mastering Cross-Cultural Communication in a Globalized World | Based on Lectures IN1, IN2, and IN3</p>
+        </div>
+    </header>
+    
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs container">
+        <button class="tab-btn active" data-target="overview">
+            <i class="fas fa-book"></i>
+            <span>Core Concepts</span>
+        </button>
+        <button class="tab-btn" data-target="theories">
+            <i class="fas fa-brain"></i>
+            <span>Theories & Models</span>
+        </button>
+        <button class="tab-btn" data-target="stages">
+            <i class="fas fa-chart-line"></i>
+            <span>Stages & Dimensions</span>
+        </button>
+        <button class="tab-btn" data-target="ideas">
+            <i class="fas fa-lightbulb"></i>
+            <span>Key Ideas</span>
+        </button>
+    </div>
+    
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Core Concepts Section -->
+        <section id="overview" class="content-section active">
+            <!-- Introduction -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Introduction to Intercultural Communication
+                </h2>
+                
+                <p><strong>Intercultural communication</strong> has emerged as a vital field in our increasingly interconnected world. As globalization accelerates through migration, digital technology, and international trade, individuals regularly encounter people from diverse cultural backgrounds in classrooms, workplaces, and online spaces.</p>
+                
+                <div class="highlight-box">
+                    <h3>Why Intercultural Communication Matters</h3>
+                    <p>In today's globalized environment, intercultural competence is no longer optional—it's essential for:</p>
+                    <ul>
+                        <li><strong>Educational success</strong> in multicultural classrooms</li>
+                        <li><strong>Professional effectiveness</strong> in global workplaces</li>
+                        <li><strong>Building meaningful relationships</strong> across cultural boundaries</li>
+                        <li><strong>Navigating digital spaces</strong> where cultures intersect</li>
+                        <li><strong>Promoting mutual understanding</strong> and reducing prejudice</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection-title">Defining Key Concepts</div>
+                
+                <div class="concept-grid">
+                    <!-- Culture Concept -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-users"></i>
+                            Culture
+                        </h3>
+                        <p><strong>Definition:</strong> A shared system of meanings, values, norms, and practices that shape how individuals perceive and interact with the world (Hall, 1976).</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Modern Understanding:</strong> Culture is no longer viewed as fixed or homogeneous. Contemporary perspectives see culture as:</p>
+                            <ul>
+                                <li><strong>Dynamic and fluid</strong> - constantly evolving</li>
+                                <li><strong>Hybrid</strong> - mixing global and local influences</li>
+                                <li><strong>Context-dependent</strong> - varies across situations</li>
+                                <li><strong>Internally diverse</strong> - not uniform within groups</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-culture">Dynamic</span>
+                            <span class="badge badge-culture">Hybrid</span>
+                            <span class="badge badge-culture">Contextual</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Intercultural Communication -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-exchange-alt"></i>
+                            Intercultural Communication
+                        </h3>
+                        <p><strong>Definition:</strong> The exchange of information between individuals or groups from different cultural backgrounds, involving understanding how cultural variables influence interactions (Gudykunst & Kim, 2017).</p>
+                        
+                        <div class="definition-box">
+                            <p><strong>Key Components:</strong></p>
+                            <ul>
+                                <li><strong>Culture:</strong> Shared system of meanings</li>
+                                <li><strong>Communication:</strong> Symbolic process of sharing meaning</li>
+                                <li><strong>Context:</strong> Situational, relational, cultural setting</li>
+                                <li><strong>Competence:</strong> Ability to interact effectively and appropriately</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Significance:</strong> Moves beyond simple cultural comparisons to focus on interaction and meaning-making in "in-between" spaces.</p>
+                    </div>
+                    
+                    <!-- Intercultural Speaker -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-user-friends"></i>
+                            Intercultural Speaker
+                        </h3>
+                        <p><strong>Definition:</strong> An individual who can effectively mediate, explain, and interpret cultural meanings across boundaries (Byram, 1997).</p>
+                        
+                        <div style="background: rgba(26, 188, 156, 0.05); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <p><strong>Characteristics of an Intercultural Speaker:</strong></p>
+                            <ul>
+                                <li>Questions stereotypes and assumptions</li>
+                                <li>Analyzes power relations in communication</li>
+                                <li>Negotiates meaning across differences</li>
+                                <li>Adapts communication style to context</li>
+                                <li>Mediates cultural misunderstandings</li>
+                            </ul>
+                        </div>
+                        
+                        <p><strong>Beyond Language:</strong> Being an intercultural speaker involves more than linguistic proficiency—it requires cultural awareness, adaptability, and empathy.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Communication Components -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-comments"></i>
+                    Components of Intercultural Communication
+                </h2>
+                
+                <div class="quote">
+                    <p>"Intercultural communication is both a process and a skill that enables individuals to navigate differences and build meaningful relationships across cultures." - Samovar, Porter, and McDaniel (2015)</p>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Definition</th>
+                                <th>Examples</th>
+                                <th>Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Culture</strong></td>
+                                <td>Shared system of meanings, values, and practices</td>
+                                <td>Communication styles, social norms, worldviews</td>
+                                <td>Shapes perception and interpretation of messages</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Communication</strong></td>
+                                <td>Symbolic process of sharing meaning through messages</td>
+                                <td>Verbal and non-verbal cues, listening, feedback</td>
+                                <td>Primary vehicle for intercultural interaction</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Context</strong></td>
+                                <td>Situational, relational, and cultural setting</td>
+                                <td>Formal/informal settings, power dynamics, history</td>
+                                <td>Determines appropriateness and interpretation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Competence</strong></td>
+                                <td>Ability to interact effectively and appropriately</td>
+                                <td>Adaptability, empathy, cultural knowledge</td>
+                                <td>Enables successful cross-cultural outcomes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="subsection-title">The Shift from "Cross-Cultural" to "Intercultural"</div>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 25px; margin: 25px 0;">
+                    <div style="flex: 1; min-width: 300px; background: rgba(44, 62, 80, 0.03); padding: 25px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 15px;">Traditional "Cross-Cultural" Approach</h4>
+                        <ul>
+                            <li>Focuses on comparing cultures</li>
+                            <li>Views culture as fixed and bounded</li>
+                            <li>Emphasizes differences between groups</li>
+                            <li>Often reinforces stereotypes</li>
+                            <li>Assumes culture = nationality</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="flex: 1; min-width: 300px; background: rgba(26, 188, 156, 0.05); padding: 25px; border-radius: var(--border-radius); border-left: 4px solid var(--intercultural);">
+                        <h4 style="color: var(--intercultural); margin-bottom: 15px;">Modern "Intercultural" Approach</h4>
+                        <ul>
+                            <li>Focuses on interaction between individuals</li>
+                            <li>Views culture as dynamic and fluid</li>
+                            <li>Emphasizes negotiation of meaning</li>
+                            <li>Questions stereotypes and power relations</li>
+                            <li>Recognizes multiple, hybrid identities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Theories Section -->
+        <section id="theories" class="content-section">
+            <!-- Major Theories -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-theater-masks"></i>
+                    Major Theoretical Frameworks
+                </h2>
+                
+                <div class="concept-grid">
+                    <!-- Hall's Context Theory -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-layer-group"></i>
+                            Hall's Context Theory
+                        </h3>
+                        <p><strong>Theorist:</strong> Edward T. Hall (1976)</p>
+                        
+                        <div class="theory-box">
+                            <p><strong>Core Idea:</strong> Cultures differ in how much meaning is carried by context versus explicit verbal messages.</p>
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <h4 style="color: var(--secondary); margin-bottom: 8px;">High-Context Cultures</h4>
+                                <ul>
+                                    <li>Rely on implicit messages</li>
+                                    <li>Use non-verbal cues extensively</li>
+                                    <li>Value relationships and trust</li>
+                                    <li><em>Examples:</em> Japan, Arab countries, China</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="flex: 1; min-width: 150px;">
+                                <h4 style="color: var(--accent); margin-bottom: 8px;">Low-Context Cultures</h4>
+                                <ul>
+                                    <li>Prefer explicit, direct communication</li>
+                                    <li>Value clarity and precision</li>
+                                    <li>Separate relationships from messages</li>
+                                    <li><em>Examples:</em> USA, Germany, Switzerland</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Application:</strong> Understanding context orientation helps interpret messages accurately and avoid misunderstandings in global interactions.</p>
+                    </div>
+                    
+                    <!-- Hofstede's Dimensions -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-ruler-combined"></i>
+                            Hofstede's Cultural Dimensions
+                        </h3>
+                        <p><strong>Theorist:</strong> Geert Hofstede (2001)</p>
+                        
+                        <div class="theory-box">
+                            <p><strong>Core Idea:</strong> Six value dimensions that explain cultural differences in communication, behavior, and workplace expectations.</p>
+                        </div>
+                        
+                        <p><strong>Key Dimensions:</strong></p>
+                        <ul>
+                            <li>Power Distance (PDI)</li>
+                            <li>Individualism vs. Collectivism (IDV)</li>
+                            <li>Masculinity vs. Femininity (MAS)</li>
+                            <li>Uncertainty Avoidance (UAI)</li>
+                            <li>Long-term vs. Short-term Orientation (LTO)</li>
+                            <li>Indulgence vs. Restraint (IVR)</li>
+                        </ul>
+                        
+                        <p><strong>Significance:</strong> Provides a systematic framework for analyzing cultural differences and predicting potential communication challenges.</p>
+                    </div>
+                    
+                    <!-- Appadurai's Global Flows -->
+                    <div class="concept-card">
+                        <h3 class="concept-title">
+                            <i class="fas fa-globe"></i>
+                            Appadurai's Global Flows
+                        </h3>
+                        <p><strong>Theorist:</strong> Arjun Appadurai (1996)</p>
+                        
+                        <div class="theory-box">
+                            <p><strong>Core Idea:</strong> Globalization operates through five interconnected "scapes" or flows that shape cultural interactions worldwide.</p>
+                        </div>
+                        
+                        <p><strong>The Five Scapes:</strong></p>
+                        <ul>
+                            <li><strong>Ethnoscapes:</strong> Flow of people</li>
+                            <li><strong>Mediascapes:</strong> Flow of media and information</li>
+                            <li><strong>Technoscapes:</strong> Flow of technology</li>
+                            <li><strong>Financescapes:</strong> Flow of capital</li>
+                            <li><strong>Ideoscapes:</strong> Flow of ideas and ideologies</li>
+                        </ul>
+                        
+                        <p><strong>Application:</strong> Helps understand how globalization creates hybrid cultures and complex identities in today's interconnected world.</p>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Additional Theoretical Perspectives</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Gudykunst's Anxiety/Uncertainty Management Theory (2005)</h4>
+                        <p>Emphasizes managing uncertainty and anxiety to achieve effective intercultural communication. Suggests that reducing uncertainty about others' behavior leads to more successful interactions.</p>
+                    </div>
+                    
+                    <div style="background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Byram's Intercultural Communicative Competence (1997)</h4>
+                        <p>Integrates linguistic skills with cultural awareness, attitudes of openness, and the ability to interpret and relate cultural meanings. Has profoundly influenced foreign language teaching.</p>
+                    </div>
+                    
+                    <div style="background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Kramsch's "Third Space" (1998, 2009)</h4>
+                        <p>Focuses on the "in-between" space where cultures meet and new meanings are negotiated. Emphasizes that intercultural communication creates something new rather than just transferring existing meanings.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Intercultural Competence -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-user-check"></i>
+                    Intercultural Competence
+                </h2>
+                
+                <p><strong>Intercultural competence</strong> refers to the ability to communicate effectively and appropriately across cultures (Deardorff, 2006). It involves more than just knowledge—it encompasses attitudes, skills, and behaviors.</p>
+                
+                <div class="highlight-box">
+                    <h3>Components of Intercultural Competence</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Knowledge</h4>
+                            <ul>
+                                <li>Cultural patterns and practices</li>
+                                <li>Global issues and trends</li>
+                                <li>Communication styles</li>
+                                <li>Cultural self-awareness</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Skills</h4>
+                            <ul>
+                                <li>Active listening</li>
+                                <li>Observation and interpretation</li>
+                                <li>Adaptability and flexibility</li>
+                                <li>Conflict resolution</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Attitudes</h4>
+                            <ul>
+                                <li>Respect for diversity</li>
+                                <li>Curiosity and openness</li>
+                                <li>Empathy and tolerance</li>
+                                <li>Suspension of judgment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Developing Intercultural Competence</div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Characteristics</th>
+                                <th>Development Strategies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Awareness</strong></td>
+                                <td>Recognizing cultural differences and one's own cultural filters</td>
+                                <td>Self-reflection, cultural comparisons, exposure to diversity</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Understanding</strong></td>
+                                <td>Developing knowledge about different cultural patterns</td>
+                                <td>Study, cultural immersion, dialogue with diverse others</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Adaptation</strong></td>
+                                <td>Modifying behavior to fit different cultural contexts</td>
+                                <td>Practice, feedback, role-playing, trial and error</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Integration</strong></td>
+                                <td>Internalizing intercultural skills as natural responses</td>
+                                <td>Continued practice, mentoring others, teaching</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="definition-box">
+                    <p><strong>Byram's Model of Intercultural Communicative Competence (1997):</strong> Integrates five savoirs (knowledges):</p>
+                    <ol>
+                        <li><strong>Savoir être:</strong> Attitudes of openness and curiosity</li>
+                        <li><strong>Savoir:</strong> Knowledge of social groups and practices</li>
+                        <li><strong>Savoir comprendre:</strong> Skills of interpreting and relating</li>
+                        <li><strong>Savoir apprendre/faire:</strong> Skills of discovery and interaction</li>
+                        <li><strong>Savoir s'engager:</strong> Critical cultural awareness</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stages & Dimensions Section -->
+        <section id="stages" class="content-section">
+            <!-- Hofstede's Dimensions Detailed -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-cube"></i>
+                    Hofstede's Cultural Dimensions in Detail
+                </h2>
+                
+                <p>Geert Hofstede's cultural dimensions theory provides a framework for understanding how values in the workplace are influenced by culture. The six dimensions help explain communication styles, management approaches, and social behaviors across cultures.</p>
+                
+                <div class="dimension-grid">
+                    <!-- Power Distance -->
+                    <div class="dimension-card">
+                        <h3 class="dimension-title">Power Distance (PDI)</h3>
+                        <p><strong>Definition:</strong> The extent to which less powerful members of society accept and expect that power is distributed unequally.</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>High PDI Cultures:</strong>
+                                <p>Accept hierarchy, respect authority, centralized power</p>
+                                <em>Examples: Malaysia, Arab countries, Philippines</em>
+                            </div>
+                            
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 12px; border-radius: 8px;">
+                                <strong>Low PDI Cultures:</strong>
+                                <p>Value equality, question authority, decentralized power</p>
+                                <em>Examples: Denmark, Sweden, New Zealand</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Individualism vs Collectivism -->
+                    <div class="dimension-card">
+                        <h3 class="dimension-title">Individualism vs Collectivism (IDV)</h3>
+                        <p><strong>Definition:</strong> The degree to which individuals are integrated into groups.</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>Individualistic Cultures:</strong>
+                                <p>Focus on personal goals, independence, self-expression</p>
+                                <em>Examples: USA, UK, Australia, Netherlands</em>
+                            </div>
+                            
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 12px; border-radius: 8px;">
+                                <strong>Collectivistic Cultures:</strong>
+                                <p>Focus on group harmony, loyalty, interdependence</p>
+                                <em>Examples: China, Algeria, Colombia, Pakistan</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Masculinity vs Femininity -->
+                    <div class="dimension-card">
+                        <h3 class="dimension-title">Masculinity vs Femininity (MAS)</h3>
+                        <p><strong>Definition:</strong> Distribution of emotional roles between genders.</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>Masculine Cultures:</strong>
+                                <p>Value competition, achievement, success, assertiveness</p>
+                                <em>Examples: Japan, Germany, Italy, Mexico</em>
+                            </div>
+                            
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 12px; border-radius: 8px;">
+                                <strong>Feminine Cultures:</strong>
+                                <p>Value cooperation, care, quality of life, modesty</p>
+                                <em>Examples: Sweden, Norway, Netherlands, Costa Rica</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Uncertainty Avoidance -->
+                    <div class="dimension-card">
+                        <h3 class="dimension-title">Uncertainty Avoidance (UAI)</h3>
+                        <p><strong>Definition:</strong> Tolerance for ambiguity and uncertainty.</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>High UAI Cultures:</strong>
+                                <p>Prefer rules, structure, predictability, formal procedures</p>
+                                <em>Examples: Greece, Portugal, Russia, Japan</em>
+                            </div>
+                            
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 12px; border-radius: 8px;">
+                                <strong>Low UAI Cultures:</strong>
+                                <p>Comfortable with ambiguity, risk, flexibility, innovation</p>
+                                <em>Examples: Singapore, Jamaica, Denmark, Sweden</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Long-term Orientation -->
+                    <div class="dimension-card">
+                        <h3 class="dimension-title">Long-term vs Short-term Orientation (LTO)</h3>
+                        <p><strong>Definition:</strong> Time perspective and focus on future versus past/present.</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>Long-term Oriented:</strong>
+                                <p>Focus on future, persistence, saving, adaptability</p>
+                                <em>Examples: China, Japan, South Korea, Germany</em>
+                            </div>
+                            
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 12px; border-radius: 8px;">
+                                <strong>Short-term Oriented:</strong>
+                                <p>Focus on tradition, immediate results, stability</p>
+                                <em>Examples: USA, UK, Australia, Canada</em>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Indulgence vs Restraint -->
+                    <div class="dimension-card">
+                        <h3 class="dimension-title">Indulgence vs Restraint (IVR)</h3>
+                        <p><strong>Definition:</strong> Gratification versus control of basic human desires.</p>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="background: rgba(231, 76, 60, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>Indulgent Cultures:</strong>
+                                <p>Allow enjoyment, personal freedom, leisure, fun</p>
+                                <em>Examples: Mexico, Nigeria, Sweden, Australia</em>
+                            </div>
+                            
+                            <div style="background: rgba(52, 152, 219, 0.1); padding: 12px; border-radius: 8px;">
+                                <strong>Restrained Cultures:</strong>
+                                <p>Value discipline, control, less expression of desires</p>
+                                <em>Examples: Egypt, Russia, China, Pakistan</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cultural Shock Stages -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-mountain"></i>
+                    Cultural Shock: Stages and Adaptation
+                </h2>
+                
+                <p><strong>Cultural shock</strong> occurs when individuals feel disoriented in a new culture due to unfamiliar norms, values, and behaviors. It's a normal response to immersion in a different cultural environment and typically progresses through predictable stages.</p>
+                
+                <div class="shock-timeline">
+                    <!-- Honeymoon Stage -->
+                    <div class="shock-item">
+                        <div class="shock-stage">Stage 1: Honeymoon Phase</div>
+                        <div class="shock-description">
+                            <p>Everything feels exciting and new. The individual enjoys the novelty of different food, language, people, and environment. This phase is characterized by:</p>
+                            <ul>
+                                <li>Curiosity and excitement</li>
+                                <li>Positive focus on similarities</li>
+                                <li>Tourist-like perspective</li>
+                                <li>Minimal stress or frustration</li>
+                            </ul>
+                            <p><em>Duration:</em> Typically lasts from a few days to several weeks.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Negotiation Stage -->
+                    <div class="shock-item">
+                        <div class="shock-stage">Stage 2: Negotiation (Frustration) Phase</div>
+                        <div class="shock-description">
+                            <p>Differences start to feel difficult and frustrating. The individual may experience:</p>
+                            <ul>
+                                <li>Confusion, loneliness, homesickness</li>
+                                <li>Irritation with cultural differences</li>
+                                <li>Communication difficulties</li>
+                                <li>Anxiety and stress</li>
+                                <li>Critical attitudes toward host culture</li>
+                            </ul>
+                            <p><em>This is typically the most difficult stage, where cultural shock is most acute.</em></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Adjustment Stage -->
+                    <div class="shock-item">
+                        <div class="shock-stage">Stage 3: Adjustment Phase</div>
+                        <div class="shock-description">
+                            <p>The individual begins to adapt and develop coping strategies:</p>
+                            <ul>
+                                <li>Understanding the culture improves</li>
+                                <li>Routines become familiar</li>
+                                <li>Communication skills develop</li>
+                                <li>Stress decreases gradually</li>
+                                <li>Sense of humor returns</li>
+                            </ul>
+                            <p><em>This stage may take several months as the individual learns to navigate the new culture more effectively.</em></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Adaptation Stage -->
+                    <div class="shock-item">
+                        <div class="shock-stage">Stage 4: Adaptation (Mastery) Phase</div>
+                        <div class="shock-description">
+                            <p>The individual feels at home in the new culture and develops:</p>
+                            <ul>
+                                <li>Ability to function effectively</li>
+                                <li>Understanding of cultural cues</li>
+                                <li>Bicultural or multicultural identity</li>
+                                <li>Appreciation for the culture</li>
+                                <li>Ability to mediate between cultures</li>
+                            </ul>
+                            <p><em>Some individuals reach full adaptation, while others achieve varying levels of comfort and competence.</em></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Strategies for Managing Cultural Shock</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 25px 0;">
+                    <div style="background: rgba(26, 188, 156, 0.05); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--intercultural); margin-bottom: 10px;">Psychological Strategies</h4>
+                        <ul>
+                            <li>Maintain realistic expectations</li>
+                            <li>Practice mindfulness and stress reduction</li>
+                            <li>Keep a journal of experiences</li>
+                            <li>Stay connected with home culture</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(52, 152, 219, 0.05); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Social Strategies</h4>
+                        <ul>
+                            <li>Build local friendships</li>
+                            <li>Join intercultural communities</li>
+                            <li>Seek mentors from host culture</li>
+                            <li>Participate in cultural activities</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(155, 89, 182, 0.05); padding: 20px; border-radius: var(--border-radius);">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Cognitive Strategies</h4>
+                        <ul>
+                            <li>Learn about the host culture</li>
+                            <li>Study the local language</li>
+                            <li>Observe cultural patterns</li>
+                            <li>Develop cultural explanations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Key Ideas Section -->
+        <section id="ideas" class="content-section">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Ideas and Applications
+                </h2>
+                
+                <p>This section synthesizes key concepts from the lectures and provides practical applications for understanding and teaching intercultural communication.</p>
+                
+                <div class="subsection-title">Essential Insights from the Lectures</div>
+                
+                <div class="ideas-grid">
+                    <!-- Idea 1 -->
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-universal-access"></i>
+                        </div>
+                        <h3 class="idea-title">Culture is Dynamic, Not Fixed</h3>
+                        <p>Modern applied linguistics rejects the idea of culture as static or homogeneous. Cultures are constantly evolving, hybridizing through global flows, and vary significantly within communities. This perspective helps avoid stereotypes and recognize individual diversity within cultural groups.</p>
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-culture">Dynamic</span>
+                            <span class="badge badge-culture">Hybrid</span>
+                            <span class="badge badge-culture">Fluid</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Idea 2 -->
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="idea-title">The "Inter" Space is Crucial</h3>
+                        <p>The shift from "cross-cultural" to "intercultural" emphasizes what happens BETWEEN people from different backgrounds. This "in-between" space is where meanings are negotiated, identities are co-constructed, and misunderstandings become learning opportunities.</p>
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-theory">Negotiation</span>
+                            <span class="badge badge-theory">Interaction</span>
+                            <span class="badge badge-theory">Co-construction</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Idea 3 -->
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="idea-title">English as a Lingua Franca (ELF)</h3>
+                        <p>English has become the dominant global lingua franca, used for international communication between non-native speakers. This creates both opportunities (global understanding) and challenges (linguistic dominance, cultural loss). ELF competence requires intercultural awareness, not just linguistic accuracy.</p>
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-key">Global Communication</span>
+                            <span class="badge badge-key">Linguistic Dominance</span>
+                            <span class="badge badge-key">Intercultural Awareness</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Idea 4 -->
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3 class="idea-title">Intercultural Speaker vs. Native Speaker</h3>
+                        <p>The goal of language education is shifting from mimicking native speakers to developing intercultural speakers who can mediate between cultures. An intercultural speaker can explain cultural references, negotiate meaning, and adapt communication styles appropriately.</p>
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-key">Mediation</span>
+                            <span class="badge badge-key">Adaptation</span>
+                            <span class="badge badge-key">Explanation</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Idea 5 -->
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-laptop-house"></i>
+                        </div>
+                        <h3 class="idea-title">Digital Intercultural Communication</h3>
+                        <p>Globalization and digital technology have made intercultural communication routine. Online interactions lack non-verbal cues, increasing misunderstanding risks. Digital competence requires clarity, empathy, and awareness of how technology mediates cultural expression.</p>
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-key">Digital Literacy</span>
+                            <span class="badge badge-key">Virtual Interaction</span>
+                            <span class="badge badge-key">Technology Mediation</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Idea 6 -->
+                    <div class="idea-card">
+                        <div class="idea-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="idea-title">Intercultural Competence in Education</h3>
+                        <p>Byram's intercultural communicative competence model integrates language learning with cultural awareness. Educators should foster attitudes of openness, develop skills of discovery and interaction, and build critical cultural awareness alongside linguistic competence.</p>
+                        <div style="margin-top: 15px;">
+                            <span class="badge badge-key">Pedagogical Integration</span>
+                            <span class="badge badge-key">Critical Awareness</span>
+                            <span class="badge badge-key">Holistic Education</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Practical Applications for the Algerian Context</div>
+                
+                <div class="highlight-box">
+                    <h3>Applying Intercultural Concepts in Algerian EFL Classrooms</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin: 25px 0;">
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Moving Beyond Stereotypes</h4>
+                            <p>Instead of teaching "British culture" as fixed facts (history, flags, holidays), explore how culture is practiced: greeting styles, politeness norms, digital communication patterns, and how these vary across contexts and individuals.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Exploring Multiple English Varieties</h4>
+                            <p>Expose students to diverse English speakers (Indian, Nigerian, Singaporean, etc.) to develop flexibility and challenge the notion of a single "correct" English. Discuss how English adapts to local cultural contexts.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Developing Mediation Skills</h4>
+                            <p>Teach students to explain Algerian cultural practices in English (e.g., religious holidays, family structures, hospitality norms) and to interpret foreign cultural references they encounter in media and online interactions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection-title">Discussion Questions for Reflection</div>
+                
+                <div style="background: rgba(44, 62, 80, 0.05); padding: 25px; border-radius: var(--border-radius); margin: 25px 0;">
+                    <ol>
+                        <li>How does the Algerian educational context typically approach teaching "culture" in EFL classrooms, and how might this be transformed using intercultural communication principles?</li>
+                        <li>What are the advantages and disadvantages of English as a global lingua franca from an Algerian perspective?</li>
+                        <li>How can Algerian students develop intercultural competence while maintaining strong connections to their own cultural identity?</li>
+                        <li>What specific challenges might Algerian professionals face in global virtual workplaces, and how can intercultural competence help address these challenges?</li>
+                        <li>How does the concept of the "intercultural speaker" differ from traditional goals of language learning focused on native-like proficiency?</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- Conclusion -->
+            <div class="section-card">
+                <h2 class="section-title">
+                    <i class="fas fa-flag-checkered"></i>
+                    Conclusion and Future Directions
+                </h2>
+                
+                <div class="quote">
+                    <p>"Intercultural communication, as a field of study and practice, highlights the necessity of understanding and respecting cultural diversity in human interaction. Its integration into didactics enables educators to move beyond mere language teaching toward developing learners' global competence." - Lecture IN1 Conclusion</p>
+                </div>
+                
+                <p><strong>Intercultural communication</strong> has evolved from a niche academic field to an essential competency in our globalized world. The theoretical frameworks of Hall, Hofstede, Appadurai, Byram, and others provide valuable tools for understanding and navigating cultural differences.</p>
+                
+                <div style="background: rgba(26, 188, 156, 0.1); padding: 25px; border-radius: var(--border-radius); margin: 25px 0; border-left: 5px solid var(--intercultural);">
+                    <h3 style="color: var(--intercultural); margin-bottom: 15px;">Key Takeaways for Students and Educators</h3>
+                    <ul>
+                        <li><strong>Culture is process, not product:</strong> Focus on how culture is practiced and negotiated, not just on static facts.</li>
+                        <li><strong>Communication is contextual:</strong> Meaning depends on cultural, relational, and situational contexts.</li>
+                        <li><strong>Competence is multidimensional:</strong> Requires knowledge, skills, attitudes, and awareness.</li>
+                        <li><strong>Globalization creates complexity:</strong> Cultural identities are increasingly hybrid and fluid.</li>
+                        <li><strong>Education must evolve:</strong> Language teaching needs to integrate intercultural competence development.</li>
+                    </ul>
+                </div>
+                
+                <p>As educational spaces become increasingly multicultural and digital interactions transcend geographic boundaries, the ability to communicate effectively across cultures remains a cornerstone of effective pedagogy, professional success, and global citizenship.</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><i class="fas fa-globe-americas"></i> Intercultural Communication Study Guide</p>
+            <p style="margin-top: 10px; font-size: 0.95rem;">Based on Lectures IN1, IN2, and IN3 | Intercultural Communication Module</p>
+            <p style="margin-top: 5px; font-size: 0.85rem;">References: Byram (1997), Hall (1976), Hofstede (2001), Appadurai (1996), Gudykunst & Kim (2017)</p>
+        </div>
+    </footer>
+
+    <script>
+        // ====== INTERCULTURAL COMMUNICATION APPLICATION ======
+        const InterculturalApp = {
+            // State
+            fontSizeLevel: 0,
+            fontSizes: ['100%', '110%', '120%', '90%'],
+            
+            // Initialize the application
+            init() {
+                this.setupEventListeners();
+                this.initializeNavigation();
+                this.initializeInteractiveElements();
+            },
+            
+            // Setup all event listeners
+            setupEventListeners() {
+                // Theme toggle
+                document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+                
+                // Font size toggle
+                document.getElementById('font-toggle').addEventListener('click', () => this.toggleFontSize());
+                
+                // Tab navigation
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchTab(e.target.closest('.tab-btn')));
+                });
+                
+                // Toggle buttons (if any are added later)
+                document.querySelectorAll('.toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.toggleContent(e.target));
+                });
+                
+                // Window resize listener
+                window.addEventListener('resize', () => {
+                    this.adjustLayoutForMobile();
+                });
+                
+                // Initialize on load
+                this.adjustLayoutForMobile();
+            },
+            
+            // ====== THEME & UI FUNCTIONS ======
+            toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    document.getElementById('theme-toggle').title = "Toggle light mode";
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    document.getElementById('theme-toggle').title = "Toggle dark mode";
+                }
+            },
+            
+            toggleFontSize() {
+                this.fontSizeLevel = (this.fontSizeLevel + 1) % this.fontSizes.length;
+                document.body.style.fontSize = this.fontSizes[this.fontSizeLevel];
+                document.getElementById('font-toggle').title = `Font size: ${this.fontSizes[this.fontSizeLevel]}`;
+            },
+            
+            switchTab(clickedBtn) {
+                const target = clickedBtn.getAttribute('data-target');
+                
+                // Update active tab
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                clickedBtn.classList.add('active');
+                
+                // Show target section
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === target) {
+                        section.classList.add('active');
+                        
+                        // Scroll to top of section
+                        window.scrollTo({
+                            top: section.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            },
+            
+            toggleContent(button) {
+                const targetId = button.id.replace('-btn', '-content');
+                const content = document.getElementById(targetId);
+                const icon = button.querySelector('i');
+                
+                if (!content) return;
+                
+                content.classList.toggle('active');
+                
+                if (content.classList.contains('active')) {
+                    icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                } else {
+                    icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                }
+            },
+            
+            // ====== NAVIGATION INITIALIZATION ======
+            initializeNavigation() {
+                // Set initial active tab
+                document.querySelector('.tab-btn.active').click();
+            },
+            
+            // ====== INTERACTIVE ELEMENTS ======
+            initializeInteractiveElements() {
+                // Add hover effects to cards
+                document.querySelectorAll('.concept-card, .dimension-card, .idea-card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-8px)';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                    });
+                });
+                
+                // Add click effects to cultural shock timeline items
+                document.querySelectorAll('.shock-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        item.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            item.style.transform = 'scale(1)';
+                        }, 200);
+                    });
+                });
+            },
+            
+            // ====== RESPONSIVE LAYOUT ADJUSTMENTS ======
+            adjustLayoutForMobile() {
+                const navTabs = document.querySelector('.nav-tabs');
+                if (!navTabs) return;
+                
+                if (window.innerWidth <= 480) {
+                    navTabs.style.overflowX = 'auto';
+                    navTabs.style.flexWrap = 'nowrap';
+                    navTabs.style.whiteSpace = 'nowrap';
+                } else {
+                    navTabs.style.overflowX = 'visible';
+                    navTabs.style.flexWrap = 'wrap';
+                    navTabs.style.whiteSpace = 'normal';
+                }
+                
+                // Adjust cultural shock timeline for mobile
+                const timeline = document.querySelector('.shock-timeline');
+                if (timeline) {
+                    if (window.innerWidth <= 992) {
+                        timeline.style.paddingLeft = '30px';
+                    } else {
+                        timeline.style.paddingLeft = '0';
+                    }
+                }
+            }
+        };
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            InterculturalApp.init();
+        });
+    </script>
 </body>
 </html>
