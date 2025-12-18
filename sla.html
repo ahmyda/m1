@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon</title>
+  <style>
+    :root {
+      --primary: #3f51b5;
+      --bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --text: #2c2c2c;
+      --muted: #6b7280;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f9fafb);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      background: var(--card-bg);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .back-link {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .back-link:hover,
+    .back-link:focus {
+      background: #303f9f;
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Coming Soon!</h1>
+    <p>This module is under construction and will be added soon.</p>
+    <a href="index.html" class="back-link">← Back to Modules</a>
+  </div>
+</body>
+</html>
