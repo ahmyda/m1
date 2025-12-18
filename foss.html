@@ -1,94 +1,2613 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon</title>
-  <style>
-    :root {
-      --primary: #3f51b5;
-      --bg: #f4f6fb;
-      --card-bg: #ffffff;
-      --text: #2c2c2c;
-      --muted: #6b7280;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #eef2ff, #f9fafb);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .container {
-      text-align: center;
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-      max-width: 500px;
-      width: 100%;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-
-    p {
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-
-    .back-link {
-      display: inline-block;
-      padding: 10px 24px;
-      background: var(--primary);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .back-link:hover,
-    .back-link:focus {
-      background: #303f9f;
-      transform: translateY(-2px);
-      outline: none;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 20px;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      p {
-        font-size: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSS for Language Students - Complete Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --gray: #6c757d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            
+            /* Light theme colors */
+            --bg-light: #f8fafc;
+            --surface-light: #ffffff;
+            --text-light: #1e293b;
+            --text-secondary-light: #475569;
+            --border-light: #e2e8f0;
+            
+            /* Dark theme colors */
+            --bg-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --text-dark: #f1f5f9;
+            --text-secondary-dark: #cbd5e1;
+            --border-dark: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Z" /></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo i {
+            color: var(--success);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 50%;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+        
+        .course-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background-color: var(--surface-light);
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        body.dark-mode .nav-tabs {
+            background-color: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+        
+        .tab {
+            padding: 20px 35px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            border-bottom: 4px solid transparent;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .tab {
+            color: var(--text-dark);
+        }
+        
+        .tab:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        body.dark-mode .tab:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .tab.active {
+            background-color: var(--surface-light);
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+        }
+        
+        body.dark-mode .tab.active {
+            background-color: var(--surface-dark);
+        }
+        
+        .tab i {
+            margin-right: 10px;
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: var(--surface-light);
+            padding: 45px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+            min-height: 600px;
+            border: 1px solid var(--border-light);
+            border-top: none;
+        }
+        
+        body.dark-mode .tab-content {
+            background-color: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-light);
+            font-size: 2rem;
+        }
+        
+        body.dark-mode h2 {
+            border-bottom-color: var(--border-dark);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 25px 0 18px;
+            font-size: 1.5rem;
+        }
+        
+        body.dark-mode h3 {
+            color: #a78bfa;
+        }
+        
+        .card {
+            background-color: var(--surface-light);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 6px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.dark-mode .card {
+            background-color: #1e293b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .card h4 i {
+            color: var(--accent);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.08), rgba(76, 201, 240, 0.08));
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--success);
+            margin: 25px 0;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .highlight-box {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.15), rgba(76, 201, 240, 0.15));
+            color: var(--text-dark);
+        }
+        
+        .key-term {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        body.dark-mode .key-term {
+            background-color: rgba(67, 97, 238, 0.2);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .comparison-table td {
+            border-color: var(--border-dark);
+            color: var(--text-dark);
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        body.dark-mode .comparison-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        
+        .comparison-table tr:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        body.dark-mode .comparison-table tr:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .os-logos {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 35px 0;
+        }
+        
+        .os-logo {
+            text-align: center;
+            width: 140px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: var(--surface-light);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .os-logo {
+            background-color: #1e293b;
+            color: var(--text-dark);
+        }
+        
+        .os-logo:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .os-logo i {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .windows { color: #0078d4; }
+        .mac { color: #000000; }
+        .linux { color: #f1502f; }
+        .debian { color: #d70751; }
+        .ubuntu { color: #dd4814; }
+        
+        .quiz-container {
+            background-color: var(--surface-light);
+            border-radius: 12px;
+            padding: 35px;
+            margin: 35px 0;
+            border: 1px solid var(--border-light);
+        }
+        
+        body.dark-mode .quiz-container {
+            background-color: var(--surface-dark);
+            border-color: var(--border-dark);
+        }
+        
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .question {
+            color: var(--text-dark);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background-color: var(--surface-light);
+            padding: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+            transition: all 0.2s ease;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .option {
+            background-color: #1e293b;
+            border-color: var(--border-dark);
+            color: var(--text-dark);
+        }
+        
+        .option:hover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        body.dark-mode .option:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .option.selected {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .option.correct {
+            border-color: #10b981;
+            background-color: rgba(16, 185, 129, 0.1);
+        }
+        
+        .option.incorrect {
+            border-color: #ef4444;
+            background-color: rgba(239, 68, 68, 0.1);
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #0da271;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
+        }
+        
+        .results {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(67, 97, 238, 0.1));
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 35px;
+            display: none;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .results {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(67, 97, 238, 0.15));
+            color: var(--text-dark);
+        }
+        
+        .score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .real-life-example {
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.08), rgba(251, 191, 36, 0.08));
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 6px solid #f97316;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .real-life-example {
+            background: linear-gradient(135deg, rgba(248, 113, 113, 0.15), rgba(251, 191, 36, 0.15));
+            color: var(--text-dark);
+        }
+        
+        .exercise {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 6px solid var(--primary);
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .exercise {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+            color: var(--text-dark);
+        }
+        
+        .exercise h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .license-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 35px 0;
+        }
+        
+        .license-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--surface-light);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--primary);
+            transition: transform 0.3s ease;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .license-card {
+            background-color: #1e293b;
+            color: var(--text-dark);
+        }
+        
+        .license-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .license-card h5 {
+            color: var(--primary);
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--surface-light);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        body.dark-mode footer {
+            background-color: var(--surface-dark);
+            color: var(--text-dark);
+            border-color: var(--border-dark);
+        }
+        
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+        
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--surface-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            color: var(--text-light);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+        
+        body.dark-mode .control-btn {
+            background-color: var(--surface-dark);
+            color: var(--text-dark);
+            border-color: var(--border-dark);
+        }
+        
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 992px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                padding: 18px;
+            }
+            
+            .tab-content {
+                padding: 30px 25px;
+            }
+            
+            .os-logos {
+                gap: 15px;
+            }
+            
+            .os-logo {
+                width: 120px;
+            }
+            
+            .controls {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .logo i {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .license-cards {
+                flex-direction: column;
+            }
+            
+            .tab {
+                padding: 16px;
+                font-size: 0.95rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        .mx-linux-section {
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.1), rgba(67, 97, 238, 0.1));
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(106, 90, 205, 0.2);
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .mx-linux-section {
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.15), rgba(67, 97, 238, 0.15));
+            color: var(--text-dark);
+        }
+        
+        .mx-logo {
+            font-size: 3.5rem;
+            color: #6a5acd;
+            margin-bottom: 25px;
+        }
+        
+        .mx-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .mx-feature {
+            background-color: var(--surface-light);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .mx-feature {
+            background-color: #1e293b;
+            color: var(--text-dark);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--surface-light);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .timeline-content {
+            background-color: #1e293b;
+            color: var(--text-dark);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--surface-light);
+            top: 22px;
+            border-radius: 50%;
+            z-index: 1;
+            border: 4px solid var(--primary);
+        }
+        
+        body.dark-mode .timeline-item:nth-child(odd) .timeline-content::after {
+            background-color: #1e293b;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -10px;
+            background-color: var(--surface-light);
+            top: 22px;
+            border-radius: 50%;
+            z-index: 1;
+            border: 4px solid var(--primary);
+        }
+        
+        body.dark-mode .timeline-item:nth-child(even) .timeline-content::after {
+            background-color: #1e293b;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin: 25px 0;
+            color: var(--text-secondary-light);
+        }
+        
+        body.dark-mode .quote {
+            color: var(--text-secondary-dark);
+        }
+        
+        .freedom-card {
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(67, 97, 238, 0.1));
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .freedom-card {
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.15), rgba(67, 97, 238, 0.15));
+            color: var(--text-dark);
+        }
+        
+        .freedom-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin: 20px 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            background-color: var(--surface-light);
+            color: var(--text-light);
+            font-size: 1rem;
+            resize: vertical;
+            margin-top: 10px;
+        }
+        
+        body.dark-mode textarea, body.dark-mode input[type="text"] {
+            background-color: #1e293b;
+            border-color: var(--border-dark);
+            color: var(--text-dark);
+        }
+        
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--border-light);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        body.dark-mode .progress-bar {
+            background-color: var(--border-dark);
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            margin: 40px 0;
+        }
+        
+        .definition-box {
+            background-color: rgba(67, 97, 238, 0.05);
+            border-left: 5px solid var(--primary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-light);
+        }
+        
+        body.dark-mode .definition-box {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--text-dark);
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Coming Soon!</h1>
-    <p>This module is under construction and will be added soon.</p>
-    <a href="index.html" class="back-link">← Back to Modules</a>
-  </div>
+    <!-- Controls for dark/light mode and font size -->
+    <div class="controls">
+        <div class="control-btn" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </div>
+        <div class="control-btn" id="fontIncrease">
+            <i class="fas fa-text-height"></i>
+        </div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-ubuntu"></i>
+                    <span>FOSS for Language Students</span>
+                </div>
+                <p class="subtitle">A comprehensive guide to understanding Free and Open Source Software, operating systems, and MX Linux - specifically designed for Master's students in Literature & Civilization with no computer science background</p>
+                <div class="course-info">
+                    <i class="fas fa-university"></i> Ziane Achour University of Djelfa | 
+                    <i class="fas fa-user-graduate"></i> Master 1 – Lit/Civ | 
+                    <i class="fas fa-chalkboard-teacher"></i> Dr. Hamza .B
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="tab active" data-target="lectures">
+                <i class="fas fa-book"></i> Lectures Content
+            </div>
+            <div class="tab" data-target="mxlinux">
+                <i class="fab fa-linux"></i> MX Linux Deep Dive
+            </div>
+            <div class="tab" data-target="quiz">
+                <i class="fas fa-question-circle"></i> Knowledge Check
+            </div>
+            <div class="tab" data-target="applications">
+                <i class="fas fa-laptop-code"></i> Real Applications
+            </div>
+        </div>
+        
+        <!-- Lectures Content Tab -->
+        <div id="lectures" class="tab-content active">
+            <h2><i class="fas fa-book-open"></i> Complete Lecture Content</h2>
+            
+            <div class="card">
+                <h4><i class="fas fa-desktop"></i> What is an Operating System? (Detailed Explanation)</h4>
+                <p>An <span class="key-term">operating system (OS)</span> is the most important software that runs on a computer. It acts as an intermediary between the user and the computer hardware. Think of it as the <strong>conductor of an orchestra</strong> - it coordinates all the different parts so they work together harmoniously.</p>
+                
+                <div class="definition-box">
+                    <strong>Formal Definition:</strong> An operating system is a collection of software that manages computer hardware resources and provides common services for computer programs.
+                </div>
+                
+                <h5>Key Functions of an Operating System:</h5>
+                <ul>
+                    <li><strong>Process Management:</strong> Controls which programs run, when they run, and how they use system resources</li>
+                    <li><strong>Memory Management:</strong> Allocates memory to programs and manages data storage</li>
+                    <li><strong>File System Management:</strong> Organizes files and folders on storage devices</li>
+                    <li><strong>Device Management:</strong> Controls hardware like printers, keyboards, and displays</li>
+                    <li><strong>User Interface:</strong> Provides a way for users to interact with the computer (graphical or command-line)</li>
+                    <li><strong>Security:</strong> Protects data and system resources from unauthorized access</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <strong>Analogy for Language Students:</strong> If your computer is a <em>library</em>, the operating system is the <em>librarian</em>. It knows where every book (file) is located, manages who can access what, helps you find information, and keeps everything organized.
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fab fa-windows"></i> Common Operating Systems - Comparative Analysis</h4>
+                <p>Different operating systems serve different purposes and user groups. Here's a detailed comparison:</p>
+                
+                <div class="os-logos">
+                    <div class="os-logo windows">
+                        <i class="fab fa-windows"></i>
+                        <div><strong>Windows</strong></div>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">Proprietary • Microsoft</div>
+                    </div>
+                    <div class="os-logo mac">
+                        <i class="fab fa-apple"></i>
+                        <div><strong>macOS</strong></div>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">Proprietary • Apple</div>
+                    </div>
+                    <div class="os-logo linux">
+                        <i class="fab fa-linux"></i>
+                        <div><strong>Linux</strong></div>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">Open Source • Community</div>
+                    </div>
+                </div>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>OS Type</th>
+                            <th>Developed By</th>
+                            <th>Cost</th>
+                            <th>Primary Users</th>
+                            <th>Key Characteristic</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Windows</strong></td>
+                            <td>Microsoft Corporation</td>
+                            <td>Proprietary (Paid)</td>
+                            <td>General users, businesses, gamers</td>
+                            <td>User-friendly, extensive software compatibility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>macOS</strong></td>
+                            <td>Apple Inc.</td>
+                            <td>Proprietary (Comes with Apple hardware)</td>
+                            <td>Creative professionals, developers</td>
+                            <td>Sleek design, optimized for Apple hardware</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Linux</strong></td>
+                            <td>Global community of developers</td>
+                            <td>Open Source (Free)</td>
+                            <td>Developers, servers, privacy-conscious users</td>
+                            <td>Customizable, secure, transparent</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h5>Linux Distributions (Distros) - Different Flavors of Linux</h5>
+                <p>Linux comes in different versions called <span class="key-term">distributions</span> or "distros." Each distribution is like a different recipe using the same basic ingredients (Linux kernel).</p>
+                
+                <div class="image-placeholder">
+                    <i class="fab fa-linux fa-3x"></i>
+                    <div style="margin-left: 20px;">
+                        <h4>Linux Distribution Family Tree</h4>
+                        <p>Different distros for different needs</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-code-branch"></i> Free and Open Source Software (FOSS) - Core Concepts</h4>
+                
+                <div class="definition-box">
+                    <strong>FOSS Definition:</strong> Free and Open Source Software refers to software that gives users the freedom to run, study, modify, and distribute the software. The "free" refers to freedom (like free speech), not necessarily price (like free beer).
+                </div>
+                
+                <h5>The Two Pillars of FOSS:</h5>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 25px 0;">
+                    <div style="flex: 1; min-width: 300px; background: rgba(67, 97, 238, 0.05); padding: 25px; border-radius: 10px; border-left: 5px solid #4361ee;">
+                        <h5 style="color: #4361ee;"><i class="fas fa-dove"></i> Free Software</h5>
+                        <p><strong>Philosophical Focus:</strong> User freedom and ethical computing</p>
+                        <p><strong>Key Principle:</strong> Users should have control over the software they use</p>
+                        <p><strong>Founder:</strong> Richard Stallman (GNU Project)</p>
+                        <p><strong>Slogan:</strong> "Free software, free society"</p>
+                    </div>
+                    
+                    <div style="flex: 1; min-width: 300px; background: rgba(76, 201, 240, 0.05); padding: 25px; border-radius: 10px; border-left: 5px solid #4cc9f0;">
+                        <h5 style="color: #4cc9f0;"><i class="fas fa-code"></i> Open Source Software</h5>
+                        <p><strong>Practical Focus:</strong> Development methodology and quality</p>
+                        <p><strong>Key Principle:</strong> Open collaboration produces better software</p>
+                        <p><strong>Emphasis:</strong> Transparency, peer review, community development</p>
+                        <p><strong>Benefit:</strong> Security through many eyes reviewing the code</p>
+                    </div>
+                </div>
+                
+                <h5>The Four Essential Freedoms (Free Software Foundation)</h5>
+                
+                <div class="freedom-card">
+                    <div class="freedom-number">0</div>
+                    <div>
+                        <h5>Freedom 0: The freedom to run the program as you wish, for any purpose</h5>
+                        <p>You can use the software for any purpose - personal, educational, commercial, or any other. No restrictions on how you use it.</p>
+                    </div>
+                </div>
+                
+                <div class="freedom-card">
+                    <div class="freedom-number">1</div>
+                    <div>
+                        <h5>Freedom 1: The freedom to study how the program works, and change it so it does your computing as you wish</h5>
+                        <p>You have access to the source code (the "recipe" of the software). You can study it, understand it, and modify it to suit your needs.</p>
+                    </div>
+                </div>
+                
+                <div class="freedom-card">
+                    <div class="freedom-number">2</div>
+                    <div>
+                        <h5>Freedom 2: The freedom to redistribute copies so you can help others</h5>
+                        <p>You can share the software with friends, colleagues, or anyone else. This promotes knowledge sharing and community support.</p>
+                    </div>
+                </div>
+                
+                <div class="freedom-card">
+                    <div class="freedom-number">3</div>
+                    <div>
+                        <h5>Freedom 3: The freedom to distribute copies of your modified versions to others</h5>
+                        <p>If you improve the software, you can share your improvements with the community, benefiting everyone.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <i class="fas fa-lightbulb"></i> <strong>Important Distinction:</strong> "Free software" and "open source software" share similar licenses but come from different philosophical traditions. Free software emphasizes ethics and user freedom, while open source emphasizes practical benefits and development methodology.
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-history"></i> Historical Timeline of the Open Source Movement</h4>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1983</div>
+                            <h5>GNU Project Launch</h5>
+                            <p>Richard Stallman announces the GNU Project to create a free Unix-like operating system. GNU stands for "GNU's Not Unix" - a recursive acronym.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1985</div>
+                            <h5>Free Software Foundation Founded</h5>
+                            <p>Stallman establishes the FSF to promote computer user freedom and defend the rights of all free software users.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1991</div>
+                            <h5>Linux Kernel Creation</h5>
+                            <p>Linus Torvalds, a Finnish student, creates the Linux kernel and releases it under the GPL license. This combines with GNU tools to create complete operating systems.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1998</div>
+                            <h5>"Open Source" Term Coined</h5>
+                            <p>The term "open source" is formally adopted to describe software with accessible source code, focusing on practical benefits rather than philosophical freedom.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2004</div>
+                            <h5>Ubuntu Released</h5>
+                            <p>Mark Shuttleworth founds Canonical and releases Ubuntu, making Linux more accessible to general users with its user-friendly interface.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">Present</div>
+                            <h5>Global Adoption</h5>
+                            <p>Open source powers the internet (Apache, Linux servers), Android phones, and critical infrastructure worldwide. Millions contribute to open source projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-balance-scale"></i> Software Licenses - The Rules of Sharing</h4>
+                
+                <p>Every software has a license that defines what users can and cannot do with it. Think of licenses as <strong>recipes with sharing rules</strong>.</p>
+                
+                <div class="highlight-box">
+                    <i class="fas fa-scroll"></i> <strong>Analogy:</strong> A software license is like the rules for a potluck dinner. Some licenses say "bring whatever you want" (permissive), others say "if you bring something, you must share the recipe" (copyleft).
+                </div>
+                
+                <div class="license-cards">
+                    <div class="license-card">
+                        <h5><i class="fab fa-github"></i> GPL (GNU General Public License)</h5>
+                        <p><strong>Philosophy:</strong> Copyleft - ensures software remains free</p>
+                        <p><strong>Key Requirement:</strong> If you modify and distribute, you must share source code</p>
+                        <p><strong>Used by:</strong> Linux kernel, WordPress, GIMP</p>
+                        <p><strong>Analogy:</strong> "Share and share alike" - if you improve it, share your improvements</p>
+                    </div>
+                    
+                    <div class="license-card">
+                        <h5><i class="fas fa-university"></i> MIT License</h5>
+                        <p><strong>Philosophy:</strong> Extremely permissive</p>
+                        <p><strong>Key Requirement:</strong> Almost none - just include original copyright notice</p>
+                        <p><strong>Used by:</strong> Node.js, jQuery, Ruby on Rails</p>
+                        <p><strong>Analogy:</strong> "Do whatever you want" - use in proprietary software allowed</p>
+                    </div>
+                    
+                    <div class="license-card">
+                        <h5><i class="fas fa-feather-alt"></i> Creative Commons</h5>
+                        <p><strong>Philosophy:</strong> For creative works, not software</p>
+                        <p><strong>Variants:</strong> CC BY (attribution), CC BY-SA (share alike), CC BY-NC (non-commercial)</p>
+                        <p><strong>Used by:</strong> Wikipedia, Flickr, OpenStreetMap</p>
+                        <p><strong>Analogy:</strong> "Flexible copyright" - choose your sharing rules</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MX Linux Deep Dive Tab -->
+        <div id="mxlinux" class="tab-content">
+            <h2><i class="fab fa-linux"></i> MX Linux - Complete Analysis</h2>
+            
+            <div class="mx-linux-section">
+                <div class="mx-logo">
+                    <i class="fab fa-linux"></i> MX
+                </div>
+                <h3>MX Linux: The Optimal Choice for Students</h3>
+                <p>MX Linux is a midweight Linux operating system designed to combine elegant and efficient desktop with high stability and solid performance.</p>
+                <div class="mx-features">
+                    <div class="mx-feature">Lightweight & Fast</div>
+                    <div class="mx-feature">Debian Stable Base</div>
+                    <div class="mx-feature">antiX Performance</div>
+                    <div class="mx-feature">Xfce Desktop</div>
+                    <div class="mx-feature">Community Developed</div>
+                    <div class="mx-feature">Free & Open Source</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-layer-group"></i> The Three-Layer Foundation of MX Linux</h4>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 25px; margin: 30px 0;">
+                    <div style="flex: 1; min-width: 300px; text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(215, 7, 81, 0.1), rgba(221, 72, 20, 0.1)); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #d70751; margin-bottom: 15px;">
+                            <i class="fab fa-debian"></i>
+                        </div>
+                        <h4>Debian Foundation</h4>
+                        <p><strong>Role:</strong> Stability and Security</p>
+                        <p><strong>Contribution:</strong> Rock-solid base system with long-term support</p>
+                        <p><strong>Benefit:</strong> Reliability for serious work</p>
+                        <p>Debian is one of the oldest and most respected Linux distributions, known for its unwavering commitment to stability.</p>
+                    </div>
+                    
+                    <div style="flex: 1; min-width: 300px; text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(106, 90, 205, 0.1)); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #4361ee; margin-bottom: 15px;">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>antiX Performance</h4>
+                        <p><strong>Role:</strong> Speed and Efficiency</p>
+                        <p><strong>Contribution:</strong> Lightweight system tools and optimizations</p>
+                        <p><strong>Benefit:</strong> Runs well on older hardware</p>
+                        <p>antiX is designed specifically for low-resource computers, bringing exceptional performance to MX Linux.</p>
+                    </div>
+                    
+                    <div style="flex: 1; min-width: 300px; text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(58, 12, 163, 0.1)); border-radius: 10px;">
+                        <div style="font-size: 3rem; color: #3a0ca3; margin-bottom: 15px;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>MX Community</h4>
+                        <p><strong>Role:</strong> Integration and Polish</p>
+                        <p><strong>Contribution:</strong> User-friendly tools and documentation</p>
+                        <p><strong>Benefit:</strong> Easy to use and customize</p>
+                        <p>The MX Community brings everything together with custom tools and excellent user support.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-tachometer-alt"></i> Why MX Linux is Perfect for Old Computers</h4>
+                
+                <p>Many students in Algeria and worldwide don't have access to powerful, new computers. MX Linux solves this problem through intelligent design:</p>
+                
+                <h5>Resource Efficiency Comparison</h5>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Resource Type</th>
+                            <th>Windows 10/11</th>
+                            <th>Ubuntu (Default)</th>
+                            <th>MX Linux</th>
+                            <th>Impact on Old Hardware</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RAM Usage (Idle)</strong></td>
+                            <td>2-4 GB</td>
+                            <td>1-1.5 GB</td>
+                            <td>300-500 MB</td>
+                            <td>Can run on computers with only 2GB RAM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CPU Usage (Idle)</strong></td>
+                            <td>5-15%</td>
+                            <td>3-8%</td>
+                            <td>1-3%</td>
+                            <td>More CPU power available for your applications</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Disk Space Required</strong></td>
+                            <td>20-30 GB</td>
+                            <td>15-20 GB</td>
+                            <td>8-12 GB</td>
+                            <td>Fits on smaller hard drives</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Startup Time</strong></td>
+                            <td>30-60 seconds</td>
+                            <td>20-40 seconds</td>
+                            <td>10-25 seconds</td>
+                            <td>Get to work faster</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box">
+                    <i class="fas fa-laptop"></i> <strong>Student Scenario:</strong> A literature student has a 10-year-old laptop with 2GB RAM and a slow processor. Windows 10 runs painfully slow, but MX Linux runs smoothly, allowing them to write essays, research online, and use productivity tools without frustration.
+                </div>
+                
+                <h5>How MX Linux Achieves This Efficiency:</h5>
+                <ul>
+                    <li><strong>Minimal Background Processes:</strong> Unlike Windows which runs many services in the background (antivirus, updates, cloud sync), MX Linux runs only what's necessary</li>
+                    <li><strong>Xfce Desktop Environment:</strong> Designed to be lightweight yet functional</li>
+                    <li><strong>Optimized Applications:</strong> Uses versions of software that are less resource-intensive</li>
+                    <li><strong>Intelligent Defaults:</strong> Configured for performance rather than flashy effects</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-wrench"></i> MX Tools - Making Linux Accessible to Everyone</h4>
+                
+                <p>One of MX Linux's standout features is its collection of <span class="key-term">MX Tools</span> - specialized utilities that make system management easy for non-technical users.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin: 25px 0;">
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #4361ee;">
+                        <h5><i class="fas fa-sliders-h"></i> MX Tweak</h5>
+                        <p>Customize desktop appearance and behavior without technical knowledge</p>
+                    </div>
+                    
+                    <div style="background: rgba(76, 201, 240, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #4cc9f0;">
+                        <h5><i class="fas fa-download"></i> MX Package Installer</h5>
+                        <p>Easy software installation with user-friendly categories</p>
+                    </div>
+                    
+                    <div style="background: rgba(247, 37, 133, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #f72585;">
+                        <h5><i class="fas fa-shield-alt"></i> MX Snapshot</h5>
+                        <p>Create backup of your system for safekeeping or sharing</p>
+                    </div>
+                    
+                    <div style="background: rgba(248, 150, 30, 0.05); padding: 20px; border-radius: 8px; border-left: 4px solid #f8961e;">
+                        <h5><i class="fas fa-cogs"></i> MX Boot Options</h5>
+                        <p>Manage startup settings and troubleshoot boot issues</p>
+                    </div>
+                </div>
+                
+                <p>These tools embody the MX Linux philosophy: <strong>powerful but accessible, capable but simple</strong>. They allow students to manage their computers without needing to learn complex command-line instructions.</p>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-graduation-cap"></i> MX Linux for Academic Work - Practical Benefits</h4>
+                
+                <h5>Pre-installed Software for Students:</h5>
+                <ul>
+                    <li><strong>LibreOffice:</strong> Complete office suite for writing papers, creating presentations, and managing data</li>
+                    <li><strong>Firefox:</strong> Secure web browser for research</li>
+                    <li><strong>Thunderbird:</strong> Email client for academic communication</li>
+                    <li><strong>VLC Media Player:</strong> For multimedia presentations and language learning</li>
+                    <li><strong>GIMP:</strong> Image editor for creating visual materials</li>
+                    <li><strong>Audacity:</strong> Audio editor for language and literature studies</li>
+                </ul>
+                
+                <h5>Academic Advantages:</h5>
+                <ol>
+                    <li><strong>Cost Savings:</strong> All software is free, eliminating the need for expensive licenses</li>
+                    <li><strong>Hardware Longevity:</strong> Extends the useful life of older computers</li>
+                    <li><strong>Privacy & Security:</strong> Less vulnerable to viruses and malware</li>
+                    <li><strong>Digital Independence:</strong> Not locked into proprietary formats or systems</li>
+                    <li><strong>Learning Opportunity:</strong> Develops understanding of how computers work</li>
+                </ol>
+                
+                <div class="quote">
+                    "As language students, we need tools that help us write, research, and communicate. MX Linux provides all these tools for free, works on our old laptops, and doesn't distract us with unnecessary complexity. It's the perfect academic operating system."
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quiz Tab Content -->
+        <div id="quiz" class="tab-content">
+            <h2><i class="fas fa-question-circle"></i> Test Your Understanding</h2>
+            <p>Answer these 10 questions about FOSS concepts and MX Linux. Questions are randomly selected from a pool of 50 questions. Try to score at least 7/10!</p>
+            
+            <div class="progress-bar">
+                <div class="progress" id="quiz-progress"></div>
+            </div>
+            
+            <div class="quiz-container">
+                <div id="question-container">
+                    <!-- Questions will be loaded here by JavaScript -->
+                </div>
+                
+                <div class="quiz-controls">
+                    <div id="question-counter">Question 1 of 10</div>
+                    <div>
+                        <button class="btn btn-primary" id="prev-btn">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn btn-primary" id="next-btn">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-success" id="submit-quiz" style="padding: 16px 35px; font-size: 1.1rem;">
+                        <i class="fas fa-paper-plane"></i> Submit Quiz
+                    </button>
+                    <button class="btn btn-warning" id="restart-quiz" style="margin-left: 20px; padding: 16px 35px; font-size: 1.1rem;">
+                        <i class="fas fa-redo"></i> New Quiz
+                    </button>
+                </div>
+                
+                <div id="results" class="results">
+                    <div class="score">Your Score: <span id="score-value">0</span>/10</div>
+                    <p id="score-message" style="text-align: center; font-size: 1.2rem; margin-bottom: 25px;"></p>
+                    
+                    <div id="review-questions" style="margin-top: 20px;">
+                        <!-- Review content will be added here -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn btn-primary" id="try-again-btn">
+                            <i class="fas fa-redo"></i> Try Another Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-chart-line"></i> Quiz Topics Covered</h4>
+                <p>The quiz questions cover all key areas from the lectures:</p>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 20px 0;">
+                    <div class="key-term">Operating Systems</div>
+                    <div class="key-term">FOSS Concepts</div>
+                    <div class="key-term">Four Freedoms</div>
+                    <div class="key-term">MX Linux Features</div>
+                    <div class="key-term">Linux Distributions</div>
+                    <div class="key-term">Software Licenses</div>
+                    <div class="key-term">Open Source History</div>
+                    <div class="key-term">Academic Applications</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Real Applications Tab -->
+        <div id="applications" class="tab-content">
+            <h2><i class="fas fa-laptop-code"></i> Practical Applications & Exercises</h2>
+            
+            <div class="real-life-example">
+                <h4><i class="fas fa-graduation-cap"></i> Educational Application: FOSS in Algerian Universities</h4>
+                
+                <p>In the Algerian educational context, FOSS offers significant advantages:</p>
+                
+                <h5>Cost Reduction for Institutions:</h5>
+                <ul>
+                    <li><strong>University Labs:</strong> Instead of paying for Windows licenses on 100+ computers, institutions can install MX Linux for free</li>
+                    <li><strong>Student Access:</strong> Students can install the same software at home without cost barriers</li>
+                    <li><strong>Long-term Savings:</strong> No recurring license fees or forced upgrade cycles</li>
+                </ul>
+                
+                <h5>Practical Exercise 1: Software Audit</h5>
+                <p>Examine the software you use for your studies. For each application, determine:</p>
+                <ol>
+                    <li>Is it proprietary or open source?</li>
+                    <li>What is the approximate cost (if any)?</li>
+                    <li>Is there a FOSS alternative available?</li>
+                </ol>
+                
+                <div style="background-color: var(--surface-light); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <p><strong>Example Analysis:</strong></p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid var(--border-light);">Software</th>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid var(--border-light);">Type</th>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid var(--border-light);">Cost</th>
+                            <th style="text-align: left; padding: 10px; border-bottom: 1px solid var(--border-light);">FOSS Alternative</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Microsoft Word</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Proprietary</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Part of Office 365 (~$70/year)</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">LibreOffice Writer (Free)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Adobe Acrobat</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Proprietary</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">~$15/month</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">PDFsam Basic (Free)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Photoshop</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">Proprietary</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">~$21/month</td>
+                            <td style="padding: 10px; border-bottom: 1px solid var(--border-light);">GIMP (Free)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4><i class="fas fa-business-time"></i> Case Study: Algerian Startups Using FOSS</h4>
+                
+                <p>From the PDF materials, we learn about Algerian startups benefiting from FOSS:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin: 25px 0;">
+                    <div style="background: var(--surface-light); padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                        <h5 style="color: #4361ee;">Yassir (Transport & Delivery)</h5>
+                        <p><strong>FOSS Tools Used:</strong></p>
+                        <ul>
+                            <li>Node.js (server platform)</li>
+                            <li>React (user interface)</li>
+                            <li>PostgreSQL (database)</li>
+                            <li>NGINX (web server)</li>
+                        </ul>
+                        <p><strong>Benefit:</strong> Saved thousands of dollars in software licenses during startup phase</p>
+                    </div>
+                    
+                    <div style="background: var(--surface-light); padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                        <h5 style="color: #4361ee;">Ouedkniss (Classified Ads)</h5>
+                        <p><strong>FOSS Tools Used:</strong></p>
+                        <ul>
+                            <li>Linux servers</li>
+                            <li>Let's Encrypt (free SSL certificates)</li>
+                            <li>Open-source database systems</li>
+                            <li>Apache web server</li>
+                        </ul>
+                        <p><strong>Benefit:</strong> Scalable infrastructure without vendor lock-in</p>
+                    </div>
+                </div>
+                
+                <h5>Practical Exercise 2: Startup Software Planning</h5>
+                <p>Imagine you're starting an online business for language services (translation, tutoring, content creation). Which FOSS tools would you use for:</p>
+                
+                <textarea id="startup-plan" rows="6" placeholder="Write your FOSS tool selection here..."></textarea>
+                
+                <button class="btn btn-primary" id="save-startup-plan" style="margin-top: 15px;">
+                    <i class="fas fa-save"></i> Save My Plan
+                </button>
+            </div>
+            
+            <div class="real-life-example">
+                <h4><i class="fas fa-user-shield"></i> Privacy & Transparency Case Studies</h4>
+                
+                <h5>Facebook Transparency Issues (from PDF)</h5>
+                <p>In Mark Zuckerberg's testimony before Congress, he admitted Facebook was not transparent about:</p>
+                <ul>
+                    <li>How user data was collected</li>
+                    <li>How data was shared with third parties</li>
+                    <li>How algorithms influenced what users saw</li>
+                </ul>
+                
+                <h5>Telegram Backdoor Pressure (from PDF)</h5>
+                <p>Telegram's founder Pavel Durov revealed that the FBI pressured him to:</p>
+                <ul>
+                    <li>Add backdoors (secret access points) to Telegram</li>
+                    <li>Allow government access to private messages</li>
+                    <li>Compromise user privacy for surveillance purposes</li>
+                </ul>
+                
+                <div class="definition-box">
+                    <strong>Backdoor Definition:</strong> A hidden method for bypassing normal authentication in a system, often inserted for unauthorized access by developers, hackers, or authorities.
+                </div>
+                
+                <h5>Practical Exercise 3: Privacy Analysis</h5>
+                <p>Compare the privacy implications of:</p>
+                <ol>
+                    <li>Using proprietary software (like Windows) where you cannot see what the software is doing</li>
+                    <li>Using open-source software (like MX Linux) where anyone can examine the code</li>
+                </ol>
+                
+                <textarea id="privacy-analysis" rows="5" placeholder="Write your privacy comparison here..."></textarea>
+            </div>
+            
+            <div class="exercise">
+                <h4><i class="fas fa-tasks"></i> Final Project: Design an FOSS-Based Academic Setup</h4>
+                
+                <p>Imagine you're helping your university department create a computer lab for literature students on a limited budget. Design a complete setup using FOSS principles.</p>
+                
+                <div style="background-color: var(--surface-light); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                    <h5>Project Requirements:</h5>
+                    
+                    <div style="margin: 20px 0;">
+                        <label style="display: block; margin-bottom: 8px;"><strong>1. Operating System Selection:</strong></label>
+                        <select id="os-selection" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-light); background-color: var(--surface-light); color: var(--text-light);">
+                            <option value="">-- Choose an OS --</option>
+                            <option value="mxlinux">MX Linux</option>
+                            <option value="ubuntu">Ubuntu</option>
+                            <option value="fedora">Fedora</option>
+                            <option value="debian">Debian</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <label style="display: block; margin-bottom: 8px;"><strong>2. Essential Software for Literature Students:</strong></label>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="software" value="libreoffice">
+                                <span>LibreOffice</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="software" value="zotero">
+                                <span>Zotero (Reference Manager)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="software" value="firefox">
+                                <span>Firefox Browser</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="software" value="calibre">
+                                <span>Calibre (E-book Manager)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="software" value="audacity">
+                                <span>Audacity (Audio Editor)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" name="software" value="gimp">
+                                <span>GIMP (Image Editor)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <label style="display: block; margin-bottom: 8px;"><strong>3. Budget Justification:</strong></label>
+                        <textarea id="budget-justification" rows="4" placeholder="Explain how your FOSS-based solution saves money compared to proprietary alternatives..."></textarea>
+                    </div>
+                    
+                    <button class="btn btn-success" id="submit-project">
+                        <i class="fas fa-paper-plane"></i> Submit Project Plan
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fas fa-certificate"></i> Course Reflection & Key Takeaways</h4>
+                
+                <p>As language and civilization students, understanding FOSS is valuable because:</p>
+                
+                <div class="highlight-box">
+                    <i class="fas fa-quote-left"></i> Technology is not just a tool but a cultural artifact that reflects values, power structures, and ideological commitments. Understanding FOSS means understanding a different approach to knowledge, ownership, and community in the digital age.
+                </div>
+                
+                <h5>Key Learnings:</h5>
+                <ul>
+                    <li><strong>Digital Autonomy:</strong> FOSS gives users control over their digital tools</li>
+                    <li><strong>Accessibility:</strong> Removes financial barriers to technology</li>
+                    <li><strong>Transparency:</strong> Promotes trust through open examination</li>
+                    <li><strong>Community:</strong> Shows how global collaboration can create powerful tools</li>
+                    <li><strong>Sustainability:</strong> Extends the life of hardware through efficient software</li>
+                </ul>
+                
+                <p>Even without becoming programmers, language students can benefit from FOSS by using the software, participating in communities, applying the principles to their own work, and making informed choices about the technology they use.</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Free and Open Source Software (FOSS)</h3>
+                <p>Based on comprehensive course materials from Dr. Hamza .B, Ziane Achour University of Djelfa</p>
+                <p>Master 1 – Literature & Civilization | Sessions 01, 02, 03 | October 2025</p>
+                <div class="section-divider" style="margin: 25px auto; width: 200px;"></div>
+                <p style="opacity: 0.9; font-size: 0.95rem;">This interactive learning platform transforms technical computer science concepts into accessible knowledge for humanities students, emphasizing practical applications and critical understanding of digital tools in academic and professional contexts.</p>
+                <p style="margin-top: 20px; opacity: 0.8; font-size: 0.9rem;">
+                    <i class="fas fa-envelope"></i> bendechou@gmail.com | 
+                    <i class="fas fa-calendar-alt"></i> 14-20 OCTOBER 2025
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme management
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Font size management
+        let fontSize = 1;
+        document.getElementById('fontIncrease').addEventListener('click', () => {
+            fontSize += 0.1;
+            if (fontSize > 1.5) fontSize = 1;
+            body.style.fontSize = `${fontSize}rem`;
+            localStorage.setItem('fontSize', fontSize);
+        });
+        
+        // Load saved font size
+        const savedFontSize = localStorage.getItem('fontSize');
+        if (savedFontSize) {
+            fontSize = parseFloat(savedFontSize);
+            body.style.fontSize = `${fontSize}rem`;
+        }
+        
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                
+                // If quiz tab is opened, initialize quiz
+                if (targetId === 'quiz' && !window.quizInitialized) {
+                    initializeQuiz();
+                }
+            });
+        });
+        
+        // Quiz data - 50 questions pool (extended)
+        const quizQuestions = [
+            {
+                question: "What does FOSS stand for and what is its core principle?",
+                options: [
+                    "Free and Open Source Software - Focus on user freedom and collaborative development",
+                    "Fast Operating System Software - Emphasis on speed and performance",
+                    "Free Online Security System - Protection from cyber threats",
+                    "File Organization Storage System - Efficient data management"
+                ],
+                correct: 0,
+                explanation: "FOSS stands for Free and Open Source Software. It combines the philosophical emphasis on user freedom (Free Software) with the practical benefits of collaborative, transparent development (Open Source).",
+                topic: "Definitions"
+            },
+            {
+                question: "According to the PDF materials, what makes MX Linux particularly suitable for students in Algeria?",
+                options: [
+                    "It runs well on older computers that students might have access to",
+                    "It comes pre-installed with Microsoft Office",
+                    "It's more expensive but offers better performance",
+                    "It only works on brand new laptops"
+                ],
+                correct: 0,
+                explanation: "MX Linux is lightweight and efficient, making it ideal for older hardware that students might be using due to budget constraints. This accessibility is particularly important in educational contexts.",
+                topic: "MX Linux"
+            },
+            {
+                question: "What historical figure launched the GNU Project in 1983, and what was its goal?",
+                options: [
+                    "Richard Stallman - To create a free Unix-like operating system",
+                    "Linus Torvalds - To develop a new kernel for PCs",
+                    "Bill Gates - To make software commercially viable",
+                    "Steve Jobs - To create a user-friendly interface"
+                ],
+                correct: 0,
+                explanation: "Richard Stallman launched the GNU Project in 1983 with the goal of creating a complete, free Unix-like operating system. GNU stands for 'GNU's Not Unix' (a recursive acronym).",
+                topic: "History"
+            },
+            {
+                question: "What are the 'Four Essential Freedoms' according to the Free Software Foundation?",
+                options: [
+                    "Freedom to run, study, redistribute, and improve software",
+                    "Freedom from viruses, malware, bugs, and crashes",
+                    "Freedom to copy, sell, modify, and patent software",
+                    "Freedom of speech, privacy, access, and ownership"
+                ],
+                correct: 0,
+                explanation: "The Four Essential Freedoms are: 0) Run software for any purpose, 1) Study and modify software, 2) Redistribute copies, and 3) Distribute modified versions.",
+                topic: "Four Freedoms"
+            },
+            {
+                question: "How does MX Linux achieve its lightweight performance according to the PDF?",
+                options: [
+                    "By combining Debian's stability with antiX's efficiency and minimizing background processes",
+                    "By removing all graphical interfaces and using only command line",
+                    "By using proprietary optimizations from Microsoft",
+                    "By running only on specific hardware with special drivers"
+                ],
+                correct: 0,
+                explanation: "MX Linux combines the rock-solid stability of Debian with the lightweight efficiency of antiX, while minimizing unnecessary background processes that consume resources.",
+                topic: "MX Linux"
+            },
+            {
+                question: "What is the key difference between 'free software' and 'freeware'?",
+                options: [
+                    "Free software emphasizes user freedoms, while freeware is just free of charge",
+                    "Freeware is higher quality than free software",
+                    "Free software is always open source, freeware never is",
+                    "There is no practical difference between them"
+                ],
+                correct: 0,
+                explanation: "'Free software' refers to software that respects users' freedoms (use, study, modify, share). 'Freeware' is simply software distributed free of charge, often with proprietary restrictions.",
+                topic: "Definitions"
+            },
+            {
+                question: "What desktop environment does MX Linux use and why is it beneficial for students?",
+                options: [
+                    "Xfce - It's lightweight, fast, and resembles Windows making it familiar",
+                    "GNOME - It has the most features and eye-catching effects",
+                    "KDE - It's the most customizable but resource-heavy",
+                    "Windows Explorer - For complete compatibility with Windows software"
+                ],
+                correct: 0,
+                explanation: "MX Linux uses Xfce desktop environment because it's lightweight, efficient, and has a familiar layout similar to Windows, making the transition easier for students.",
+                topic: "MX Linux"
+            },
+            {
+                question: "According to the PDF, what pressure did Telegram's founder face from authorities?",
+                options: [
+                    "Pressure to add backdoors for government surveillance access",
+                    "Pressure to make the software proprietary and charge fees",
+                    "Pressure to remove encryption for 'national security'",
+                    "Pressure to share user data with advertising companies"
+                ],
+                correct: 0,
+                explanation: "Pavel Durov revealed that Telegram was pressured by authorities to add backdoors (secret access points) that would compromise user privacy for surveillance purposes.",
+                topic: "Privacy"
+            },
+            {
+                question: "What is a key advantage of open source software for security according to the materials?",
+                options: [
+                    "Many eyes can review the code, making vulnerabilities easier to find and fix",
+                    "It's immune to all types of cyber attacks by design",
+                    "Governments have special access to protect open source software",
+                    "It doesn't connect to the internet so can't be hacked"
+                ],
+                correct: 0,
+                explanation: "The 'many eyes' principle means that with source code openly available, more people can examine it for security flaws, leading to quicker identification and resolution of vulnerabilities.",
+                topic: "Security"
+            },
+            {
+                question: "Which license requires that modifications to the software must also be open source?",
+                options: [
+                    "GPL (GNU General Public License)",
+                    "MIT License",
+                    "Apache License",
+                    "Creative Commons Zero"
+                ],
+                correct: 0,
+                explanation: "The GPL license is a copyleft license that requires any modified versions of the software to also be distributed under the same license, ensuring the software remains free.",
+                topic: "Licenses"
+            },
+            {
+                question: "What year was the Linux kernel created and by whom?",
+                options: [
+                    "1991 by Linus Torvalds",
+                    "1983 by Richard Stallman",
+                    "1995 by Bill Gates",
+                    "2000 by Steve Jobs"
+                ],
+                correct: 0,
+                explanation: "Linus Torvalds created the Linux kernel in 1991 while he was a student in Finland. This combined with GNU tools to create complete operating systems.",
+                topic: "History"
+            },
+            {
+                question: "What are MX Tools and why are they significant for non-technical users?",
+                options: [
+                    "Special utilities that make system management easy without command line knowledge",
+                    "Proprietary software that comes with MX Linux for advanced users only",
+                    "Games and entertainment applications pre-installed in MX Linux",
+                    "Hardware diagnostic tools for repairing computers"
+                ],
+                correct: 0,
+                explanation: "MX Tools are a collection of user-friendly utilities that simplify common system administration tasks, making Linux accessible to users without technical expertise.",
+                topic: "MX Linux"
+            },
+            {
+                question: "According to the PDF examples, which Algerian startup uses Node.js and React?",
+                options: [
+                    "Yassir",
+                    "Ouedkniss",
+                    "Djezzy",
+                    "Algérie Télécom"
+                ],
+                correct: 0,
+                explanation: "The PDF mentions that Yassir, an Algerian transportation and delivery startup, uses Node.js and React among other open source tools to build their platform.",
+                topic: "Real World"
+            },
+            {
+                question: "What does 'free as in speech, not free as in beer' mean in FOSS context?",
+                options: [
+                    "It refers to freedom (liberty) not price (gratis)",
+                    "It means software should be completely free with no costs",
+                    "It's a marketing slogan for expensive software",
+                    "It refers to software that can be used while drinking beer"
+                ],
+                correct: 0,
+                explanation: "This phrase distinguishes between 'free' meaning freedom (as in free speech) and 'free' meaning no cost (as in free beer). FOSS emphasizes the former, though it's often both.",
+                topic: "Philosophy"
+            },
+            {
+                question: "What is the main ethical value promoted by the open source movement according to the PDF?",
+                options: [
+                    "Transparency and collaborative knowledge sharing",
+                    "Profit maximization through software sales",
+                    "Exclusive ownership of intellectual property",
+                    "Restricting access to maintain quality"
+                ],
+                correct: 0,
+                explanation: "The open source movement promotes transparency, collaboration, and the idea that knowledge should be shared for the benefit of all, rather than restricted for profit.",
+                topic: "Ethics"
+            },
+            {
+                question: "Why is Debian considered a good base for MX Linux?",
+                options: [
+                    "It's known for stability, security, and long-term support",
+                    "It's the fastest Linux distribution available",
+                    "It comes with the most pre-installed software",
+                    "It has the best gaming compatibility"
+                ],
+                correct: 0,
+                explanation: "Debian is renowned for its stability, security practices, and long support cycles, providing a solid foundation that MX Linux builds upon.",
+                topic: "Linux Distributions"
+            },
+            {
+                question: "What transparency issue did Mark Zuckerberg admit about Facebook?",
+                options: [
+                    "Facebook was not transparent enough about how it uses user data",
+                    "Facebook shares all its algorithms publicly",
+                    "Facebook's code is completely open source",
+                    "Facebook doesn't collect any user data at all"
+                ],
+                correct: 0,
+                explanation: "In congressional testimony, Zuckerberg admitted Facebook was not sufficiently transparent about its data collection and usage practices, promising to improve transparency.",
+                topic: "Privacy"
+            },
+            {
+                question: "Which of these is NOT a characteristic of MX Linux according to the PDF?",
+                options: [
+                    "Developed and sold by a large corporation",
+                    "Lightweight and efficient",
+                    "Based on Debian stable",
+                    "Community-driven development"
+                ],
+                correct: 0,
+                explanation: "MX Linux is community-driven, not developed by a corporation. It's maintained by volunteers rather than a commercial entity.",
+                topic: "MX Linux"
+            },
+            {
+                question: "What educational benefit does FOSS provide according to the PDF?",
+                options: [
+                    "Reduces software costs in schools and universities",
+                    "Forces students to learn programming",
+                    "Requires expensive hardware to run properly",
+                    "Is only useful for computer science students"
+                ],
+                correct: 0,
+                explanation: "A key educational benefit of FOSS is cost reduction, allowing educational institutions to provide software tools without expensive licensing fees.",
+                topic: "Education"
+            },
+            {
+                question: "What is the relationship between Linux distributions and the Linux kernel?",
+                options: [
+                    "Distributions are complete operating systems built around the Linux kernel",
+                    "The kernel is a type of distribution",
+                    "Distributions are alternatives to the kernel",
+                    "They are completely separate and unrelated"
+                ],
+                correct: 0,
+                explanation: "Linux distributions (like MX Linux, Ubuntu, Fedora) are complete operating systems that package the Linux kernel with other software, desktop environments, and tools.",
+                topic: "Linux Basics"
+            },
+            {
+                question: "According to the PDF, what is an advantage of FOSS for enhancing creativity?",
+                options: [
+                    "Students can modify tools to suit their specific needs",
+                    "All FOSS software has more features than proprietary alternatives",
+                    "FOSS automatically makes users more creative",
+                    "It restricts users to only approved creative methods"
+                ],
+                correct: 0,
+                explanation: "FOSS enhances creativity by allowing users to study, modify, and adapt software tools to their specific needs and creative processes.",
+                topic: "Creativity"
+            },
+            {
+                question: "What does 'backdoor' mean in software context?",
+                options: [
+                    "A hidden method to bypass normal security and access a system",
+                    "A security feature that protects against hackers",
+                    "An alternative user interface for accessibility",
+                    "A method for legally purchasing software at discount"
+                ],
+                correct: 0,
+                explanation: "A backdoor is a hidden method, vulnerability, or piece of code that allows unauthorized access to a system, often inserted deliberately.",
+                topic: "Security"
+            },
+            {
+                question: "Which of these is a key feature of antiX that benefits MX Linux?",
+                options: [
+                    "Extreme lightweight design for older hardware",
+                    "Proprietary optimizations for speed",
+                    "Complete compatibility with Windows software",
+                    "Built-in artificial intelligence features"
+                ],
+                correct: 0,
+                explanation: "antiX contributes its lightweight design and optimizations for older hardware to MX Linux, making it efficient on limited resources.",
+                topic: "MX Linux"
+            },
+            {
+                question: "What does the PDF say about 'free' in the context of Red Hat Linux?",
+                options: [
+                    "Red Hat is open source but sold commercially - free refers to freedom, not price",
+                    "Red Hat is completely free with no commercial version",
+                    "Red Hat is proprietary and never free in any sense",
+                    "Red Hat is free only for educational use"
+                ],
+                correct: 0,
+                explanation: "Red Hat Linux demonstrates that 'free' in FOSS refers to freedom (open source) not price, as it's commercially sold while remaining open source.",
+                topic: "Definitions"
+            },
+            {
+                question: "According to the PDF, what is LibreOffice and why is it significant for students?",
+                options: [
+                    "A free, open source office suite alternative to Microsoft Office",
+                    "A specialized programming tool for advanced computer science",
+                    "A paid office suite with more features than Microsoft Office",
+                    "A cloud-based collaboration tool only"
+                ],
+                correct: 0,
+                explanation: "LibreOffice is a complete, free, open source office suite that provides an accessible alternative to expensive proprietary office software for students.",
+                topic: "Software Examples"
+            },
+            {
+                question: "What is the 'GNU' in GNU Project?",
+                options: [
+                    "GNU's Not Unix - a recursive acronym",
+                    "General New Unix - describing its purpose",
+                    "Global Network Utility - its intended function",
+                    "Graphical New Userface - its interface design"
+                ],
+                correct: 0,
+                explanation: "GNU is a recursive acronym standing for 'GNU's Not Unix', reflecting its goal to create a Unix-like system that is free software.",
+                topic: "History"
+            },
+            {
+                question: "According to the PDF, what educational platform uses FOSS principles?",
+                options: [
+                    "Khan Academy - providing free online education",
+                    "Microsoft Teams - for classroom collaboration",
+                    "Adobe Education Exchange - for creative tools",
+                    "Apple Schoolwork - for iPad classrooms"
+                ],
+                correct: 0,
+                explanation: "Khan Academy is cited as an example of FOSS principles in education, providing free, accessible learning resources to all.",
+                topic: "Education"
+            },
+            {
+                question: "What is the primary benefit of community-driven software development?",
+                options: [
+                    "Many contributors can improve the software from diverse perspectives",
+                    "It's always faster than corporate development",
+                    "Community software never has bugs or security issues",
+                    "It requires less overall effort than corporate development"
+                ],
+                correct: 0,
+                explanation: "Community development brings diverse perspectives, skills, and use cases, often leading to more robust and versatile software.",
+                topic: "Development"
+            },
+            {
+                question: "What transparency advantage does open source provide according to the PDF?",
+                options: [
+                    "Users can examine the code to see exactly what the software does",
+                    "All development meetings are publicly broadcast",
+                    "Software companies must disclose their financial records",
+                    "Users get to vote on all software features"
+                ],
+                correct: 0,
+                explanation: "Open source provides transparency through accessible source code, allowing users to verify what the software does and doesn't do.",
+                topic: "Transparency"
+            },
+            {
+                question: "According to the PDF, what is Moodle and how does it align with FOSS philosophy?",
+                options: [
+                    "An open source learning management system that reduces costs for schools",
+                    "A proprietary educational platform with free trial",
+                    "A government-funded educational resource database",
+                    "A commercial testing and assessment tool"
+                ],
+                correct: 0,
+                explanation: "Moodle is an open source learning management system that aligns with FOSS philosophy by providing free, customizable educational tools.",
+                topic: "Education"
+            },
+            {
+                question: "What does the PDF indicate about software licenses?",
+                options: [
+                    "They are rules that define what users can and cannot do with software",
+                    "They are only important for commercial software companies",
+                    "They don't apply to free software at all",
+                    "They are optional suggestions without legal weight"
+                ],
+                correct: 0,
+                explanation: "Software licenses are legal agreements that define the terms under which software can be used, modified, and distributed.",
+                topic: "Licenses"
+            },
+            {
+                question: "According to the PDF, why do open source projects often use animal logos?",
+                options: [
+                    "Animals symbolize freedom, nature, and community values",
+                    "Animals are easier to draw than abstract symbols",
+                    "It's required by open source licensing terms",
+                    "Animal logos make software run faster"
+                ],
+                correct: 0,
+                explanation: "Animal logos in open source projects often symbolize values like freedom, community, and natural growth that align with open source philosophy.",
+                topic: "Culture"
+            },
+            {
+                question: "What is the main difference between system software and application software?",
+                options: [
+                    "System software manages computer resources, application software performs specific tasks",
+                    "System software is always free, application software is always paid",
+                    "System software is for servers, application software is for desktops",
+                    "System software has graphical interfaces, application software uses command line"
+                ],
+                correct: 0,
+                explanation: "System software (like operating systems) manages hardware and provides a platform, while application software (like word processors) performs specific user tasks.",
+                topic: "Basics"
+            },
+            {
+                question: "According to the PDF, what is a key social impact of FOSS?",
+                options: [
+                    "Encourages access to technology for everyone regardless of economic status",
+                    "Creates more jobs in the software industry only",
+                    "Makes computers obsolete faster",
+                    "Increases dependence on large technology corporations"
+                ],
+                correct: 0,
+                explanation: "FOSS promotes digital inclusion by removing cost barriers and making technology accessible to wider populations.",
+                topic: "Social Impact"
+            },
+            {
+                question: "What does the PDF say about installing MX Linux?",
+                options: [
+                    "The installation process is simple and guided for ease of use",
+                    "It requires advanced technical knowledge and programming skills",
+                    "Only certified technicians can install it properly",
+                    "Installation takes several days to complete"
+                ],
+                correct: 0,
+                explanation: "MX Linux features a user-friendly, guided installation process designed to be accessible even to those without technical expertise.",
+                topic: "MX Linux"
+            },
+            {
+                question: "According to the PDF, what is the advantage of Ouedkniss using Let's Encrypt?",
+                options: [
+                    "Free SSL certificates for website security",
+                    "Paid premium security features at discount",
+                    "Government-approved encryption standards",
+                    "Proprietary Algerian encryption technology"
+                ],
+                correct: 0,
+                explanation: "Let's Encrypt provides free SSL/TLS certificates, allowing websites like Ouedkniss to implement secure HTTPS connections without cost.",
+                topic: "Real World"
+            },
+            {
+                question: "What is the 'copyleft' principle in software licensing?",
+                options: [
+                    "Requires modified versions to also be freely available under same terms",
+                    "Allows unlimited copying for personal use only",
+                    "Permits copying only left-handed versions of software",
+                    "Restricts all copying and modification completely"
+                ],
+                correct: 0,
+                explanation: "Copyleft uses copyright law to ensure software remains free by requiring that modified versions are also distributed under the same free terms.",
+                topic: "Licenses"
+            },
+            {
+                question: "According to the PDF, what is a key characteristic of Debian?",
+                options: [
+                    "Stability and reliability for long-term use",
+                    "Cutting-edge features updated daily",
+                    "Exclusive use on servers only",
+                    "Proprietary code with paid access"
+                ],
+                correct: 0,
+                explanation: "Debian prioritizes stability and reliability over cutting-edge features, making it suitable for systems that need to work consistently.",
+                topic: "Linux Distributions"
+            },
+            {
+                question: "What does the PDF indicate about the cost of FOSS for educational institutions?",
+                options: [
+                    "Significantly reduces software costs, allowing budget reallocation",
+                    "Increases costs due to required specialized training",
+                    "Has no impact on overall educational budgets",
+                    "Only reduces costs for computer science departments"
+                ],
+                correct: 0,
+                explanation: "FOSS dramatically reduces licensing costs for educational institutions, freeing up budgets for other educational needs.",
+                topic: "Education"
+            },
+            {
+                question: "According to the PDF, what does the MIT license allow?",
+                options: [
+                    "Very permissive use including in proprietary software",
+                    "Only non-commercial, educational use",
+                    "Use only within the same organization",
+                    "No modifications allowed under any circumstances"
+                ],
+                correct: 0,
+                explanation: "The MIT license is extremely permissive, allowing use, modification, and distribution even in proprietary software, with minimal requirements.",
+                topic: "Licenses"
+            },
+            {
+                question: "What is the main purpose of the Free Software Foundation according to the PDF?",
+                options: [
+                    "To promote computer user freedom and defend free software rights",
+                    "To develop proprietary software for commercial sale",
+                    "To certify software quality standards",
+                    "To provide free computers to schools"
+                ],
+                correct: 0,
+                explanation: "The FSF's mission is to promote computer user freedom and defend the rights of all free software users worldwide.",
+                topic: "Organizations"
+            },
+            {
+                question: "According to the PDF, how does FOSS promote collaborative learning?",
+                options: [
+                    "By enabling sharing and modification of educational resources",
+                    "By forcing all students to work in groups",
+                    "By providing pre-made collaborative projects",
+                    "By requiring internet connection for all learning"
+                ],
+                correct: 0,
+                explanation: "FOSS promotes collaborative learning through tools and resources that can be freely shared, modified, and improved by educators and students.",
+                topic: "Education"
+            },
+            {
+                question: "What is Xfce in the context of MX Linux?",
+                options: [
+                    "The desktop environment - the visual interface users interact with",
+                    "The kernel that manages hardware resources",
+                    "A programming language for developing MX tools",
+                    "A file system for organizing documents"
+                ],
+                correct: 0,
+                explanation: "Xfce is the desktop environment in MX Linux, providing the graphical user interface that users see and interact with.",
+                topic: "MX Linux"
+            },
+            {
+                question: "According to the PDF, what is a benefit of the MX Linux community?",
+                options: [
+                    "Friendly support and helpful resources for users",
+                    "Paid professional technical support",
+                    "Exclusive access to premium software",
+                    "Government funding for development"
+                ],
+                correct: 0,
+                explanation: "The MX Linux community provides free, friendly support through forums, documentation, and tutorials, helping users solve problems.",
+                topic: "Community"
+            },
+            {
+                question: "What does the PDF say about using old laptops with MX Linux?",
+                options: [
+                    "MX Linux can revive old laptops that struggle with newer operating systems",
+                    "Only new laptops can run MX Linux properly",
+                    "Old laptops need hardware upgrades before using MX Linux",
+                    "MX Linux performs worse on old hardware than Windows"
+                ],
+                correct: 0,
+                explanation: "MX Linux is specifically optimized to run well on older hardware, extending the useful life of computers that might otherwise be discarded.",
+                topic: "MX Linux"
+            },
+            {
+                question: "According to the PDF, what does 'free software' mean in Richard Stallman's slogan?",
+                options: [
+                    "'Free software, free society' - linking software freedom to social freedom",
+                    "'Free software for all' - emphasizing zero cost",
+                    "'Freedom from software' - advocating minimal technology use",
+                    "'Freely available software' - focusing on accessibility"
+                ],
+                correct: 0,
+                explanation: "Stallman's slogan 'free software, free society' connects software freedom with broader social and political freedoms.",
+                topic: "Philosophy"
+            },
+            {
+                question: "What is the key advantage of FOSS for digital autonomy according to the PDF?",
+                options: [
+                    "Users control their tools rather than being controlled by them",
+                    "Software automatically performs tasks without user input",
+                    "Computers become easier to replace when broken",
+                    "Users don't need to understand how software works"
+                ],
+                correct: 0,
+                explanation: "FOSS promotes digital autonomy by giving users control over their tools, allowing modification and understanding rather than passive consumption.",
+                topic: "Autonomy"
+            },
+            {
+                question: "According to the PDF, what is the significance of 1991 in open source history?",
+                options: [
+                    "Linus Torvalds created the Linux kernel",
+                    "The term 'open source' was officially coined",
+                    "Richard Stallman founded the FSF",
+                    "The first Linux distribution was released"
+                ],
+                correct: 0,
+                explanation: "1991 marks when Linus Torvalds created the Linux kernel, a pivotal moment that enabled the development of complete open source operating systems.",
+                topic: "History"
+            },
+            {
+                question: "What does the PDF indicate about background processes in antiX/MX Linux versus Windows?",
+                options: [
+                    "antiX/MX Linux minimizes background processes for better performance",
+                    "Both systems run approximately the same number of background processes",
+                    "Windows has fewer background processes for security",
+                    "Background processes don't affect system performance"
+                ],
+                correct: 0,
+                explanation: "antiX and MX Linux are designed to minimize unnecessary background processes that consume resources, unlike Windows which runs many services in the background.",
+                topic: "Performance"
+            }
+        ];
+        
+        // Quiz functionality
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let quizSubmitted = false;
+        window.quizInitialized = false;
+        
+        function initializeQuiz() {
+            // Select 10 random questions from the pool
+            currentQuestions = [...quizQuestions]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 10);
+            
+            currentQuestionIndex = 0;
+            userAnswers = new Array(10).fill(null);
+            quizSubmitted = false;
+            window.quizInitialized = true;
+            
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('submit-quiz').style.display = 'inline-flex';
+            document.getElementById('restart-quiz').style.display = 'inline-flex';
+            
+            displayQuestion();
+            updateQuestionCounter();
+            updateProgressBar();
+        }
+        
+        function displayQuestion() {
+            const container = document.getElementById('question-container');
+            const question = currentQuestions[currentQuestionIndex];
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionClass += ' selected';
+                }
+                if (quizSubmitted) {
+                    if (index === question.correct) {
+                        optionClass += ' correct';
+                    } else if (userAnswers[currentQuestionIndex] === index && userAnswers[currentQuestionIndex] !== question.correct) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        <span style="font-weight: bold; margin-right: 10px;">${String.fromCharCode(65 + index)}.</span>
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = `
+                <div class="question">${currentQuestionIndex + 1}. ${question.question}</div>
+                <div class="options">
+                    ${optionsHTML}
+                </div>
+                ${quizSubmitted ? `
+                    <div style="margin-top: 25px; padding: 20px; background: ${userAnswers[currentQuestionIndex] === question.correct ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)'}; border-radius: 10px; border-left: 5px solid ${userAnswers[currentQuestionIndex] === question.correct ? '#10b981' : '#ef4444'};">
+                        <strong style="color: ${userAnswers[currentQuestionIndex] === question.correct ? '#10b981' : '#ef4444'};">${userAnswers[currentQuestionIndex] === question.correct ? '✓ Correct!' : '✗ Incorrect.'}</strong>
+                        <p style="margin-top: 10px;">${question.explanation}</p>
+                        <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary-light);">
+                            <span class="key-term">${question.topic}</span>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+            
+            // Add event listeners to options if quiz not submitted
+            if (!quizSubmitted) {
+                document.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Remove selected class from all options
+                        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        
+                        // Save user's answer
+                        userAnswers[currentQuestionIndex] = parseInt(this.getAttribute('data-index'));
+                    });
+                });
+            }
+        }
+        
+        function updateQuestionCounter() {
+            document.getElementById('question-counter').textContent = `Question ${currentQuestionIndex + 1} of 10`;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            document.getElementById('next-btn').disabled = currentQuestionIndex === 9;
+        }
+        
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / 10) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+        }
+        
+        function nextQuestion() {
+            if (currentQuestionIndex < 9) {
+                currentQuestionIndex++;
+                displayQuestion();
+                updateQuestionCounter();
+                updateProgressBar();
+            }
+        }
+        
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+                updateQuestionCounter();
+                updateProgressBar();
+            }
+        }
+        
+        function submitQuiz() {
+            quizSubmitted = true;
+            
+            // Calculate score
+            let score = 0;
+            for (let i = 0; i < currentQuestions.length; i++) {
+                if (userAnswers[i] === currentQuestions[i].correct) {
+                    score++;
+                }
+            }
+            
+            // Display results
+            document.getElementById('score-value').textContent = score;
+            
+            let message = "";
+            let messageColor = "";
+            if (score >= 9) {
+                message = "Excellent! You have mastered the FOSS concepts presented in the course materials.";
+                messageColor = "#10b981";
+            } else if (score >= 7) {
+                message = "Very Good! You have a strong understanding of most key concepts.";
+                messageColor = "#3b82f6";
+            } else if (score >= 5) {
+                message = "Good! You understand the basics but should review some topics.";
+                messageColor = "#f59e0b";
+            } else {
+                message = "Keep studying! Review the lecture materials and try the quiz again.";
+                messageColor = "#ef4444";
+            }
+            
+            document.getElementById('score-message').textContent = message;
+            document.getElementById('score-message').style.color = messageColor;
+            
+            // Display review questions
+            let reviewHTML = "<h4 style='margin-bottom: 20px;'>Question Review:</h4>";
+            for (let i = 0; i < currentQuestions.length; i++) {
+                const q = currentQuestions[i];
+                const isCorrect = userAnswers[i] === q.correct;
+                const userAnswerText = userAnswers[i] !== null ? q.options[userAnswers[i]] : "Not answered";
+                const correctAnswerText = q.options[q.correct];
+                
+                reviewHTML += `
+                    <div style="margin-bottom: 20px; padding: 18px; background-color: ${isCorrect ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)'}; border-radius: 10px; border-left: 4px solid ${isCorrect ? '#10b981' : '#ef4444'};">
+                        <strong>Q${i+1}:</strong> ${q.question}<br>
+                        <div style="margin-top: 10px;">
+                            <span style="color: ${isCorrect ? '#10b981' : '#ef4444'}">
+                                <strong>Your answer:</strong> ${userAnswerText} ${isCorrect ? '✓' : '✗'}<br>
+                                ${!isCorrect ? `<strong>Correct answer:</strong> ${correctAnswerText}` : ''}
+                            </span>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary-light);">
+                            <strong>Topic:</strong> <span class="key-term">${q.topic}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('review-questions').innerHTML = reviewHTML;
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('submit-quiz').style.display = 'none';
+            document.getElementById('restart-quiz').style.display = 'none';
+            
+            // Show first question
+            currentQuestionIndex = 0;
+            displayQuestion();
+            updateQuestionCounter();
+        }
+        
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize quiz
+            initializeQuiz();
+            
+            // Set up quiz controls
+            document.getElementById('next-btn').addEventListener('click', nextQuestion);
+            document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+            document.getElementById('submit-quiz').addEventListener('click', submitQuiz);
+            document.getElementById('restart-quiz').addEventListener('click', initializeQuiz);
+            document.getElementById('try-again-btn').addEventListener('click', initializeQuiz);
+            
+            // Set up exercise buttons
+            document.getElementById('save-startup-plan').addEventListener('click', function() {
+                const answer = document.getElementById('startup-plan').value;
+                if (answer.trim()) {
+                    alert('Business plan saved! Consider how FOSS tools reduce startup costs while maintaining flexibility.');
+                    // In a real application, this would save to a database or local storage
+                } else {
+                    alert('Please write your startup plan before saving.');
+                }
+            });
+            
+            document.getElementById('submit-project').addEventListener('click', function() {
+                const osSelection = document.getElementById('os-selection').value;
+                const selectedSoftware = Array.from(document.querySelectorAll('input[name="software"]:checked')).map(cb => cb.value);
+                const budgetJustification = document.getElementById('budget-justification').value;
+                
+                if (!osSelection || selectedSoftware.length === 0 || !budgetJustification.trim()) {
+                    alert('Please complete all sections of the project plan.');
+                    return;
+                }
+                
+                alert('Project submitted! Your FOSS-based computer lab design shows understanding of practical applications for academic contexts.');
+                
+                // Reset form
+                document.getElementById('os-selection').value = '';
+                document.querySelectorAll('input[name="software"]').forEach(cb => cb.checked = false);
+                document.getElementById('budget-justification').value = '';
+            });
+            
+            // Set up sample data for exercises
+            window.addEventListener('load', function() {
+                // Sample startup plan
+                document.getElementById('startup-plan').value = "For my language services startup, I would use:\n\n1. MX Linux as the operating system on all computers (free, runs on older hardware)\n2. LibreOffice for document creation and management\n3. Nextcloud for file sharing and collaboration with clients\n4. WordPress with WooCommerce for the website and booking system\n5. Jitsi Meet for online tutoring sessions (open source alternative to Zoom)\n6. GIMP for creating marketing materials\n\nTotal software cost: $0. All funds can be allocated to marketing and quality service delivery.";
+                
+                // Sample privacy analysis
+                document.getElementById('privacy-analysis').value = "Proprietary software like Windows presents privacy concerns because:\n1. Users cannot see what data is being collected\n2. Updates and telemetry often run without clear disclosure\n3. Backdoors could exist without public knowledge\n\nOpen source software like MX Linux offers better privacy because:\n1. Code is transparent and can be audited\n2. Users control what data is shared\n3. Community scrutiny helps identify and remove privacy issues\n\nFor academic work involving sensitive research or personal data, open source provides important privacy guarantees.";
+            });
+        });
+    </script>
 </body>
 </html>
