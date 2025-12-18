@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Teaching Comprehensive Revision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4CAF50;
+            --warning: #ff9800;
+            --danger: #f72585;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 0 18px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #7209b7, var(--danger));
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        header p {
+            opacity: 0.95;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            border-radius: var(--border-radius);
+            margin: 0 18px 30px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 18px 8px;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+        }
+        
+        .tab-btn i {
+            font-size: 1.3rem;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.08);
+        }
+        
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+            border-left: 6px solid var(--primary);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            background: rgba(76, 201, 240, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .subsection-title {
+            color: var(--secondary);
+            margin: 20px 0 15px;
+            font-size: 1.3rem;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .question {
+            background-color: var(--light-gray);
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+        }
+        
+        .question:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .question h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .question h3 i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+        
+        .answer {
+            background-color: rgba(67, 97, 238, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 5px solid var(--accent);
+            display: none;
+        }
+        
+        .answer.active {
+            display: block;
+        }
+        
+        .show-answer-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 6px rgba(67, 97, 238, 0.2);
+        }
+        
+        .show-answer-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(67, 97, 238, 0.3);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: rgba(67, 97, 238, 0.03);
+        }
+        
+        table tr:hover {
+            background-color: rgba(67, 97, 238, 0.08);
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .quiz-progress {
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            line-height: 1.5;
+            background: rgba(67, 97, 238, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .quiz-option {
+            padding: 18px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .quiz-option:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+            border-color: var(--primary);
+        }
+        
+        .quiz-option.selected {
+            background-color: rgba(67, 97, 238, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 3px 8px rgba(67, 97, 238, 0.15);
+        }
+        
+        .quiz-option.correct {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-color: var(--success);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: rgba(247, 37, 133, 0.1);
+            border-color: var(--danger);
+        }
+        
+        .option-letter {
+            width: 36px;
+            height: 36px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark);
+            flex-shrink: 0;
+        }
+        
+        .quiz-option.selected .option-letter {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .quiz-option.correct .option-letter {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .quiz-option.incorrect .option-letter {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .quiz-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
+        }
+        
+        .quiz-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+        }
+        
+        .quiz-btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .quiz-results {
+            padding: 30px;
+        }
+        
+        .quiz-score {
+            font-size: 4rem;
+            color: var(--primary);
+            margin: 20px 0;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .result-details {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .question-review {
+            background: rgba(67, 97, 238, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .question-review.correct {
+            border-left-color: var(--success);
+        }
+        
+        .question-review.incorrect {
+            border-left-color: var(--danger);
+        }
+        
+        .review-feedback {
+            background: rgba(76, 201, 240, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .essay-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+            border-top: 6px solid var(--accent);
+        }
+        
+        .essay-title {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+        }
+        
+        .essay-content {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .essay-paragraphs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .essay-paragraph {
+            padding: 20px;
+            background: rgba(67, 97, 238, 0.03);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .essay-key-ideas {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.08), rgba(76, 201, 240, 0.08));
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .essay-key-ideas h4 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .method-badge {
+            display: inline-block;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 193, 7, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .tab-btn {
+                padding: 15px 5px;
+                font-size: 0.85rem;
+            }
+            
+            .tab-btn i {
+                font-size: 1.1rem;
+            }
+            
+            .section-card, .quiz-container, .essay-item {
+                padding: 20px 15px;
+            }
+            
+            .quiz-question {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+            
+            .quiz-btn {
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-graduation-cap"></i> Language Teaching: Comprehensive Revision</h1>
+            <p>Integrating Didactics Lectures 1-6: Effective Teaching, Self-Monitoring, Teachers' Beliefs, Classroom Discourse, Management & Teaching-Learning Dynamics</p>
+        </div>
+    </header>
+    
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-target="revision">
+            <i class="fas fa-file-alt"></i>
+            <span>Full Revision</span>
+        </button>
+        <button class="tab-btn" data-target="quiz">
+            <i class="fas fa-question-circle"></i>
+            <span>Self-Test Quiz</span>
+        </button>
+        <button class="tab-btn" data-target="essays">
+            <i class="fas fa-edit"></i>
+            <span>Essay Builder</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <!-- Revision Section -->
+        <section id="revision" class="content-section active">
+            <!-- Effective Teaching -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-chalkboard-teacher"></i> 1. Effective Teaching</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-search"></i> The Search for the Right Method</h3>
+                <p>Language teaching has evolved through various methods, each with strengths and limitations:</p>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> Why have methods proven weak and limited?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <p>Teaching is too complex to be reduced to a single method. Methods tend to be rigid, focusing only on "how" to teach (teacher's delivery) while ignoring diverse student needs, contextual factors, and the dynamic nature of learning. They cannot accommodate the multifaceted reality of classroom interactions.</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-exchange-alt"></i> The Shift from Teaching to Learning</h3>
+                <p>Modern language education has shifted from teacher-centered instruction to learner-centered approaches:</p>
+                
+                <table>
+                    <tr>
+                        <th>Traditional Approach (Lock-Step)</th>
+                        <th>Modern Approach (Learner-Centered)</th>
+                    </tr>
+                    <tr>
+                        <td>Fixed set of topics for all</td>
+                        <td>Learning based on students' needs</td>
+                    </tr>
+                    <tr>
+                        <td>Assessment focused on content recall</td>
+                        <td>Assessment of understanding and application</td>
+                    </tr>
+                    <tr>
+                        <td>Everyone learns same way at same time</td>
+                        <td>Varied teaching techniques for diverse learners</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher as "sage on the stage"</td>
+                        <td>Teacher as "guide on the side"</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-user-tie"></i> The Evolving Role of Teachers</h3>
+                <p>From traditional methods to modern education, teachers now assume multiple roles:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Facilitator/Guide</h4>
+                        <p>Creates learning opportunities rather than transmitting knowledge</p>
+                    </div>
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Planner</h4>
+                        <p>Designs lessons that consider diverse learning styles (VARK)</p>
+                    </div>
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Assessor</h4>
+                        <p>Evaluates both progress and process, providing constructive feedback</p>
+                    </div>
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Mentor</h4>
+                        <p>Supports emotional and cognitive development of learners</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-star"></i> Factors of Effective Teaching (Mujjs & Reynolds, 2005)</h3>
+                <ul style="columns: 2; column-gap: 30px; margin: 15px 0; padding-left: 20px;">
+                    <li>Positive attitude</li>
+                    <li>Pleasant classroom climate</li>
+                    <li>High expectations</li>
+                    <li>Lesson clarity</li>
+                    <li>Effective time management</li>
+                    <li>Strong lesson structuring</li>
+                    <li>Variety of teaching methods</li>
+                    <li>Incorporation of pupil ideas</li>
+                    <li>Appropriate questioning</li>
+                </ul>
+                <p><em>Note: Effectiveness is context-specific, depending on activity type, subject matter, pupil backgrounds, and personal characteristics.</em></p>
+            </div>
+            
+            <!-- Self-Monitoring -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-search"></i> 2. Self-Monitoring in Language Teaching</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-brain"></i> Assumptions About Teacher Development</h3>
+                <ol style="padding-left: 25px; margin: 15px 0;">
+                    <li>Effective teaching relies on a strong knowledge base</li>
+                    <li>Teachers are often unaware of their own teaching practices</li>
+                    <li>Experience alone does not guarantee development</li>
+                    <li>Critical reflection fosters deeper insight and change</li>
+                </ol>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What is self-monitoring?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Definition (Armstrong & Firth, 1984):</strong> A systematic approach to the observation, evaluation and management of one's own behavior to achieve better understanding and control.</p>
+                        <p>Self-monitoring is a method of reflective teaching that involves:</p>
+                        <ol>
+                            <li>Understanding your own teaching (strengths and weaknesses)</li>
+                            <li>Collecting objective information about classroom events</li>
+                            <li>Analyzing this information systematically</li>
+                            <li>Making informed decisions about teaching improvements</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-info-circle"></i> The Johari Window of Teacher Awareness</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(67, 97, 238, 0.08); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--primary);">Open Self</h4>
+                        <p>Known to teacher and others</p>
+                    </div>
+                    <div style="background: rgba(247, 37, 133, 0.08); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--danger);">Blind Self</h4>
+                        <p>Known to others but not teacher</p>
+                    </div>
+                    <div style="background: rgba(76, 201, 240, 0.08); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--accent);">Secret Self</h4>
+                        <p>Known to teacher but not others</p>
+                    </div>
+                    <div style="background: rgba(108, 117, 125, 0.08); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--gray);">Hidden Self</h4>
+                        <p>Unknown to both</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-tasks"></i> How is Self-Monitoring Carried Out?</h3>
+                <ol style="padding-left: 25px; margin: 15px 0;">
+                    <li><strong>Personal reflection:</strong> Systematic thinking about teaching experiences</li>
+                    <li><strong>Self-reporting:</strong> Documenting observations and insights</li>
+                    <li><strong>Audio/Video recording:</strong> Objective review of classroom interactions</li>
+                    <li><strong>Action research:</strong> Systematic inquiry into teaching practices</li>
+                </ol>
+            </div>
+            
+            <!-- Teachers' Beliefs -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-brain"></i> 3. Teachers' Beliefs</h2>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What are teachers' beliefs and why are they important?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Definition (Raymond, 1997):</strong> Personal judgments formed from experiences. Teachers' beliefs are subjective, experience-based constructs that shape their teaching practices more powerfully than formal knowledge.</p>
+                        <p><strong>Why difficult to define/evaluate:</strong></p>
+                        <ol>
+                            <li><strong>Culturally bound:</strong> Shaped by cultural, educational, and societal norms</li>
+                            <li><strong>Formed early:</strong> Stem from personal schooling experiences</li>
+                            <li><strong>Resistant to change:</strong> Developed over many years through various experiences</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-users"></i> Teachers' Beliefs About Learners</h3>
+                <table>
+                    <tr>
+                        <th>Belief</th>
+                        <th>View of Learner</th>
+                        <th>Teaching Approach</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Resisters</strong></td>
+                        <td>Resistant to learning</td>
+                        <td>Force/punishment to overcome resistance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Receptacles</strong></td>
+                        <td>Passive containers</td>
+                        <td>Direct transmission of information</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Raw Materials</strong></td>
+                        <td>To be molded</td>
+                        <td>Shaping according to predetermined ideas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Partners</strong></td>
+                        <td>Collaborators</td>
+                        <td>Joint discovery and collaboration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Individual Explorers</strong></td>
+                        <td>Active discoverers</td>
+                        <td>Facilitation rather than instruction</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-chart-line"></i> Constraints on Effective Teaching</h3>
+                <ul style="columns: 2; column-gap: 30px; margin: 15px 0; padding-left: 20px;">
+                    <li>Diversity of learning styles (VARK)</li>
+                    <li>Varied ability levels</li>
+                    <li>Insufficient teaching materials</li>
+                    <li>Overwhelming workloads</li>
+                    <li>Lack of professional development</li>
+                    <li>Teachers' own beliefs undermining effectiveness</li>
+                </ul>
+            </div>
+            
+            <!-- Classroom Discourse -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-comments"></i> 4. Classroom Discourse & Teacher Talk</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-balance-scale"></i> TTT vs. LTT (Teacher Talk Time vs. Learner Talk Time)</h3>
+                <table>
+                    <tr>
+                        <th>Teacher Talk Time (TTT)</th>
+                        <th>Learner Talk Time (LTT)</th>
+                    </tr>
+                    <tr>
+                        <td>Modeling, explaining, managing</td>
+                        <td>Practicing, negotiating, expressing ideas</td>
+                    </tr>
+                    <tr>
+                        <td>Essential for instruction</td>
+                        <td>Essential for language acquisition</td>
+                    </tr>
+                    <tr>
+                        <td>Should be strategic and purposeful</td>
+                        <td>Should be maximized meaningfully</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-exchange-alt"></i> Pedagogic vs. Natural Discourse (Kramsch, 1998)</h3>
+                <table>
+                    <tr>
+                        <th>Pedagogic Discourse</th>
+                        <th>Natural Discourse</th>
+                    </tr>
+                    <tr>
+                        <td>Formal, structured, teacher-led</td>
+                        <td>Informal, spontaneous, collaborative</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher as knowledge source</td>
+                        <td>Meaning co-constructed with learners</td>
+                    </tr>
+                    <tr>
+                        <td>Accuracy & curriculum-focused</td>
+                        <td>Fluency & authentic communication</td>
+                    </tr>
+                    <tr>
+                        <td>Known-answer (display) questions</td>
+                        <td>Learners initiate and express opinions</td>
+                    </tr>
+                </table>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What are display vs. referential questions?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Display Questions:</strong> Teacher knows the answer (e.g., "What is the capital of France?"). Focuses on accuracy check, common in pedagogic discourse.</p>
+                        <p><strong>Referential Questions:</strong> Teacher does NOT know the answer (e.g., "What did you do last weekend?"). Focuses on genuine communication, common in natural discourse.</p>
+                        <p>Effective teachers use more referential questions to promote authentic communication.</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-handshake"></i> Classroom Interactional Competence (Walsh, 2011)</h3>
+                <p>The ability to use interaction to mediate and assist learning through:</p>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Appropriate questioning techniques</li>
+                    <li>Effective turn-taking management</li>
+                    <li>Constructive feedback provision</li>
+                    <li>Clarification requests</li>
+                </ul>
+            </div>
+            
+            <!-- Classroom Management -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-tasks"></i> 5. Classroom Management</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-exclamation-triangle"></i> Misconceptions About Classroom Management</h3>
+                <table>
+                    <tr>
+                        <th>Misconception</th>
+                        <th>Reality</th>
+                    </tr>
+                    <tr>
+                        <td>Only about misbehavior</td>
+                        <td>Preventing problems through positive engagement</td>
+                    </tr>
+                    <tr>
+                        <td>Calmness means control</td>
+                        <td>Structure and understanding are key</td>
+                    </tr>
+                    <tr>
+                        <td>Rewards/punishments are enough</td>
+                        <td>Teaching motivation and self-discipline is essential</td>
+                    </tr>
+                    <tr>
+                        <td>Good teaching = good management</td>
+                        <td>Both planning and relationship-building needed</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-puzzle-piece"></i> Four Key Components of Classroom Management</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Physical Environment</h4>
+                        <p>Well-organized, welcoming space that reduces distractions</p>
+                    </div>
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Management of Learning</h4>
+                        <p>Planning for diverse learning styles (VARK) and engagement</p>
+                    </div>
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Procedures & Rules</h4>
+                        <p>Clear expectations and routines for security</p>
+                    </div>
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Discipline Management</h4>
+                        <p>Guiding rather than punishing; restorative approaches</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-bullseye"></i> Types of Learning in Classroom Management (Evertson & Weinstein, 2006)</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+                    <div style="flex: 1; min-width: 250px; background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(67, 97, 238, 0.05)); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Academic Learning</h4>
+                        <p>Developing thinking skills, subject knowledge, and learning habits</p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px; background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(76, 201, 240, 0.05)); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Social Learning</h4>
+                        <p>Focusing on teamwork, empathy, respect, and collaboration</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Teaching-Learning Process Dynamics -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-cogs"></i> 6. Teaching-Learning Process Dynamics</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-users-cog"></i> The Four Agents of Learning</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(67, 97, 238, 0.05)); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Learner</h4>
+                        <p>Unique with prior knowledge, affect, and learning strategies</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(76, 201, 240, 0.05)); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Teacher</h4>
+                        <p>Decides how learning occurs; pivotal factor in the process</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(247, 37, 133, 0.1), rgba(247, 37, 133, 0.05)); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--danger); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h4 style="color: var(--danger); margin-bottom: 10px;">Classroom Environment</h4>
+                        <p>Physical, social, psychological factors affecting learning</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="width: 60px; height: 60px; background: var(--success); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 style="color: var(--success); margin-bottom: 10px;">Curriculum</h4>
+                        <p>Structured framework guiding learning at all levels</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-book-open"></i> Curriculum Definitions</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+                    <div style="flex: 1; min-width: 300px; background: rgba(67, 97, 238, 0.05); padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">William Kerr (1968)</h4>
+                        <p><em>"Curriculum is the totality of student experiences that occur in the educational process."</em></p>
+                        <p>Emphasizes the comprehensive nature of educational experiences.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 300px; background: rgba(76, 201, 240, 0.05); padding: 20px; border-radius: 10px; border-left: 5px solid var(--accent);">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Lawrence Stenhouse (1975)</h4>
+                        <p><em>"Curriculum is a means by which teachers can formulate and test hypotheses about teaching and learning."</em></p>
+                        <p>Views curriculum as a process open to adaptation and interpretation.</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-lightbulb"></i> Types of Knowledge</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;">
+                    <div style="flex: 1; min-width: 250px; background: rgba(67, 97, 238, 0.05); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Declarative Knowledge ("What")</h4>
+                        <p>Knowing facts or specific details</p>
+                        <p><em>Example:</em> "Paris is the capital of France."</p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px; background: rgba(76, 201, 240, 0.05); padding: 20px; border-radius: 10px;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Procedural Knowledge ("How")</h4>
+                        <p>Knowing how to perform a task</p>
+                        <p><em>Example:</em> Knowing how to write an essay or solve a math problem.</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-heart"></i> Motivation and Affect in Learning</h3>
+                <p>According to Gardner (1995), <span class="highlight">motivation and attitude are central to learning a second language (L2)</span>. Affect encompasses motivation, desire, and positive attitude toward learning, significantly influencing learner engagement and persistence.</p>
+                
+                <h3 class="subsection-title"><i class="fas fa-route"></i> Learning Strategies</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(67, 97, 238, 0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--primary); font-size: 1rem;">Metacognitive</h4>
+                        <p>Planning, monitoring, evaluating</p>
+                    </div>
+                    <div style="background: rgba(76, 201, 240, 0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--accent); font-size: 1rem;">Cognitive</h4>
+                        <p>Processing and remembering info</p>
+                    </div>
+                    <div style="background: rgba(247, 37, 133, 0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--danger); font-size: 1rem;">Social</h4>
+                        <p>Collaboration and interaction</p>
+                    </div>
+                    <div style="background: rgba(76, 175, 80, 0.05); padding: 15px; border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--success); font-size: 1rem;">Affective</h4>
+                        <p>Managing emotions and motivation</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-user-check"></i> VARK Learning Preferences (Fleming & Mills, 1992)</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 20px 0;">
+                    <span class="method-badge" style="background: rgba(67, 97, 238, 0.1);"><i class="fas fa-eye"></i> Visual</span>
+                    <span class="method-badge" style="background: rgba(76, 201, 240, 0.1);"><i class="fas fa-ear-listen"></i> Auditory</span>
+                    <span class="method-badge" style="background: rgba(247, 37, 133, 0.1);"><i class="fas fa-book-reader"></i> Reading/Writing</span>
+                    <span class="method-badge" style="background: rgba(76, 175, 80, 0.1);"><i class="fas fa-hands"></i> Kinesthetic</span>
+                </div>
+                <p>Recognizing these preferences helps teachers adapt instruction for better outcomes.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz Section -->
+        <section id="quiz" class="content-section">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 class="section-title"><i class="fas fa-question-circle"></i> Comprehensive Self-Test Quiz</h2>
+                    <div class="quiz-progress">Question <span id="current-question">1</span> of <span id="total-questions">5</span></div>
+                </div>
+                
+                <div id="quiz-content">
+                    <div class="quiz-question" id="question-text">Loading question...</div>
+                    
+                    <div class="quiz-options" id="options-container">
+                        <!-- Options will be generated here by JavaScript -->
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button id="prev-btn" class="quiz-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button id="next-btn" class="quiz-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <div id="results-container" style="display: none;">
+                    <div class="quiz-results">
+                        <h2 style="color: var(--primary);">Quiz Completed!</h2>
+                        <div class="quiz-score" id="score">0/5</div>
+                        <p id="result-message" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">Based on your score, you have a good understanding of the material!</p>
+                        
+                        <div id="review-container" class="result-details">
+                            <!-- Question reviews will be inserted here -->
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px;">
+                            <button id="restart-quiz" class="quiz-btn"><i class="fas fa-redo"></i> Retry Same Questions</button>
+                            <button id="new-quiz" class="quiz-btn" style="background-color: var(--accent);"><i class="fas fa-random"></i> New 5 Questions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Quiz Instructions</h2>
+                <p>This quiz randomly selects 5 questions from a comprehensive pool covering all lectures (DD1-DD6). Answer all questions to see your score and detailed feedback. After completion, you'll see each question with your answer, the correct answer, and explanatory feedback. You can retake the quiz with the same questions or try a new set of random questions.</p>
+                <p><strong>Topics covered:</strong> Effective Teaching Methods, Self-Monitoring, Teachers' Beliefs, Classroom Discourse, Classroom Management, and Teaching-Learning Dynamics.</p>
+            </div>
+        </section>
+        
+        <!-- Essays Section -->
+        <section id="essays" class="content-section">
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-edit"></i> Essay Builder: 20 Key Paragraphs</h2>
+                <p>Below are 20 comprehensive paragraphs covering key concepts from all lectures. Use these to build essays, understand connections between topics, and prepare for exam questions.</p>
+            </div>
+            
+            <div class="essay-item">
+                <h3 class="essay-title"><i class="fas fa-pen-fancy"></i> Integrated Essay Paragraphs</h3>
+                
+                <div class="essay-paragraphs">
+                    <div class="essay-paragraph">
+                        <p><strong>1. The Evolution of Language Teaching Methodologies:</strong> The search for the perfect language teaching method has been a central concern in EFL history, progressing from Grammar-Translation's focus on accuracy and literary texts to Audio-Lingual's behaviorist drills, and finally to Communicative Language Teaching's emphasis on meaningful interaction. However, as research indicates, no single method can address the complex realities of diverse classrooms, leading to the contemporary understanding that effective teaching requires an eclectic, context-sensitive approach rather than rigid adherence to any one methodology.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>2. The Paradigm Shift from Teaching to Learning:</strong> Modern language education has undergone a fundamental transformation from teacher-centered instruction to learner-centered approaches. This shift, influenced by constructivist and communicative theories, recognizes that learning is most effective when students actively participate in constructing knowledge rather than passively receiving it. The traditional "sage on the stage" model has given way to the teacher as "guide on the side," emphasizing facilitation over transmission and engagement over compliance.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>3. Self-Monitoring as Professional Development:</strong> Self-monitoring represents a systematic approach to reflective practice that enables teachers to bridge the gap between their perceived teaching performance and classroom reality. By employing techniques such as lesson recording, journaling, and action research, teachers can move beyond the limitations of their "blind self" (aspects of their teaching visible to others but not themselves) and develop greater awareness and control over their instructional practices, ultimately leading to more intentional and effective teaching.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>4. Teachers' Beliefs and Their Impact:</strong> Teachers' beliefs, defined as subjective judgments formed from personal and cultural experiences, exert a powerful influence on classroom practices often surpassing the impact of formal training. These deeply held assumptions about learners—whether viewing them as resisters, receptacles, raw materials, partners, or individual explorers—fundamentally shape instructional decisions, assessment approaches, and classroom relationships, highlighting why belief examination is crucial for effective teaching.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>5. Classroom Discourse as a Learning Tool:</strong> Classroom discourse serves not merely as a medium of instruction but as a primary tool for language acquisition and cognitive development. The balance between Teacher Talk Time (TTT) and Learner Talk Time (LTT), the shift from display to referential questions, and the integration of pedagogic with natural discourse all contribute to creating communicative spaces where language is not only learned but authentically used, reflecting Walsh's concept of Classroom Interactional Competence.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>6. Comprehensive Classroom Management:</strong> Effective classroom management transcends mere discipline to encompass the creation of an ecosystem conducive to both academic and social learning. This involves the strategic management of physical space, learning processes, classroom procedures, and behavioral guidance—all grounded in positive relationships and clear expectations rather than punitive measures, aligning with Evertson and Weinstein's dual focus on cognitive and social development.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>7. The Teaching-Learning Ecosystem:</strong> Learning occurs within a dynamic ecosystem where four agents—the unique learner, the adaptive teacher, the structured curriculum, and the supportive environment—interact continuously. This perspective, emphasizing that students often learn more outside than inside classrooms, challenges traditional boundaries and recognizes learning as a lifelong, multidimensional process beginning before formal education and continuing throughout life.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>8. Knowledge Types and Problem-Solving:</strong> Effective language learning requires both declarative knowledge (knowing "what"—facts and information) and procedural knowledge (knowing "how"—skills and processes). This dual knowledge base enables learners to move beyond rote memorization to genuine problem-solving, applying language strategically in authentic communicative situations rather than merely reproducing learned patterns.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>9. Motivation and Affect in L2 Acquisition:</strong> Gardner's emphasis on motivation as central to second language learning highlights the crucial role of affect—the emotional and attitudinal dimensions of learning. Beyond cognitive strategies, learners' desires, confidence levels, and perceived relevance of the language significantly influence engagement, persistence, and ultimate success, necessitating pedagogical approaches that address these affective factors.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>10. Learning Strategies and Styles:</strong> Effective learners employ metacognitive, cognitive, social, and affective strategies strategically, while teachers must recognize and accommodate diverse learning preferences through the VARK model (Visual, Auditory, Reading/Writing, Kinesthetic). This dual attention to how learners learn best and how they can improve their learning processes represents a key dimension of learner-centered instruction.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>11. Curriculum as Process and Product:</strong> The contrast between Kerr's definition of curriculum as "the totality of student experiences" and Stenhouse's view of it as "a means to formulate and test hypotheses" captures the essential tension between curriculum as predetermined content and curriculum as dynamic process. Effective language teaching navigates this tension by providing structure while remaining responsive to emerging learner needs and contexts.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>12. Teacher Roles in Modern Education:</strong> Contemporary teachers fulfill multifaceted roles as facilitators, planners, instructors, assessors, and mentors—a significant expansion beyond traditional knowledge-transmitter functions. This role diversification reflects the complexity of modern teaching and the recognition that effective instruction requires not only subject expertise but also skills in guidance, assessment, relationship-building, and adaptive planning.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>13. Factors Undermining Teaching Effectiveness:</strong> Despite teachers' best intentions, effectiveness can be undermined by contextual constraints including diverse learning styles, varied ability levels, resource limitations, overwhelming workloads, and inadequate professional development. Additionally, teachers' own unexamined beliefs about learning and learners can inadvertently perpetuate ineffective practices, highlighting the need for systemic support coupled with reflective practice.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>14. The Johari Window of Teacher Awareness:</strong> The Johari Window model applied to teaching—distinguishing open, secret, blind, and hidden aspects of teaching practice—provides a powerful framework for understanding why self-monitoring is essential. By systematically reducing the "blind self" (teaching behaviors visible to others but not the teacher), educators can align their intentions with their actual practice, closing the gap between perceived and actual teaching effectiveness.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>15. Pedagogic vs. Natural Discourse Balance:</strong> Kramsch's distinction between pedagogic discourse (structured, accuracy-focused, teacher-controlled) and natural discourse (spontaneous, fluency-focused, collaboratively constructed) highlights a key instructional challenge. Effective teaching strategically blends both, using pedagogic discourse to build foundational knowledge while creating spaces for natural discourse where language is used authentically for genuine communication.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>16. Classroom Management Misconceptions:</strong> Common misconceptions about classroom management—that it's primarily about discipline, that calmness equals control, that rewards/punishments suffice, or that good teaching automatically ensures good management—often lead to ineffective practices. In reality, management is a proactive, multifaceted skill involving environmental design, relationship-building, procedural clarity, and instructional engagement.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>17. The Learner as Central Agent:</strong> Each learner enters the classroom with a unique combination of prior knowledge, affective disposition, and learning strategies—what might be called their "learning history." Effective teaching recognizes this uniqueness, adapting instruction to accommodate different starting points, motivations, and approaches rather than expecting uniform responses to standardized instruction.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>18. Display vs. Referential Questions:</strong> The distinction between display questions (to which teachers know answers) and referential questions (to which they don't) has profound implications for classroom interaction. While display questions check comprehension and recall, referential questions promote authentic communication, longer learner responses, and genuine meaning negotiation—key components of language acquisition beyond the structural level.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>19. Methods as Historical Artifacts:</strong> Each major teaching method—from Grammar-Translation to Suggestopedia—emerged from specific historical contexts and theoretical assumptions about language and learning. Understanding these methods not as prescriptions but as historical artifacts helps teachers critically evaluate their underlying principles and selectively integrate useful techniques while avoiding rigid adherence to any single approach.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>20. Holistic Educational Success:</strong> Ultimately, successful language education requires the harmonious integration of effective teaching practices, reflective teacher development, examined beliefs, strategic discourse management, supportive classroom environments, and responsive curricula. This holistic approach recognizes that language learning is not merely cognitive but also social, emotional, and cultural—a complex process best supported by equally complex and adaptive teaching.</p>
+                    </div>
+                </div>
+                
+                <div class="essay-key-ideas">
+                    <h4><i class="fas fa-lightbulb"></i> How to Use These Paragraphs:</h4>
+                    <ul>
+                        <li><strong>Mix and match</strong> paragraphs to build complete essays on various topics</li>
+                        <li>Use as <strong>reference points</strong> for key concepts from all six lectures</li>
+                        <li><strong>Adapt and expand</strong> with specific examples from your own experience</li>
+                        <li>Practice <strong>connecting concepts</strong> across different lectures (e.g., link self-monitoring to teachers' beliefs)</li>
+                        <li>Use as <strong>model paragraphs</strong> for academic writing structure and argumentation</li>
+                    </ul>
+                </div>
+            </div>
+            
+                        <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Sample Essay Structures (10 Models)</h2>
+                
+                <div class="essay-paragraphs">
+                    <!-- Essay 1 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 1: The Teacher's Evolving Role in Modern Language Education
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 2 (Paradigm Shift) + Context on changing educational landscape</p>
+                        <p><strong>Body 1 (Historical Evolution):</strong> Paragraph 1 (Methodologies Evolution) + Paragraph 19 (Methods as Historical Artifacts)</p>
+                        <p><strong>Body 2 (Current Roles):</strong> Paragraph 12 (Teacher Roles) + Paragraph 5 (Discourse as Learning Tool)</p>
+                        <p><strong>Body 3 (Future Development):</strong> Paragraph 3 (Self-Monitoring) + Paragraph 14 (Johari Window)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Success) + Implications for teacher training</p>
+                    </div>
+                    
+                    <!-- Essay 2 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 2: Creating Effective Learning Environments
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 7 (Teaching-Learning Ecosystem)</p>
+                        <p><strong>Body 1 (Physical & Management):</strong> Paragraph 6 (Comprehensive Management) + Paragraph 16 (Management Misconceptions)</p>
+                        <p><strong>Body 2 (Discourse & Interaction):</strong> Paragraph 5 (Discourse as Tool) + Paragraph 15 (Discourse Balance) + Paragraph 18 (Question Types)</p>
+                        <p><strong>Body 3 (Psychological Factors):</strong> Paragraph 4 (Teachers' Beliefs) + Paragraph 9 (Motivation & Affect)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 17 (Learner as Central) + Paragraph 20 (Holistic Approach)</p>
+                    </div>
+                    
+                    <!-- Essay 3 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 3: From Methodologies to Eclecticism in Language Teaching
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 1 (Methodologies Evolution) + Current state of EFL teaching</p>
+                        <p><strong>Body 1 (Historical Methods):</strong> Paragraph 19 (Methods as Artifacts) + GTM, ALM, Direct Method analysis</p>
+                        <p><strong>Body 2 (Modern Approaches):</strong> Paragraph 2 (Shift to Learning) + Paragraph 5 (Discourse Focus)</p>
+                        <p><strong>Body 3 (Eclectic Practice):</strong> Paragraph 12 (Multiple Roles) + Paragraph 10 (Strategies & Styles) + Contextual adaptation</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Success) + Future of methodology</p>
+                    </div>
+                    
+                    <!-- Essay 4 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 4: The Role of Self-Monitoring in Teacher Development
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 3 (Self-Monitoring Definition) + Importance of reflective practice</p>
+                        <p><strong>Body 1 (Theoretical Framework):</strong> Paragraph 14 (Johari Window) + Theories of reflective practice</p>
+                        <p><strong>Body 2 (Practical Applications):</strong> Paragraph 3 (continued) + Techniques and implementation</p>
+                        <p><strong>Body 3 (Impact on Teaching):</strong> Paragraph 4 (Beliefs Connection) + Paragraph 12 (Role Development) + Evidence from research</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Development) + Recommendations for teacher education</p>
+                    </div>
+                    
+                    <!-- Essay 5 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 5: Classroom Discourse and Language Acquisition
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 5 (Discourse as Learning Tool) + Importance in SLA</p>
+                        <p><strong>Body 1 (Theoretical Perspectives):</strong> Paragraph 15 (Discourse Types) + Paragraph 18 (Question Types)</p>
+                        <p><strong>Body 2 (Practical Strategies):</strong> Paragraph 5 (continued) + Maximizing LTT techniques</p>
+                        <p><strong>Body 3 (Teacher Competence):</strong> Paragraph 12 (Teacher Roles) + CIC development + Assessment implications</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Communication) + Future classroom discourse trends</p>
+                    </div>
+                    
+                    <!-- Essay 6 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 6: Curriculum Design and Implementation in Language Education
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 11 (Curriculum Definitions) + Importance in language teaching</p>
+                        <p><strong>Body 1 (Theoretical Models):</strong> Paragraph 11 (continued) + Kerr vs. Stenhouse analysis</p>
+                        <p><strong>Body 2 (Implementation Challenges):</strong> Paragraph 13 (Undermining Factors) + Paragraph 7 (Ecosystem Complexity)</p>
+                        <p><strong>Body 3 (Effective Adaptation):</strong> Paragraph 12 (Teacher Roles) + Paragraph 10 (Learner Diversity) + Flexibility needs</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Curriculum) + Future curriculum trends</p>
+                    </div>
+                    
+                    <!-- Essay 7 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 7: Learner-Centered Approaches in Modern Language Teaching
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 2 (Paradigm Shift) + Rise of learner-centeredness</p>
+                        <p><strong>Body 1 (Theoretical Basis):</strong> Paragraph 17 (Learner as Central) + Constructivist principles</p>
+                        <p><strong>Body 2 (Practical Implementation):</strong> Paragraph 10 (Strategies & Styles) + Paragraph 9 (Motivation)</p>
+                        <p><strong>Body 3 (Teacher Adaptation):</strong> Paragraph 12 (Teacher Roles) + Paragraph 4 (Beliefs Adaptation)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Learner Focus) + Future of learner-centered teaching</p>
+                    </div>
+                    
+                    <!-- Essay 8 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 8: The Psychology of Language Learning: Affect and Motivation
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 9 (Motivation & Affect) + Psychological dimensions of SLA</p>
+                        <p><strong>Body 1 (Theoretical Framework):</strong> Paragraph 9 (continued) + Gardner's theory and beyond</p>
+                        <p><strong>Body 2 (Classroom Applications):</strong> Paragraph 4 (Beliefs Impact) + Paragraph 10 (Affective Strategies)</p>
+                        <p><strong>Body 3 (Teacher's Role):</strong> Paragraph 12 (Mentor Role) + Creating positive affect + Assessment considerations</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Psychology) + Future affective research</p>
+                    </div>
+                    
+                    <!-- Essay 9 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 9: Assessment and Evaluation in Communicative Language Teaching
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 8 (Knowledge Types) + Assessment challenges in CLT</p>
+                        <p><strong>Body 1 (Theoretical Foundations):</strong> Paragraph 8 (continued) + Declarative vs procedural assessment</p>
+                        <p><strong>Body 2 (Classroom Practices):</strong> Paragraph 5 (Discourse Assessment) + Paragraph 18 (Questioning for Assessment)</p>
+                        <p><strong>Body 3 (Teacher Competence):</strong> Paragraph 12 (Assessor Role) + Paragraph 3 (Self-Monitoring for Assessment)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Assessment) + Future assessment trends</p>
+                    </div>
+                    
+                    <!-- Essay 10 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(67, 97, 238, 0.2); padding-bottom: 8px;">
+                            Essay 10: Technology Integration in Modern Language Classrooms
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 7 (Evolving Ecosystem) + Technology as fifth agent</p>
+                        <p><strong>Body 1 (Pedagogical Foundations):</strong> Paragraph 2 (Shift to Learning) + Technology-enhanced learning</p>
+                        <p><strong>Body 2 (Practical Applications):</strong> Paragraph 5 (Digital Discourse) + Paragraph 10 (Tech for Different Styles)</p>
+                        <p><strong>Body 3 (Teacher Development):</strong> Paragraph 3 (Tech for Self-Monitoring) + Paragraph 12 (Tech Integrator Role)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Holistic Tech Integration) + Future technological developments</p>
+                    </div>
+                    
+                    <!-- Essay 11 (Bonus) -->
+                    <div class="essay-paragraph" style="background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(76, 201, 240, 0.05)); border-left: 4px solid var(--warning);">
+                        <h4 style="color: var(--warning); margin-bottom: 10px; border-bottom: 2px solid rgba(255, 152, 0, 0.3); padding-bottom: 8px;">
+                            <i class="fas fa-star"></i> Bonus Essay: Critical Analysis of Contemporary EFL Challenges
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 13 (Teaching Constraints) + Current EFL landscape</p>
+                        <p><strong>Body 1 (Systemic Challenges):</strong> Paragraph 13 (continued) + Resource and workload issues</p>
+                        <p><strong>Body 2 (Pedagogical Challenges):</strong> Paragraph 1 (Method Limitations) + Paragraph 16 (Management Issues)</p>
+                        <p><strong>Body 3 (Solutions & Innovations):</strong> Paragraph 3 (Self-Monitoring) + Paragraph 12 (Role Adaptation) + Paragraph 20 (Holistic Solutions)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Future Directions) + Recommendations for EFL improvement</p>
+                    </div>
+                </div>
+                
+                <div class="essay-key-ideas" style="margin-top: 25px;">
+                    <h4><i class="fas fa-tips"></i> How to Use These Essay Structures:</h4>
+                    <ul style="columns: 1;">
+                        <li><strong>Mix and match</strong> paragraphs from different essays to create customized responses</li>
+                        <li>Use the <strong>paragraph numbers</strong> to quickly locate content in the essay section above</li>
+                        <li>Adapt each structure based on <strong>specific exam questions or word limits</strong></li>
+                        <li>Add <strong>specific examples</strong> from your teaching experience or observations</li>
+                        <li>Practice <strong>timed writing</strong> using these structures to improve exam performance</li>
+                        <li>Combine <strong>multiple essays</strong> for comprehensive discussion questions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p><i class="fas fa-book-reader"></i> Language Teaching Comprehensive Revision Guide &copy; 2023 | Integrating Lectures DD1-DD6</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Designed for mobile study with interactive quiz and essay builder</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation between sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    
+                    // Update active tab
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target section
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === target) {
+                            section.classList.add('active');
+                        }
+                    });
+                    
+                    // If switching to quiz, initialize it
+                    if (target === 'quiz') {
+                        initializeQuiz();
+                    }
+                });
+            });
+            
+            // Show/hide answers in revision section
+            const showAnswerBtns = document.querySelectorAll('.show-answer-btn');
+            showAnswerBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('active');
+                    
+                    // Change button text
+                    if (answer.classList.contains('active')) {
+                        this.innerHTML = 'Hide Answer <i class="fas fa-chevron-up"></i>';
+                    } else {
+                        this.innerHTML = 'Show Answer <i class="fas fa-chevron-down"></i>';
+                    }
+                });
+            });
+            
+            // Initialize quiz
+            initializeQuiz();
+        });
+        
+        // Quiz functionality
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let quizCompleted = false;
+        
+        // Comprehensive question pool covering all lectures
+        const questionPool = [
+            // Effective Teaching Questions
+            {
+                question: "According to Mujjs and Reynolds (2005), which of these is NOT a characteristic of effective teachers?",
+                options: [
+                    "Having high expectations of what pupils can achieve",
+                    "Using a variety of teaching methods",
+                    "Maintaining complete silence in the classroom",
+                    "Developing a pleasant social/psychological climate"
+                ],
+                correct: 2,
+                explanation: "Effective teachers create a positive classroom climate, not necessarily complete silence. Silence can indicate disengagement rather than learning. Effective classrooms often have productive noise from collaborative activities.",
+                topic: "Effective Teaching"
+            },
+            {
+                question: "What is the primary limitation of language teaching methods according to modern research?",
+                options: [
+                    "They are too expensive to implement",
+                    "They focus only on grammar rules",
+                    "They are too rigid and ignore contextual factors",
+                    "They require too much teacher preparation"
+                ],
+                correct: 2,
+                explanation: "Methods tend to be rigid and cannot accommodate diverse student needs, different contexts, or the dynamic nature of learning. Teaching is too complex to be reduced to a single methodological approach.",
+                topic: "Effective Teaching"
+            },
+            {
+                question: "Which teaching method is characterized by the use of native language, translation of texts, and memorization of rules?",
+                options: [
+                    "Direct Method",
+                    "Audio-Lingual Method",
+                    "Grammar-Translation Method",
+                    "Communicative Language Teaching"
+                ],
+                correct: 2,
+                explanation: "The Grammar-Translation Method focuses on literary texts, translation between L1 and L2, and explicit grammar rule memorization. It was dominant in the 19th century but criticized for neglecting oral communication.",
+                topic: "Effective Teaching"
+            },
+            // Self-Monitoring Questions
+            {
+                question: "According to Armstrong and Firth (1984), what is self-monitoring?",
+                options: [
+                    "Students evaluating their own learning progress",
+                    "A systematic approach to observing and managing one's own behavior",
+                    "Administrators observing teachers in the classroom",
+                    "Using technology to track student attendance"
+                ],
+                correct: 1,
+                explanation: "Self-monitoring is defined as a systematic approach to the observation, evaluation and management of one's own behavior to achieve better understanding and control. It's a key component of reflective teaching practice.",
+                topic: "Self-Monitoring"
+            },
+            {
+                question: "Which aspect of the Johari Window refers to behaviors known to others but not to the teacher?",
+                options: [
+                    "Open Self",
+                    "Secret Self",
+                    "Blind Self",
+                    "Hidden Self"
+                ],
+                correct: 2,
+                explanation: "The 'Blind Self' represents aspects of our teaching that others can see but we cannot. Self-monitoring techniques like video recording help reduce this blind area by making the invisible visible.",
+                topic: "Self-Monitoring"
+            },
+            {
+                question: "Which is NOT a method for carrying out self-monitoring?",
+                options: [
+                    "Personal reflection",
+                    "Audio or video recording of lessons",
+                    "Standardized testing of students",
+                    "Action research"
+                ],
+                correct: 2,
+                explanation: "While student testing provides feedback, it's not a direct method of self-monitoring. Self-monitoring focuses on teachers observing their own practice through reflection, recording, reporting, and research.",
+                topic: "Self-Monitoring"
+            },
+            // Teachers' Beliefs Questions
+            {
+                question: "According to Raymond (1997), how are teachers' beliefs best defined?",
+                options: [
+                    "Objective facts proven by research",
+                    "Personal judgments formed from experiences",
+                    "Rules prescribed by educational authorities",
+                    "Theoretical concepts from teacher training"
+                ],
+                correct: 1,
+                explanation: "Beliefs are subjective, experience-based judgments rather than objective facts. They're formed through personal and professional experiences and are culturally embedded, making them powerful influences on teaching practice.",
+                topic: "Teachers' Beliefs"
+            },
+            {
+                question: "Which teacher belief about learners views students as 'raw materials' to be molded?",
+                options: [
+                    "Resisters",
+                    "Receptacles",
+                    "Raw Materials",
+                    "Partners"
+                ],
+                correct: 2,
+                explanation: "The 'raw materials' metaphor sees students as passive substances to be shaped according to the teacher's or society's predetermined ideals. This approach risks manipulating students rather than developing their autonomy.",
+                topic: "Teachers' Beliefs"
+            },
+            {
+                question: "Why are teachers' beliefs difficult to change?",
+                options: [
+                    "They are based on scientific research",
+                    "They are formed early and reinforced over years",
+                    "Teachers receive no training about beliefs",
+                    "Beliefs are genetically determined"
+                ],
+                correct: 1,
+                explanation: "Beliefs are formed through early schooling experiences, teacher training, classroom practice, and cultural socialization over many years. This long development makes them resistant to change despite new evidence or training.",
+                topic: "Teachers' Beliefs"
+            },
+            // Classroom Discourse Questions
+            {
+                question: "What is the key difference between display questions and referential questions?",
+                options: [
+                    "Display questions are longer than referential questions",
+                    "The teacher knows the answer to display questions but not referential questions",
+                    "Referential questions test grammar while display questions test vocabulary",
+                    "Display questions are for advanced learners only"
+                ],
+                correct: 1,
+                explanation: "Display questions test knowledge the teacher already possesses (e.g., 'What's the past tense of go?'), while referential questions seek genuine information unknown to the teacher (e.g., 'What did you do yesterday?'). Referential questions promote more authentic communication.",
+                topic: "Classroom Discourse"
+            },
+            {
+                question: "According to Walsh (2011), what is Classroom Interactional Competence (CIC)?",
+                options: [
+                    "Students' ability to pass language tests",
+                    "Teachers' skill in designing curriculum",
+                    "The ability to use interaction to mediate and assist learning",
+                    "Managing classroom discipline effectively"
+                ],
+                correct: 2,
+                explanation: "CIC involves using interaction strategically to support learning through appropriate questioning, feedback, turn-taking, and clarification. It emphasizes how communication patterns affect learning opportunities.",
+                topic: "Classroom Discourse"
+            },
+            {
+                question: "Which type of discourse is characterized by spontaneous, collaborative communication where meaning is co-constructed?",
+                options: [
+                    "Pedagogic discourse",
+                    "Natural discourse",
+                    "Monologic discourse",
+                    "Evaluative discourse"
+                ],
+                correct: 1,
+                explanation: "Natural discourse (Kramsch, 1998) involves authentic, spontaneous communication where learners actively participate in constructing meaning, contrasting with teacher-controlled pedagogic discourse focused on accuracy.",
+                topic: "Classroom Discourse"
+            },
+            // Classroom Management Questions
+            {
+                question: "Which of these is a common misconception about classroom management?",
+                options: [
+                    "It involves creating a positive learning environment",
+                    "It's only about dealing with misbehavior",
+                    "It requires clear procedures and rules",
+                    "It supports both academic and social learning"
+                ],
+                correct: 1,
+                explanation: "The misconception that management is only about discipline ignores its proactive dimensions: environmental design, relationship-building, engagement strategies, and creating conditions for learning.",
+                topic: "Classroom Management"
+            },
+            {
+                question: "According to Evertson and Weinstein (2006), what are the two main types of learning in classroom management?",
+                options: [
+                    "Formal and informal learning",
+                    "Individual and collaborative learning",
+                    "Academic and social learning",
+                    "Theoretical and practical learning"
+                ],
+                correct: 2,
+                explanation: "Effective management supports both academic learning (knowledge and skills) and social learning (collaboration, empathy, respect). This dual focus recognizes classrooms as both cognitive and social spaces.",
+                topic: "Classroom Management"
+            },
+            {
+                question: "Which component of classroom management involves planning lessons for diverse learning styles?",
+                options: [
+                    "Management of the physical environment",
+                    "Management of learning",
+                    "Classroom procedures and rules",
+                    "Management of discipline"
+                ],
+                correct: 1,
+                explanation: "Management of learning involves instructional planning that considers different learning preferences (VARK), abilities, and engagement needs, not just delivering content uniformly.",
+                topic: "Classroom Management"
+            },
+            // Teaching-Learning Dynamics Questions
+            {
+                question: "According to William Kerr (1968), how is curriculum defined?",
+                options: [
+                    "A set of textbooks for a course",
+                    "The totality of student experiences in education",
+                    "A list of learning objectives",
+                    "Government-mandated content standards"
+                ],
+                correct: 1,
+                explanation: "Kerr's definition emphasizes curriculum as all planned and unplanned learning experiences, not just official documents or textbooks. This broad view recognizes that learning happens beyond formal instruction.",
+                topic: "Teaching-Learning Dynamics"
+            },
+            {
+                question: "What does 'affect' refer to in the teaching-learning process?",
+                options: [
+                    "Cognitive abilities and intelligence",
+                    "Motivation, attitude, and emotional disposition",
+                    "Teaching methods and techniques",
+                    "Assessment and evaluation procedures"
+                ],
+                correct: 1,
+                explanation: "Affect encompasses the emotional and attitudinal dimensions of learning: motivation, desire, confidence, and mindset. Gardner (1995) highlighted its centrality to second language acquisition.",
+                topic: "Teaching-Learning Dynamics"
+            },
+            {
+                question: "Which of these is NOT one of the four agents in the teaching-learning process?",
+                options: [
+                    "Learner",
+                    "Teacher",
+                    "Textbook",
+                    "Classroom environment"
+                ],
+                correct: 2,
+                explanation: "The four interacting agents are learner, teacher, curriculum, and classroom environment. While textbooks are part of curriculum resources, they don't constitute a separate agent in the learning ecosystem.",
+                topic: "Teaching-Learning Dynamics"
+            },
+            {
+                question: "What is the main difference between declarative and procedural knowledge?",
+                options: [
+                    "Declarative is practical, procedural is theoretical",
+                    "Declarative is 'what', procedural is 'how'",
+                    "Declarative is easy, procedural is difficult",
+                    "Declarative is for beginners, procedural is for advanced"
+                ],
+                correct: 1,
+                explanation: "Declarative knowledge involves knowing facts or information ('what'—e.g., vocabulary definitions), while procedural knowledge involves knowing how to perform tasks ('how'—e.g., having a conversation). Both are essential for language competence.",
+                topic: "Teaching-Learning Dynamics"
+            },
+            {
+                question: "According to Gardner (1995), what is central to learning a second language?",
+                options: [
+                    "Grammar accuracy",
+                    "Native-like pronunciation",
+                    "Motivation and attitude",
+                    "Extensive vocabulary"
+                ],
+                correct: 2,
+                explanation: "Gardner's research highlighted that motivation and positive attitudes toward the target language and culture are crucial for L2 success, often outweighing purely cognitive factors like aptitude.",
+                topic: "Teaching-Learning Dynamics"
+            }
+        ];
+        
+        // Fill the question pool to 50 questions
+        function fillQuestionPool() {
+            const baseQuestions = questionPool.length;
+            const topics = ["Effective Teaching", "Self-Monitoring", "Teachers' Beliefs", "Classroom Discourse", "Classroom Management", "Teaching-Learning Dynamics"];
+            
+            for (let i = baseQuestions; i < 50; i++) {
+                const templateIndex = i % baseQuestions;
+                const template = questionPool[templateIndex];
+                const topic = topics[i % topics.length];
+                
+                const newQuestion = {
+                    question: `[${topic}] ${template.question}`,
+                    options: [...template.options],
+                    correct: template.correct,
+                    explanation: template.explanation,
+                    topic: topic
+                };
+                
+                // Modify question slightly
+                if (i > baseQuestions) {
+                    newQuestion.question = newQuestion.question.replace("?", "? (Q" + (i + 1) + ")");
+                }
+                
+                questionPool.push(newQuestion);
+            }
+        }
+        
+        function initializeQuiz() {
+            fillQuestionPool();
+            
+            // Reset quiz state
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            quizCompleted = false;
+            
+            // Randomly select 5 questions from the pool
+            quizQuestions = getRandomQuestions(5);
+            
+            // Display first question
+            displayQuestion(currentQuestionIndex);
+            
+            // Update UI
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = quizQuestions.length;
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('next-btn').textContent = 'Next';
+        }
+        
+        function getRandomQuestions(count) {
+            const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        
+        function displayQuestion(index) {
+            const question = quizQuestions[index];
+            document.getElementById('question-text').textContent = question.question;
+            
+            // Clear previous options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            const letters = ['A', 'B', 'C', 'D'];
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                if (userAnswers[index] === i) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.innerHTML = `
+                    <div class="option-letter">${letters[i]}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(i));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update progress
+            document.getElementById('current-question').textContent = index + 1;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = index === 0;
+            
+            if (index === quizQuestions.length - 1) {
+                document.getElementById('next-btn').textContent = userAnswers[index] !== undefined ? 'Finish Quiz' : 'Finish (Select Answer First)';
+            } else {
+                document.getElementById('next-btn').textContent = 'Next';
+            }
+            
+            // Enable/disable Next button
+            document.getElementById('next-btn').disabled = userAnswers[index] === undefined;
+        }
+        
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            userAnswers[currentQuestionIndex] = optionIndex;
+            document.getElementById('next-btn').disabled = false;
+            
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                document.getElementById('next-btn').textContent = 'Finish Quiz';
+            }
+        }
+        
+        function showResults() {
+            let score = 0;
+            const results = [];
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            // Calculate score and prepare review
+            for (let i = 0; i < quizQuestions.length; i++) {
+                const q = quizQuestions[i];
+                const userAnswer = userAnswers[i];
+                const isCorrect = userAnswer === q.correct;
+                
+                if (isCorrect) score++;
+                
+                results.push({
+                    question: q.question,
+                    options: q.options,
+                    userAnswer: userAnswer,
+                    correctAnswer: q.correct,
+                    isCorrect: isCorrect,
+                    explanation: q.explanation,
+                    topic: q.topic || "General"
+                });
+            }
+            
+            // Display score
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            
+            // Provide feedback based on score
+            let message = "";
+            if (score === quizQuestions.length) {
+                message = "Excellent! You have mastered all the material from the six lectures.";
+            } else if (score >= quizQuestions.length * 0.7) {
+                message = "Very good! You have a solid understanding of the key concepts.";
+            } else if (score >= quizQuestions.length * 0.5) {
+                message = "Fair understanding. Review the areas where you had difficulties.";
+            } else {
+                message = "You should thoroughly review the material before your exam.";
+            }
+            
+            document.getElementById('result-message').textContent = message;
+            
+            // Generate detailed review
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '<h3 style="color: var(--secondary); margin-bottom: 20px;">Detailed Review</h3>';
+            
+            results.forEach((result, index) => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.className = `question-review ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                
+                let optionsHtml = '';
+                result.options.forEach((option, optIndex) => {
+                    let optionClass = '';
+                    if (optIndex === result.correctAnswer) {
+                        optionClass = 'correct';
+                    } else if (optIndex === result.userAnswer && !result.isCorrect) {
+                        optionClass = 'incorrect';
+                    }
+                    
+                    optionsHtml += `
+                        <div class="quiz-option ${optionClass}" style="margin: 8px 0; cursor: default; padding: 12px;">
+                            <div class="option-letter">${letters[optIndex]}</div>
+                            <div class="option-text">${option}</div>
+                            ${optIndex === result.correctAnswer ? '<span style="color: var(--success); margin-left: 10px;"><i class="fas fa-check-circle"></i> Correct</span>' : ''}
+                            ${optIndex === result.userAnswer && !result.isCorrect ? '<span style="color: var(--danger); margin-left: 10px;"><i class="fas fa-times-circle"></i> Your choice</span>' : ''}
+                        </div>
+                    `;
+                });
+                
+                reviewDiv.innerHTML = `
+                    <h4 style="color: ${result.isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom: 10px;">
+                        Question ${index + 1}: ${result.isCorrect ? '<i class="fas fa-check"></i> Correct' : '<i class="fas fa-times"></i> Incorrect'}
+                        <span style="font-size: 0.9rem; color: var(--gray); background: rgba(108, 117, 125, 0.1); padding: 3px 8px; border-radius: 12px; margin-left: 10px;">${result.topic}</span>
+                    </h4>
+                    <p style="margin-bottom: 15px; font-weight: 500;">${result.question}</p>
+                    ${optionsHtml}
+                    <div class="review-feedback">
+                        <strong>Explanation:</strong> ${result.explanation}
+                    </div>
+                `;
+                
+                reviewContainer.appendChild(reviewDiv);
+            });
+            
+            // Show results, hide quiz
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('results-container').style.display = 'block';
+            
+            quizCompleted = true;
+        }
+        
+        // Event listeners for quiz buttons
+        document.getElementById('prev-btn').addEventListener('click', function() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion(currentQuestionIndex);
+            }
+        });
+        
+        document.getElementById('next-btn').addEventListener('click', function() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(currentQuestionIndex);
+            } else {
+                showResults();
+            }
+        });
+        
+        document.getElementById('restart-quiz').addEventListener('click', function() {
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            displayQuestion(currentQuestionIndex);
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('results-container').style.display = 'none';
+        });
+        
+        document.getElementById('new-quiz').addEventListener('click', function() {
+            initializeQuiz();
+        });
+    </script>
+</body>
+</html>
