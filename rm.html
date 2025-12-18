@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational Research Methodology Revision</title>
+    <title>Educational Research Methodology</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS Variables */
@@ -22,7 +22,7 @@
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
-        
+
         /* Dark mode */
         .dark-mode {
             --primary: #3498db;
@@ -33,29 +33,30 @@
             --dark-text: #ecf0f1;
             --light-text: #bdc3c7;
         }
-        
+
         /* Reset & Base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--light-bg);
             color: var(--dark-text);
             line-height: 1.6;
             padding-bottom: 40px;
+            font-size: 100%;
         }
-        
+
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
+
         /* Header */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -65,7 +66,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
         }
-        
+
         header h1 {
             font-size: 1.8rem;
             margin-bottom: 10px;
@@ -75,14 +76,14 @@
             gap: 15px;
             flex-wrap: wrap;
         }
-        
+
         header p {
             font-size: 1rem;
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .header-controls {
             position: absolute;
             top: 20px;
@@ -90,7 +91,7 @@
             display: flex;
             gap: 10px;
         }
-        
+
         .theme-toggle, .font-toggle {
             background: rgba(255, 255, 255, 0.2);
             border: none;
@@ -104,12 +105,12 @@
             justify-content: center;
             transition: var(--transition);
         }
-        
+
         .theme-toggle:hover, .font-toggle:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: scale(1.05);
         }
-        
+
         /* Navigation */
         .nav-tabs {
             display: flex;
@@ -123,7 +124,7 @@
             z-index: 100;
             flex-wrap: wrap;
         }
-        
+
         .tab-btn {
             flex: 1;
             min-width: 120px;
@@ -140,16 +141,16 @@
             gap: 8px;
             position: relative;
         }
-        
+
         .tab-btn i {
             font-size: 1.3rem;
         }
-        
+
         .tab-btn.active {
             color: var(--primary);
             background-color: rgba(44, 62, 80, 0.08);
         }
-        
+
         .tab-btn.active::after {
             content: "";
             position: absolute;
@@ -160,22 +161,22 @@
             background-color: var(--primary);
             border-radius: 2px 2px 0 0;
         }
-        
+
         /* Content Sections */
         .content-section {
             display: none;
             animation: fadeIn 0.5s;
         }
-        
+
         .content-section.active {
             display: block;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         /* Cards */
         .section-card {
             background-color: var(--light-card);
@@ -185,7 +186,7 @@
             box-shadow: var(--box-shadow);
             border-left: 6px solid var(--primary);
         }
-        
+
         .section-title {
             color: var(--primary);
             margin-bottom: 20px;
@@ -196,7 +197,7 @@
             gap: 15px;
             font-size: 1.5rem;
         }
-        
+
         .section-title i {
             color: var(--accent);
             background: rgba(26, 188, 156, 0.1);
@@ -208,7 +209,7 @@
             justify-content: center;
             flex-shrink: 0;
         }
-        
+
         .subsection-title {
             color: var(--secondary);
             margin: 25px 0 15px;
@@ -216,22 +217,38 @@
             padding-left: 10px;
             border-left: 4px solid var(--accent);
         }
-        
-        /* Tables - Responsive Design */
-        .table-container {
+
+        /* Tables - Optimized for Mobile */
+        .table-wrapper {
             width: 100%;
             overflow-x: auto;
             margin: 20px 0;
             border-radius: var(--border-radius);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
         }
-        
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: rgba(44, 62, 80, 0.05);
+            border-radius: 3px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px; /* Ensures table doesn't get too small on mobile */
+            min-width: 600px;
         }
-        
+
         table th {
             background-color: var(--primary);
             color: white;
@@ -239,67 +256,120 @@
             text-align: left;
             font-weight: 600;
             font-size: 0.95rem;
+            position: sticky;
+            left: 0;
         }
-        
+
         table td {
             padding: 15px 12px;
             border-bottom: 1px solid rgba(44, 62, 80, 0.1);
             font-size: 0.95rem;
         }
-        
+
         table tr:nth-child(even) {
             background-color: rgba(44, 62, 80, 0.03);
         }
-        
+
         table tr:hover {
             background-color: rgba(44, 62, 80, 0.08);
         }
-        
-        /* For very small screens, make tables stack */
-        @media (max-width: 640px) {
-            .stack-table {
-                display: block;
+
+        /* Mobile Table Styling */
+        @media (max-width: 768px) {
+            table {
+                min-width: 500px;
             }
             
-            .stack-table thead {
-                display: none;
-            }
-            
-            .stack-table tr {
-                display: block;
-                margin-bottom: 15px;
-                border: 1px solid rgba(44, 62, 80, 0.1);
-                border-radius: var(--border-radius);
-                padding: 15px;
-            }
-            
-            .stack-table td {
-                display: block;
-                text-align: right;
-                padding: 8px 15px;
-                border-bottom: 1px solid rgba(44, 62, 80, 0.1);
-                position: relative;
-            }
-            
-            .stack-table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 15px;
-                font-weight: 600;
-                color: var(--primary);
+            table th, table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
             }
         }
-        
+
+        @media (max-width: 480px) {
+            .table-wrapper {
+                margin: 10px -10px;
+                width: calc(100% + 20px);
+                border-radius: 0;
+            }
+            
+            table {
+                min-width: 450px;
+            }
+            
+            table th, table td {
+                padding: 10px 6px;
+                font-size: 0.85rem;
+            }
+            
+            /* First column sticky on mobile */
+            table th:first-child,
+            table td:first-child {
+                position: sticky;
+                left: 0;
+                background: inherit;
+                z-index: 1;
+            }
+            
+            table th:first-child {
+                background-color: var(--primary);
+            }
+            
+            table tr:nth-child(even) td:first-child {
+                background-color: rgba(44, 62, 80, 0.03);
+            }
+        }
+
+        /* Alternative Stacked Tables for Small Screens */
+        .stacked-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .stacked-table thead {
+            display: none;
+        }
+
+        .stacked-table tbody tr {
+            display: block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            background: var(--light-card);
+        }
+
+        .stacked-table td {
+            display: block;
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+            position: relative;
+            text-align: right;
+        }
+
+        .stacked-table td:last-child {
+            border-bottom: none;
+        }
+
+        .stacked-table td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 15px;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: left;
+        }
+
         /* List Styling */
         ul, ol {
             padding-left: 25px;
             margin: 15px 0;
         }
-        
+
         li {
             margin-bottom: 8px;
         }
-        
+
         /* Interactive Elements */
         .toggle-btn {
             background-color: var(--primary);
@@ -315,12 +385,12 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .toggle-btn:hover {
             background-color: var(--secondary);
             transform: translateY(-2px);
         }
-        
+
         .hidden-content {
             max-height: 0;
             overflow: hidden;
@@ -329,13 +399,13 @@
             border-radius: var(--border-radius);
             margin-top: 15px;
         }
-        
+
         .hidden-content.active {
             max-height: 1000px;
             padding: 20px;
             margin-top: 15px;
         }
-        
+
         /* Quiz Section */
         .quiz-container {
             background-color: var(--light-card);
@@ -344,7 +414,7 @@
             margin-bottom: 25px;
             box-shadow: var(--box-shadow);
         }
-        
+
         .quiz-header {
             display: flex;
             justify-content: space-between;
@@ -353,7 +423,7 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        
+
         .quiz-progress {
             font-weight: 700;
             color: var(--primary);
@@ -362,7 +432,7 @@
             border-radius: 20px;
             font-size: 0.9rem;
         }
-        
+
         .quiz-question {
             font-size: 1.2rem;
             margin-bottom: 25px;
@@ -373,14 +443,14 @@
             border-radius: var(--border-radius);
             border-left: 5px solid var(--accent);
         }
-        
+
         .quiz-options {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 25px;
         }
-        
+
         .quiz-option {
             padding: 18px;
             border: 2px solid rgba(44, 62, 80, 0.1);
@@ -391,27 +461,27 @@
             align-items: center;
             gap: 15px;
         }
-        
+
         .quiz-option:hover {
             background-color: rgba(44, 62, 80, 0.05);
             border-color: var(--primary);
         }
-        
+
         .quiz-option.selected {
             background-color: rgba(44, 62, 80, 0.1);
             border-color: var(--primary);
         }
-        
+
         .quiz-option.correct {
             background-color: rgba(39, 174, 96, 0.1);
             border-color: var(--success);
         }
-        
+
         .quiz-option.incorrect {
             background-color: rgba(231, 76, 60, 0.1);
             border-color: var(--danger);
         }
-        
+
         .option-letter {
             width: 36px;
             height: 36px;
@@ -424,7 +494,7 @@
             color: var(--dark-text);
             flex-shrink: 0;
         }
-        
+
         .quiz-controls {
             display: flex;
             justify-content: space-between;
@@ -432,7 +502,7 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        
+
         .quiz-btn {
             background-color: var(--primary);
             color: white;
@@ -446,17 +516,17 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .quiz-btn:hover:not(:disabled) {
             background-color: var(--secondary);
             transform: translateY(-2px);
         }
-        
+
         .quiz-btn:disabled {
             background-color: var(--light-text);
             cursor: not-allowed;
         }
-        
+
         /* Case Study Cards */
         .case-study-grid {
             display: grid;
@@ -464,7 +534,7 @@
             gap: 25px;
             margin: 25px 0;
         }
-        
+
         .case-card {
             background-color: var(--light-card);
             border-radius: var(--border-radius);
@@ -473,12 +543,12 @@
             border-top: 6px solid var(--accent);
             transition: var(--transition);
         }
-        
+
         .case-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .case-title {
             color: var(--primary);
             margin-bottom: 15px;
@@ -487,19 +557,19 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         /* Form Elements */
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--primary);
         }
-        
+
         .form-select, .form-input, .form-textarea {
             width: 100%;
             padding: 12px 15px;
@@ -510,13 +580,13 @@
             background-color: var(--light-card);
             color: var(--dark-text);
         }
-        
+
         .form-select:focus, .form-input:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
         }
-        
+
         /* Project Builder Steps */
         .builder-steps {
             display: flex;
@@ -525,7 +595,7 @@
             position: relative;
             flex-wrap: wrap;
         }
-        
+
         .builder-steps:before {
             content: '';
             position: absolute;
@@ -536,7 +606,7 @@
             background-color: rgba(44, 62, 80, 0.1);
             z-index: 1;
         }
-        
+
         .step {
             text-align: center;
             position: relative;
@@ -544,7 +614,7 @@
             flex: 1;
             min-width: 120px;
         }
-        
+
         .step-circle {
             width: 50px;
             height: 50px;
@@ -559,19 +629,19 @@
             color: var(--light-text);
             transition: var(--transition);
         }
-        
+
         .step.active .step-circle {
             border-color: var(--accent);
             background-color: var(--accent);
             color: white;
         }
-        
+
         .step.completed .step-circle {
             border-color: var(--success);
             background-color: var(--success);
             color: white;
         }
-        
+
         /* Footer */
         footer {
             text-align: center;
@@ -581,7 +651,7 @@
             padding-top: 20px;
             border-top: 1px solid rgba(44, 62, 80, 0.1);
         }
-        
+
         /* Utility Classes */
         .highlight {
             background-color: rgba(26, 188, 156, 0.1);
@@ -589,7 +659,7 @@
             border-radius: 4px;
             font-weight: 600;
         }
-        
+
         .badge {
             display: inline-block;
             background: rgba(44, 62, 80, 0.1);
@@ -600,22 +670,22 @@
             font-weight: 600;
             margin: 2px 5px;
         }
-        
+
         .badge-qual {
             background: rgba(52, 152, 219, 0.1);
             color: var(--secondary);
         }
-        
+
         .badge-quant {
             background: rgba(231, 76, 60, 0.1);
             color: var(--danger);
         }
-        
+
         .badge-mixed {
             background: rgba(26, 188, 156, 0.1);
             color: var(--accent);
         }
-        
+
         /* Mobile Optimizations */
         @media (max-width: 768px) {
             header h1 {
@@ -674,7 +744,165 @@
                 flex-shrink: 0;
             }
         }
-        
+
+        /* Small Phone Optimizations (400px and below) */
+        @media (max-width: 400px) {
+            header {
+                padding: 15px 0;
+            }
+            
+            header h1 {
+                font-size: 1.3rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            header p {
+                font-size: 0.9rem;
+                padding: 0 10px;
+            }
+            
+            .header-controls {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 10px auto 0;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            /* Navigation scrollable on small screens */
+            .nav-tabs {
+                margin: 10px 5px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .tab-btn {
+                min-width: 90px;
+                padding: 12px 3px;
+                font-size: 0.75rem;
+            }
+            
+            .tab-btn i {
+                font-size: 1rem;
+            }
+            
+            /* Content adjustments */
+            .container {
+                padding: 0 10px;
+            }
+            
+            .section-card, .quiz-container, .case-card {
+                padding: 15px 10px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+                gap: 10px;
+            }
+            
+            .section-title i {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .subsection-title {
+                font-size: 1rem;
+                margin: 15px 0 10px;
+            }
+            
+            /* Quiz adjustments */
+            .quiz-question {
+                font-size: 1rem;
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .quiz-option {
+                padding: 10px;
+                gap: 8px;
+            }
+            
+            .option-letter {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quiz-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+            }
+            
+            /* Buttons */
+            .toggle-btn {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            /* Forms */
+            .form-select, .form-input, .form-textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            /* Case studies */
+            .case-study-grid {
+                gap: 15px;
+            }
+            
+            .case-card {
+                padding: 15px;
+            }
+            
+            .case-title {
+                font-size: 1.1rem;
+            }
+            
+            /* Lists */
+            ul, ol {
+                padding-left: 20px;
+                margin: 10px 0;
+            }
+            
+            li {
+                margin-bottom: 5px;
+                font-size: 0.9rem;
+            }
+            
+            /* Badges */
+            .badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+                margin: 1px 3px;
+            }
+            
+            /* Builder steps */
+            .step {
+                min-width: 100%;
+            }
+            
+            .step-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 480px) {
             .quiz-question {
                 font-size: 1.1rem;
@@ -686,177 +914,37 @@
                 font-size: 0.95rem;
             }
             
-            .header-controls {
-                position: relative;
-                top: 0;
-                right: 0;
-                justify-content: center;
-                margin-top: 15px;
+            .table-wrapper {
+                margin: 10px -5px;
+                width: calc(100% + 10px);
             }
         }
-        /* Add these media queries at the end of your CSS */
 
-@media (max-width: 400px) {
-    /* Make tables even more compact */
-    .stack-table td {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-    }
-    
-    .stack-table td:before {
-        font-size: 0.8rem;
-        left: 10px;
-    }
-    
-    /* Reduce card padding */
-    .section-card, .quiz-container, .case-card {
-        padding: 15px 12px;
-    }
-    
-    /* Smaller section titles */
-    .section-title {
-        font-size: 1.2rem;
-        padding-bottom: 8px;
-    }
-    
-    .section-title i {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-    }
-    
-    /* Smaller subsection titles */
-    .subsection-title {
-        font-size: 1.1rem;
-        margin: 20px 0 10px;
-    }
-    
-    /* Compact quiz elements */
-    .quiz-question {
-        font-size: 1rem;
-        padding: 12px;
-    }
-    
-    .quiz-option {
-        padding: 12px;
-        gap: 10px;
-    }
-    
-    .option-letter {
-        width: 30px;
-        height: 30px;
-        font-size: 0.9rem;
-    }
-    
-    /* Compact buttons */
-    .toggle-btn, .quiz-btn {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-    }
-    
-    /* Stack header elements vertically */
-    header h1 {
-        flex-direction: column;
-        gap: 5px;
-        font-size: 1.4rem;
-    }
-    
-    .header-controls {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-top: 15px;
-        justify-content: center;
-    }
-    
-    /* Make navigation tabs scrollable */
-    .nav-tabs {
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        flex-wrap: nowrap;
-    }
-    
-    .tab-btn {
-        min-width: 100px;
-        padding: 15px 8px;
-        font-size: 0.8rem;
-    }
-    
-    /* Reduce case study grid gaps */
-    .case-study-grid {
-        gap: 15px;
-    }
-    
-    /* Make form elements more compact */
-    .form-select, .form-input, .form-textarea {
-        padding: 10px 12px;
-        font-size: 0.9rem;
-    }
-    
-    /* Adjust builder steps for very small screens */
-    .step {
-        min-width: 80px;
-    }
-    
-    .step-circle {
-        width: 40px;
-        height: 40px;
-        font-size: 0.9rem;
-    }
-    
-    /* Reduce spacing in lists */
-    ul, ol {
-        padding-left: 20px;
-        margin: 10px 0;
-    }
-    
-    li {
-        margin-bottom: 6px;
-    }
-}
-
-@media (max-width: 350px) {
-    /* Extra small phone optimization */
-    .stack-table td {
-        padding: 5px 8px;
-        font-size: 0.8rem;
-    }
-    
-    .tab-btn {
-        min-width: 90px;
-        padding: 12px 5px;
-        font-size: 0.75rem;
-    }
-    
-    .tab-btn i {
-        font-size: 0.9rem;
-    }
-    
-    .section-title {
-        font-size: 1.1rem;
-    }
-    
-    .quiz-controls {
-        flex-direction: column;
-    }
-    
-    .quiz-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    /* Single column for very small grids */
-    .case-study-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Hide non-essential elements if needed */
-    .badge {
-        font-size: 0.7rem;
-        padding: 3px 8px;
-    }
-}
+        /* Extra Small Phones (320px and below) */
+        @media (max-width: 320px) {
+            .tab-btn {
+                min-width: 85px;
+                padding: 10px 2px;
+                font-size: 0.7rem;
+            }
+            
+            .section-title {
+                font-size: 1rem;
+            }
+            
+            .subsection-title {
+                font-size: 0.95rem;
+            }
+            
+            table th, table td {
+                padding: 8px 4px;
+                font-size: 0.8rem;
+            }
+            
+            .quiz-option {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -913,8 +1001,8 @@
                 
                 <h3 class="subsection-title">8 Steps of Educational Research</h3>
                 
-                <div class="table-container">
-                    <table class="stack-table">
+                <div class="table-wrapper">
+                    <table class="responsive-table">
                         <thead>
                             <tr>
                                 <th>Step</th>
@@ -998,8 +1086,8 @@
                 
                 <h3 class="subsection-title">Comparing Approaches in Educational Research</h3>
                 
-                <div class="table-container">
-                    <table class="stack-table">
+                <div class="table-wrapper">
+                    <table class="responsive-table">
                         <thead>
                             <tr>
                                 <th>Aspect</th>
@@ -1078,8 +1166,8 @@
                 
                 <h3 class="subsection-title">Worldviews in Educational Research</h3>
                 
-                <div class="table-container">
-                    <table class="stack-table">
+                <div class="table-wrapper">
+                    <table class="responsive-table">
                         <thead>
                             <tr>
                                 <th>Worldview</th>
@@ -1161,8 +1249,8 @@
                     Module 4: Types of Educational Research
                 </h2>
                 
-                <div class="table-container">
-                    <table class="stack-table">
+                <div class="table-wrapper">
+                    <table class="responsive-table">
                         <thead>
                             <tr>
                                 <th>Type</th>
@@ -1239,8 +1327,8 @@
                 
                 <h3 class="subsection-title">Data Collection Tools for Educational Research</h3>
                 
-                <div class="table-container">
-                    <table class="stack-table">
+                <div class="table-wrapper">
+                    <table class="responsive-table">
                         <thead>
                             <tr>
                                 <th>Tool</th>
@@ -1819,8 +1907,8 @@
                 </div>
                 
                 <h3 class="subsection-title">Common Pitfalls to Avoid</h3>
-                <div class="table-container">
-                    <table class="stack-table">
+                <div class="table-wrapper">
+                    <table class="responsive-table">
                         <thead>
                             <tr>
                                 <th>Pitfall</th>
@@ -1871,770 +1959,717 @@
     </footer>
 
     <script>
-        // DOM Elements
-        const themeToggle = document.getElementById('theme-toggle');
-        const fontToggle = document.getElementById('font-toggle');
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const contentSections = document.querySelectorAll('.content-section');
-        
-        // Theme Toggle
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            const icon = this.querySelector('i');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                this.title = "Toggle light mode";
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                this.title = "Toggle dark mode";
-            }
-        });
-        
-        // Font Size Toggle
-        let fontSizeLevel = 1;
-        const fontSizes = ['100%', '110%', '120%', '90%'];
-        fontToggle.addEventListener('click', function() {
-            fontSizeLevel = (fontSizeLevel + 1) % fontSizes.length;
-            document.body.style.fontSize = fontSizes[fontSizeLevel];
-            this.title = `Font size: ${fontSizes[fontSizeLevel]}`;
-        });
-        
-        // Tab Navigation
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const target = this.getAttribute('data-target');
+        // ====== CORE APPLICATION OBJECT ======
+        const App = {
+            // State
+            currentQuiz: null,
+            currentBuilderStep: 1,
+            fontSizeLevel: 0,
+            fontSizes: ['100%', '110%', '120%', '90%'],
+            
+            // Initialize the application
+            init() {
+                this.setupEventListeners();
+                this.initializeTables();
+                this.initializeBuilder();
+                this.fixNavigationForMobile();
+                
+                // Initialize quiz if on quiz tab
+                if (document.getElementById('quiz').classList.contains('active')) {
+                    this.initializeQuiz();
+                }
+            },
+            
+            // Setup all event listeners
+            setupEventListeners() {
+                // Theme toggle
+                document.getElementById('theme-toggle').addEventListener('click', () => this.toggleTheme());
+                
+                // Font size toggle
+                document.getElementById('font-toggle').addEventListener('click', () => this.toggleFontSize());
+                
+                // Tab navigation
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.switchTab(e.target));
+                });
+                
+                // Toggle buttons
+                document.querySelectorAll('.toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => this.toggleContent(e.target));
+                });
+                
+                // Quiz buttons
+                document.getElementById('prev-btn').addEventListener('click', () => this.prevQuestion());
+                document.getElementById('next-btn').addEventListener('click', () => this.nextQuestion());
+                document.getElementById('restart-quiz').addEventListener('click', () => this.restartQuiz());
+                document.getElementById('new-quiz').addEventListener('click', () => this.newQuiz());
+                
+                // Research idea generator
+                document.getElementById('generate-idea-btn').addEventListener('click', () => this.generateResearchIdea());
+                
+                // Window resize listener
+                window.addEventListener('resize', () => {
+                    this.fixNavigationForMobile();
+                    this.updateTableDisplay();
+                });
+            },
+            
+            // ====== THEME & UI FUNCTIONS ======
+            toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+                const icon = document.getElementById('theme-toggle').querySelector('i');
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    document.getElementById('theme-toggle').title = "Toggle light mode";
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    document.getElementById('theme-toggle').title = "Toggle dark mode";
+                }
+            },
+            
+            toggleFontSize() {
+                this.fontSizeLevel = (this.fontSizeLevel + 1) % this.fontSizes.length;
+                document.body.style.fontSize = this.fontSizes[this.fontSizeLevel];
+                document.getElementById('font-toggle').title = `Font size: ${this.fontSizes[this.fontSizeLevel]}`;
+            },
+            
+            switchTab(clickedBtn) {
+                const target = clickedBtn.getAttribute('data-target');
                 
                 // Update active tab
-                tabBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                clickedBtn.classList.add('active');
                 
                 // Show target section
-                contentSections.forEach(section => {
+                document.querySelectorAll('.content-section').forEach(section => {
                     section.classList.remove('active');
                     if (section.id === target) {
                         section.classList.add('active');
                     }
                 });
                 
-                // Initialize specific section features
+                // Initialize specific features
                 if (target === 'quiz') {
-                    initializeQuiz();
+                    this.initializeQuiz();
                 } else if (target === 'builder') {
-                    initializeBuilder();
+                    this.initializeBuilder();
                 }
-            });
-        });
-        
-        // Toggle buttons for hidden content
-        document.querySelectorAll('.toggle-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const targetId = this.id.replace('-btn', '-content');
+            },
+            
+            toggleContent(button) {
+                const targetId = button.id.replace('-btn', '-content');
                 const content = document.getElementById(targetId);
-                const icon = this.querySelector('i');
+                const icon = button.querySelector('i');
                 
                 content.classList.toggle('active');
                 
                 if (content.classList.contains('active')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
+                    icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
                 } else {
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
+                    icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
                 }
-            });
-        });
-        
-        // Quiz System
-        let quizQuestions = [];
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizCompleted = false;
-        
-        const questionPool = [
-            {
-                question: "Which research approach is best for understanding teachers' experiences with inclusive education?",
-                options: [
-                    "Quantitative experimental design",
-                    "Qualitative case study",
-                    "Quantitative survey research",
-                    "Mixed methods longitudinal study"
-                ],
-                correct: 1,
-                explanation: "Qualitative approaches like case studies are ideal for exploring experiences, perspectives, and complex phenomena in depth.",
-                topic: "Research Approaches"
             },
-            {
-                question: "What is the primary purpose of a literature review in educational research?",
-                options: [
-                    "To copy previous studies",
-                    "To identify gaps in existing knowledge",
-                    "To prove your hypothesis is correct",
-                    "To avoid doing original research"
-                ],
-                correct: 1,
-                explanation: "A literature review helps identify what's already known, theoretical frameworks, and gaps that your research can address.",
-                topic: "Literature Review"
-            },
-            {
-                question: "Which sampling method would be most appropriate for studying gifted education programs across a state?",
-                options: [
-                    "Convenience sampling of nearby schools",
-                    "Purposive sampling of exemplary programs",
-                    "Stratified random sampling by school type",
-                    "Snowball sampling through teacher referrals"
-                ],
-                correct: 2,
-                explanation: "Stratified random sampling ensures representation across different school types (urban/rural, public/private, etc.).",
-                topic: "Sampling Methods"
-            },
-            {
-                question: "In a study comparing two teaching methods, which design would provide the strongest evidence for causality?",
-                options: [
-                    "Case study of one classroom",
-                    "Correlational study across multiple schools",
-                    "True experiment with random assignment",
-                    "Survey of teacher preferences"
-                ],
-                correct: 2,
-                explanation: "True experiments with random assignment to conditions provide the strongest evidence for causal relationships.",
-                topic: "Research Design"
-            },
-            {
-                question: "What ethical consideration is MOST important when conducting research with minor students?",
-                options: [
-                    "Paying participants for their time",
-                    "Obtaining parental/guardian consent",
-                    "Publishing results quickly",
-                    "Using advanced statistical tests"
-                ],
-                correct: 1,
-                explanation: "Research with minors requires informed consent from parents/guardians in addition to assent from the children themselves.",
-                topic: "Research Ethics"
-            },
-            {
-                question: "Which data analysis technique would be appropriate for identifying themes in teacher interview transcripts?",
-                options: [
-                    "T-test for comparing means",
-                    "Thematic analysis",
-                    "Correlation coefficient",
-                    "Regression analysis"
-                ],
-                correct: 1,
-                explanation: "Thematic analysis is a qualitative method for identifying, analyzing, and reporting patterns (themes) within data.",
-                topic: "Data Analysis"
-            },
-            {
-                question: "What is the main advantage of mixed methods research in education?",
-                options: [
-                    "It's always faster than single-method studies",
-                    "It requires less expertise to conduct",
-                    "It provides more comprehensive understanding",
-                    "It's cheaper than quantitative research"
-                ],
-                correct: 2,
-                explanation: "Mixed methods combine the strengths of both qualitative and quantitative approaches for a more complete understanding.",
-                topic: "Mixed Methods"
-            },
-            {
-                question: "Which of these would be considered an applied research question in education?",
-                options: [
-                    "How do children acquire language theoretically?",
-                    "What teaching method improves reading scores in 3rd grade?",
-                    "What are the philosophical foundations of education?",
-                    "How does memory work at the neurological level?"
-                ],
-                correct: 1,
-                explanation: "Applied research focuses on solving practical problems and improving educational practice.",
-                topic: "Research Types"
-            },
-            {
-                question: "What is triangulation in educational research?",
-                options: [
-                    "Using three different statistical tests",
-                    "Having three researchers analyze data independently",
-                    "Using multiple data sources or methods to study a phenomenon",
-                    "Conducting research over three time periods"
-                ],
-                correct: 2,
-                explanation: "Triangulation increases validity by using multiple methods, data sources, or researchers to examine the same phenomenon.",
-                topic: "Research Validity"
-            },
-            {
-                question: "Which worldviews emphasizes that knowledge is socially constructed through human interaction?",
-                options: [
-                    "Positivism",
-                    "Interpretivism",
-                    "Critical theory",
-                    "Pragmatism"
-                ],
-                correct: 1,
-                explanation: "Interpretivism posits that reality is socially constructed and knowledge is shaped by human experiences and interactions.",
-                topic: "Research Philosophy"
-            }
-        ];
-        
-        function initializeQuiz() {
-            // Reset quiz state
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            quizCompleted = false;
             
-            // Randomly select 5 questions
-            quizQuestions = getRandomQuestions(5);
-            
-            // Display first question
-            displayQuestion(currentQuestionIndex);
-            
-            // Update UI
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = quizQuestions.length;
-            document.getElementById('quiz-content').style.display = 'block';
-            document.getElementById('results-container').style.display = 'none';
-            document.getElementById('prev-btn').disabled = true;
-            document.getElementById('next-btn').textContent = 'Next';
-        }
-        
-        function getRandomQuestions(count) {
-            const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-        
-        function displayQuestion(index) {
-            const question = quizQuestions[index];
-            document.getElementById('question-text').textContent = question.question;
-            
-            // Clear previous options
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            // Add new options
-            const letters = ['A', 'B', 'C', 'D'];
-            question.options.forEach((option, i) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'quiz-option';
-                if (userAnswers[index] === i) {
-                    optionElement.classList.add('selected');
-                }
-                
-                optionElement.innerHTML = `
-                    <div class="option-letter">${letters[i]}</div>
-                    <div class="option-text">${option}</div>
-                `;
-                
-                optionElement.addEventListener('click', () => selectOption(i));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Update progress
-            document.getElementById('current-question').textContent = index + 1;
-            
-            // Update button states
-            document.getElementById('prev-btn').disabled = index === 0;
-            
-            if (index === quizQuestions.length - 1) {
-                document.getElementById('next-btn').textContent = userAnswers[index] !== undefined ? 'Finish Quiz' : 'Finish (Select Answer First)';
-            } else {
-                document.getElementById('next-btn').textContent = 'Next';
-            }
-            
-            // Enable/disable Next button
-            document.getElementById('next-btn').disabled = userAnswers[index] === undefined;
-        }
-        
-        function selectOption(optionIndex) {
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            options[optionIndex].classList.add('selected');
-            
-            userAnswers[currentQuestionIndex] = optionIndex;
-            document.getElementById('next-btn').disabled = false;
-            
-            if (currentQuestionIndex === quizQuestions.length - 1) {
-                document.getElementById('next-btn').textContent = 'Finish Quiz';
-            }
-        }
-        
-        function showResults() {
-            let score = 0;
-            const results = [];
-            const letters = ['A', 'B', 'C', 'D'];
-            
-            // Calculate score and prepare review
-            for (let i = 0; i < quizQuestions.length; i++) {
-                const q = quizQuestions[i];
-                const userAnswer = userAnswers[i];
-                const isCorrect = userAnswer === q.correct;
-                
-                if (isCorrect) score++;
-                
-                results.push({
-                    question: q.question,
-                    options: q.options,
-                    userAnswer: userAnswer,
-                    correctAnswer: q.correct,
-                    isCorrect: isCorrect,
-                    explanation: q.explanation,
-                    topic: q.topic
+            // ====== TABLE HANDLING FUNCTIONS ======
+            initializeTables() {
+                // Add data labels to all table cells
+                document.querySelectorAll('table').forEach(table => {
+                    if (table.dataset.labelsAdded) return;
+                    
+                    const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
+                    if (headers.length === 0) return;
+                    
+                    table.querySelectorAll('td').forEach((cell, index) => {
+                        const headerIndex = index % headers.length;
+                        if (headers[headerIndex]) {
+                            cell.setAttribute('data-label', headers[headerIndex]);
+                        }
+                    });
+                    
+                    table.dataset.labelsAdded = 'true';
                 });
-            }
+            },
             
-            // Display score
-            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            updateTableDisplay() {
+                const isMobile = window.innerWidth <= 768;
+                document.querySelectorAll('table').forEach(table => {
+                    if (isMobile) {
+                        table.style.minWidth = '500px';
+                    } else {
+                        table.style.minWidth = '600px';
+                    }
+                });
+            },
             
-            // Provide feedback based on score
-            let message = "";
-            if (score === quizQuestions.length) {
-                message = "Excellent! You have a strong understanding of educational research methodology.";
-            } else if (score >= quizQuestions.length * 0.7) {
-                message = "Very good! You have a solid grasp of key concepts.";
-            } else if (score >= quizQuestions.length * 0.5) {
-                message = "Fair understanding. Review the explanations below to improve.";
-            } else {
-                message = "Review the course notes and try again. Focus on understanding the explanations.";
-            }
-            
-            document.getElementById('result-message').textContent = message;
-            
-            // Generate detailed review
-            const reviewContainer = document.getElementById('review-container');
-            reviewContainer.innerHTML = '<h3 style="color: var(--secondary); margin-bottom: 20px;">Detailed Review</h3>';
-            
-            results.forEach((result, index) => {
-                const reviewDiv = document.createElement('div');
-                reviewDiv.className = `question-review ${result.isCorrect ? 'correct' : 'incorrect'}`;
-                reviewDiv.style.cssText = "background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid " + (result.isCorrect ? "var(--success)" : "var(--danger)") + ";";
+            fixNavigationForMobile() {
+                const navTabs = document.querySelector('.nav-tabs');
+                if (!navTabs) return;
                 
-                let optionsHtml = '';
-                result.options.forEach((option, optIndex) => {
-                    let optionClass = '';
-                    if (optIndex === result.correctAnswer) {
-                        optionClass = 'correct';
-                    } else if (optIndex === result.userAnswer && !result.isCorrect) {
-                        optionClass = 'incorrect';
+                if (window.innerWidth <= 400) {
+                    navTabs.style.overflowX = 'auto';
+                    navTabs.style.flexWrap = 'nowrap';
+                    navTabs.style.whiteSpace = 'nowrap';
+                } else {
+                    navTabs.style.overflowX = 'visible';
+                    navTabs.style.flexWrap = 'wrap';
+                    navTabs.style.whiteSpace = 'normal';
+                }
+            },
+            
+            // ====== QUIZ SYSTEM ======
+            questionPool: [
+                {
+                    question: "Which research approach is best for understanding teachers' experiences with inclusive education?",
+                    options: [
+                        "Quantitative experimental design",
+                        "Qualitative case study",
+                        "Quantitative survey research",
+                        "Mixed methods longitudinal study"
+                    ],
+                    correct: 1,
+                    explanation: "Qualitative approaches like case studies are ideal for exploring experiences, perspectives, and complex phenomena in depth.",
+                    topic: "Research Approaches"
+                },
+                {
+                    question: "What is the primary purpose of a literature review in educational research?",
+                    options: [
+                        "To copy previous studies",
+                        "To identify gaps in existing knowledge",
+                        "To prove your hypothesis is correct",
+                        "To avoid doing original research"
+                    ],
+                    correct: 1,
+                    explanation: "A literature review helps identify what's already known, theoretical frameworks, and gaps that your research can address.",
+                    topic: "Literature Review"
+                },
+                {
+                    question: "Which sampling method would be most appropriate for studying gifted education programs across a state?",
+                    options: [
+                        "Convenience sampling of nearby schools",
+                        "Purposive sampling of exemplary programs",
+                        "Stratified random sampling by school type",
+                        "Snowball sampling through teacher referrals"
+                    ],
+                    correct: 2,
+                    explanation: "Stratified random sampling ensures representation across different school types (urban/rural, public/private, etc.).",
+                    topic: "Sampling Methods"
+                },
+                {
+                    question: "In a study comparing two teaching methods, which design would provide the strongest evidence for causality?",
+                    options: [
+                        "Case study of one classroom",
+                        "Correlational study across multiple schools",
+                        "True experiment with random assignment",
+                        "Survey of teacher preferences"
+                    ],
+                    correct: 2,
+                    explanation: "True experiments with random assignment to conditions provide the strongest evidence for causal relationships.",
+                    topic: "Research Design"
+                },
+                {
+                    question: "What ethical consideration is MOST important when conducting research with minor students?",
+                    options: [
+                        "Paying participants for their time",
+                        "Obtaining parental/guardian consent",
+                        "Publishing results quickly",
+                        "Using advanced statistical tests"
+                    ],
+                    correct: 1,
+                    explanation: "Research with minors requires informed consent from parents/guardians in addition to assent from the children themselves.",
+                    topic: "Research Ethics"
+                }
+            ],
+            
+            initializeQuiz() {
+                this.currentQuiz = {
+                    questions: this.getRandomQuestions(5),
+                    currentIndex: 0,
+                    userAnswers: [],
+                    completed: false
+                };
+                
+                this.displayQuestion(0);
+                this.updateQuizUI();
+            },
+            
+            getRandomQuestions(count) {
+                const shuffled = [...this.questionPool].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            },
+            
+            displayQuestion(index) {
+                if (!this.currentQuiz) return;
+                
+                const question = this.currentQuiz.questions[index];
+                document.getElementById('question-text').textContent = question.question;
+                
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                
+                const letters = ['A', 'B', 'C', 'D'];
+                question.options.forEach((option, i) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'quiz-option';
+                    if (this.currentQuiz.userAnswers[index] === i) {
+                        optionElement.classList.add('selected');
                     }
                     
-                    optionsHtml += `
-                        <div class="quiz-option ${optionClass}" style="margin: 8px 0; cursor: default; padding: 12px;">
-                            <div class="option-letter">${letters[optIndex]}</div>
-                            <div class="option-text">${option}</div>
-                            ${optIndex === result.correctAnswer ? '<span style="color: var(--success); margin-left: 10px;"><i class="fas fa-check-circle"></i> Correct</span>' : ''}
-                            ${optIndex === result.userAnswer && !result.isCorrect ? '<span style="color: var(--danger); margin-left: 10px;"><i class="fas fa-times-circle"></i> Your choice</span>' : ''}
+                    optionElement.innerHTML = `
+                        <div class="option-letter">${letters[i]}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    
+                    optionElement.addEventListener('click', () => this.selectOption(i));
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                document.getElementById('current-question').textContent = index + 1;
+                document.getElementById('prev-btn').disabled = index === 0;
+                
+                const nextBtn = document.getElementById('next-btn');
+                if (index === this.currentQuiz.questions.length - 1) {
+                    nextBtn.textContent = this.currentQuiz.userAnswers[index] !== undefined ? 'Finish Quiz' : 'Finish (Select Answer First)';
+                } else {
+                    nextBtn.textContent = 'Next';
+                }
+                
+                nextBtn.disabled = this.currentQuiz.userAnswers[index] === undefined;
+            },
+            
+            selectOption(optionIndex) {
+                if (!this.currentQuiz) return;
+                
+                const options = document.querySelectorAll('.quiz-option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                options[optionIndex].classList.add('selected');
+                
+                this.currentQuiz.userAnswers[this.currentQuiz.currentIndex] = optionIndex;
+                document.getElementById('next-btn').disabled = false;
+                
+                if (this.currentQuiz.currentIndex === this.currentQuiz.questions.length - 1) {
+                    document.getElementById('next-btn').textContent = 'Finish Quiz';
+                }
+            },
+            
+            prevQuestion() {
+                if (!this.currentQuiz || this.currentQuiz.currentIndex === 0) return;
+                
+                this.currentQuiz.currentIndex--;
+                this.displayQuestion(this.currentQuiz.currentIndex);
+            },
+            
+            nextQuestion() {
+                if (!this.currentQuiz) return;
+                
+                if (this.currentQuiz.currentIndex < this.currentQuiz.questions.length - 1) {
+                    this.currentQuiz.currentIndex++;
+                    this.displayQuestion(this.currentQuiz.currentIndex);
+                } else {
+                    this.showResults();
+                }
+            },
+            
+            showResults() {
+                if (!this.currentQuiz) return;
+                
+                let score = 0;
+                const results = [];
+                const letters = ['A', 'B', 'C', 'D'];
+                
+                this.currentQuiz.questions.forEach((q, i) => {
+                    const userAnswer = this.currentQuiz.userAnswers[i];
+                    const isCorrect = userAnswer === q.correct;
+                    
+                    if (isCorrect) score++;
+                    
+                    results.push({
+                        question: q.question,
+                        options: q.options,
+                        userAnswer: userAnswer,
+                        correctAnswer: q.correct,
+                        isCorrect: isCorrect,
+                        explanation: q.explanation,
+                        topic: q.topic
+                    });
+                });
+                
+                // Display score
+                document.getElementById('score').textContent = `${score}/${this.currentQuiz.questions.length}`;
+                
+                // Feedback message
+                let message = "";
+                if (score === this.currentQuiz.questions.length) {
+                    message = "Excellent! You have a strong understanding of educational research methodology.";
+                } else if (score >= this.currentQuiz.questions.length * 0.7) {
+                    message = "Very good! You have a solid grasp of key concepts.";
+                } else if (score >= this.currentQuiz.questions.length * 0.5) {
+                    message = "Fair understanding. Review the explanations below to improve.";
+                } else {
+                    message = "Review the course notes and try again. Focus on understanding the explanations.";
+                }
+                
+                document.getElementById('result-message').textContent = message;
+                
+                // Generate review
+                const reviewContainer = document.getElementById('review-container');
+                reviewContainer.innerHTML = '<h3 style="color: var(--secondary); margin-bottom: 20px;">Detailed Review</h3>';
+                
+                results.forEach((result, index) => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.className = `question-review ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                    reviewDiv.style.cssText = "background: rgba(44, 62, 80, 0.03); padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid " + (result.isCorrect ? "var(--success)" : "var(--danger)") + ";";
+                    
+                    let optionsHtml = '';
+                    result.options.forEach((option, optIndex) => {
+                        let optionClass = '';
+                        if (optIndex === result.correctAnswer) {
+                            optionClass = 'correct';
+                        } else if (optIndex === result.userAnswer && !result.isCorrect) {
+                            optionClass = 'incorrect';
+                        }
+                        
+                        optionsHtml += `
+                            <div class="quiz-option ${optionClass}" style="margin: 8px 0; cursor: default; padding: 12px;">
+                                <div class="option-letter">${letters[optIndex]}</div>
+                                <div class="option-text">${option}</div>
+                                ${optIndex === result.correctAnswer ? '<span style="color: var(--success); margin-left: 10px;"><i class="fas fa-check-circle"></i> Correct</span>' : ''}
+                                ${optIndex === result.userAnswer && !result.isCorrect ? '<span style="color: var(--danger); margin-left: 10px;"><i class="fas fa-times-circle"></i> Your choice</span>' : ''}
+                            </div>
+                        `;
+                    });
+                    
+                    reviewDiv.innerHTML = `
+                        <h4 style="color: ${result.isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom: 10px;">
+                            Question ${index + 1}: ${result.isCorrect ? '<i class="fas fa-check"></i> Correct' : '<i class="fas fa-times"></i> Incorrect'}
+                            <span style="font-size: 0.9rem; color: var(--light-text); background: rgba(108, 117, 125, 0.1); padding: 3px 8px; border-radius: 12px; margin-left: 10px;">${result.topic}</span>
+                        </h4>
+                        <p style="margin-bottom: 15px; font-weight: 500;">${result.question}</p>
+                        ${optionsHtml}
+                        <div style="background: rgba(26, 188, 156, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 0.95rem;">
+                            <strong>Explanation:</strong> ${result.explanation}
                         </div>
                     `;
-                });
-                
-                reviewDiv.innerHTML = `
-                    <h4 style="color: ${result.isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom: 10px;">
-                        Question ${index + 1}: ${result.isCorrect ? '<i class="fas fa-check"></i> Correct' : '<i class="fas fa-times"></i> Incorrect'}
-                        <span style="font-size: 0.9rem; color: var(--light-text); background: rgba(108, 117, 125, 0.1); padding: 3px 8px; border-radius: 12px; margin-left: 10px;">${result.topic}</span>
-                    </h4>
-                    <p style="margin-bottom: 15px; font-weight: 500;">${result.question}</p>
-                    ${optionsHtml}
-                    <div style="background: rgba(26, 188, 156, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 0.95rem;">
-                        <strong>Explanation:</strong> ${result.explanation}
-                    </div>
-                `;
-                
-                reviewContainer.appendChild(reviewDiv);
-            });
-            
-            // Show results, hide quiz
-            document.getElementById('quiz-content').style.display = 'none';
-            document.getElementById('results-container').style.display = 'block';
-            
-            quizCompleted = true;
-        }
-        
-        // Quiz button event listeners
-        document.getElementById('prev-btn').addEventListener('click', function() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion(currentQuestionIndex);
-            }
-        });
-        
-        document.getElementById('next-btn').addEventListener('click', function() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion(currentQuestionIndex);
-            } else {
-                showResults();
-            }
-        });
-        
-        document.getElementById('restart-quiz').addEventListener('click', function() {
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            displayQuestion(currentQuestionIndex);
-            document.getElementById('quiz-content').style.display = 'block';
-            document.getElementById('results-container').style.display = 'none';
-        });
-        
-        document.getElementById('new-quiz').addEventListener('click', function() {
-            initializeQuiz();
-        });
-        
-        // Initialize quiz on load if on quiz tab
-        if (window.location.hash === '#quiz' || document.getElementById('quiz').classList.contains('active')) {
-            initializeQuiz();
-        }
-        
-        // Project Builder
-        function initializeBuilder() {
-            // Reset builder to step 1
-            showBuilderStep(1);
-            
-            // Generate research problem when button clicked
-            document.getElementById('generate-problem-btn').addEventListener('click', generateResearchProblem);
-            
-            // Step navigation
-            document.getElementById('next-step1-btn').addEventListener('click', () => showBuilderStep(2));
-            document.getElementById('prev-step2-btn').addEventListener('click', () => showBuilderStep(1));
-            document.getElementById('next-step2-btn').addEventListener('click', () => showBuilderStep(3));
-            document.getElementById('prev-step3-btn').addEventListener('click', () => showBuilderStep(2));
-            document.getElementById('next-step3-btn').addEventListener('click', () => showBuilderStep(4));
-            document.getElementById('prev-step4-btn').addEventListener('click', () => showBuilderStep(3));
-            document.getElementById('next-step4-btn').addEventListener('click', () => showBuilderStep(5));
-            document.getElementById('prev-step5-btn').addEventListener('click', () => showBuilderStep(4));
-            document.getElementById('reset-builder-btn').addEventListener('click', initializeBuilder);
-            
-            // Design selection
-            document.querySelectorAll('[data-design]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const design = this.getAttribute('data-design');
-                    document.getElementById('selected-design').value = design.charAt(0).toUpperCase() + design.slice(1) + " Design";
                     
-                    // Update recommendation
-                    const goal = document.getElementById('research-goal').value;
-                    updateDesignRecommendation(goal, design);
+                    reviewContainer.appendChild(reviewDiv);
                 });
-            });
+                
+                // Show results
+                document.getElementById('quiz-content').style.display = 'none';
+                document.getElementById('results-container').style.display = 'block';
+                this.currentQuiz.completed = true;
+            },
             
-            // Research goal change
-            document.getElementById('research-goal').addEventListener('change', function() {
-                const goal = this.value;
+            restartQuiz() {
+                if (!this.currentQuiz) return;
+                
+                this.currentQuiz.currentIndex = 0;
+                this.currentQuiz.userAnswers = [];
+                this.displayQuestion(0);
+                document.getElementById('quiz-content').style.display = 'block';
+                document.getElementById('results-container').style.display = 'none';
+            },
+            
+            newQuiz() {
+                this.initializeQuiz();
+            },
+            
+            updateQuizUI() {
+                if (!this.currentQuiz) return;
+                
+                document.getElementById('total-questions').textContent = this.currentQuiz.questions.length;
+                document.getElementById('quiz-content').style.display = 'block';
+                document.getElementById('results-container').style.display = 'none';
+            },
+            
+            // ====== PROJECT BUILDER ======
+            initializeBuilder() {
+                this.currentBuilderStep = 1;
+                this.showBuilderStep(1);
+                
+                // Step navigation
+                document.getElementById('next-step1-btn').addEventListener('click', () => this.showBuilderStep(2));
+                document.getElementById('prev-step2-btn').addEventListener('click', () => this.showBuilderStep(1));
+                document.getElementById('next-step2-btn').addEventListener('click', () => this.showBuilderStep(3));
+                document.getElementById('prev-step3-btn').addEventListener('click', () => this.showBuilderStep(2));
+                document.getElementById('next-step3-btn').addEventListener('click', () => this.showBuilderStep(4));
+                document.getElementById('prev-step4-btn').addEventListener('click', () => this.showBuilderStep(3));
+                document.getElementById('next-step4-btn').addEventListener('click', () => this.showBuilderStep(5));
+                document.getElementById('prev-step5-btn').addEventListener('click', () => this.showBuilderStep(4));
+                document.getElementById('reset-builder-btn').addEventListener('click', () => this.initializeBuilder());
+                
+                // Generate problem button
+                document.getElementById('generate-problem-btn').addEventListener('click', () => this.generateResearchProblem());
+                
+                // Design selection
+                document.querySelectorAll('[data-design]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const design = e.target.getAttribute('data-design');
+                        document.getElementById('selected-design').value = design.charAt(0).toUpperCase() + design.slice(1) + " Design";
+                        this.updateDesignRecommendation();
+                    });
+                });
+                
+                // Research goal change
+                document.getElementById('research-goal').addEventListener('change', () => this.updateDesignRecommendation());
+                
+                // Sample size slider
+                document.getElementById('sample-size').addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    document.getElementById('sample-size-value').textContent = value;
+                    
+                    let sampleType = "Medium-sized study";
+                    if (value < 30) sampleType = "Small qualitative study";
+                    if (value >= 100) sampleType = "Large quantitative study";
+                    
+                    document.getElementById('sample-type').textContent = sampleType;
+                });
+                
+                // Timeline slider
+                document.getElementById('timeline').addEventListener('input', (e) => {
+                    const value = parseInt(e.target.value);
+                    document.getElementById('timeline-value').textContent = value + (value === 1 ? " month" : " months");
+                });
+                
+                // Tool options
+                document.querySelectorAll('.tool-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        const checkbox = option.querySelector('input');
+                        checkbox.checked = !checkbox.checked;
+                        
+                        if (checkbox.checked) {
+                            option.style.backgroundColor = 'rgba(26, 188, 156, 0.1)';
+                            option.style.borderLeft = '4px solid var(--accent)';
+                        } else {
+                            option.style.backgroundColor = 'rgba(44, 62, 80, 0.05)';
+                            option.style.borderLeft = 'none';
+                        }
+                        
+                        this.updateAnalysisRecommendation();
+                    });
+                });
+                
+                // Export project
+                document.getElementById('export-project-btn').addEventListener('click', () => this.exportProject());
+                
+                // Initialize recommendations
+                this.updateAnalysisRecommendation();
+            },
+            
+            showBuilderStep(stepNumber) {
+                // Hide all steps
+                for (let i = 1; i <= 5; i++) {
+                    const stepElement = document.getElementById(`builder-step${i}`);
+                    if (stepElement) stepElement.style.display = 'none';
+                    
+                    const stepCircle = document.getElementById(`step${i}`);
+                    if (stepCircle) stepCircle.classList.remove('active', 'completed');
+                }
+                
+                // Show current step
+                const currentStep = document.getElementById(`builder-step${stepNumber}`);
+                if (currentStep) currentStep.style.display = 'block';
+                
+                const currentStepCircle = document.getElementById(`step${stepNumber}`);
+                if (currentStepCircle) currentStepCircle.classList.add('active');
+                
+                // Mark previous steps as completed
+                for (let i = 1; i < stepNumber; i++) {
+                    const prevStep = document.getElementById(`step${i}`);
+                    if (prevStep) prevStep.classList.add('completed');
+                }
+                
+                this.currentBuilderStep = stepNumber;
+            },
+            
+            generateResearchProblem() {
+                const level = document.getElementById('education-level').value;
+                const subject = document.getElementById('subject-area').value;
+                const challenge = document.getElementById('research-challenge').value;
+                
+                if (!level || !subject || !challenge) {
+                    alert("Please fill in all fields to generate a research problem.");
+                    return;
+                }
+                
+                const levelTexts = {
+                    'preschool': 'preschool/early childhood',
+                    'primary': 'primary/elementary school',
+                    'secondary': 'secondary school',
+                    'higher': 'higher education',
+                    'adult': 'adult education'
+                };
+                
+                const subjectTexts = {
+                    'language': 'language/literacy education',
+                    'stem': 'STEM education',
+                    'assessment': 'assessment practices',
+                    'technology': 'technology integration',
+                    'classroom': 'classroom management',
+                    'equity': 'educational equity',
+                    'curriculum': 'curriculum development',
+                    'professional': 'professional development'
+                };
+                
+                const levelText = levelTexts[level] || level;
+                const subjectText = subjectTexts[subject] || subject;
+                
+                const problem = `Despite the importance of ${subjectText} in ${levelText}, there is a persistent challenge of ${challenge}. This study aims to investigate this issue and identify effective strategies to address it, contributing to improved educational practice in this context.`;
+                
+                document.getElementById('research-problem-output').value = problem;
+            },
+            
+            updateDesignRecommendation() {
+                const goal = document.getElementById('research-goal').value;
                 const design = document.getElementById('selected-design').value.toLowerCase();
-                updateDesignRecommendation(goal, design);
-            });
-            
-            // Sample size slider
-            const sampleSlider = document.getElementById('sample-size');
-            const sampleValue = document.getElementById('sample-size-value');
-            const sampleType = document.getElementById('sample-type');
-            
-            sampleSlider.addEventListener('input', function() {
-                const value = parseInt(this.value);
-                sampleValue.textContent = value;
+                const recommendation = document.getElementById('approach-recommendation');
                 
-                if (value < 30) {
-                    sampleType.textContent = "Small qualitative study";
-                } else if (value < 100) {
-                    sampleType.textContent = "Medium-sized study";
-                } else {
-                    sampleType.textContent = "Large quantitative study";
+                if (!goal) {
+                    recommendation.innerHTML = '<p>Select a research goal to see recommendations</p>';
+                    return;
                 }
-            });
-            
-            // Timeline slider
-            const timelineSlider = document.getElementById('timeline');
-            const timelineValue = document.getElementById('timeline-value');
-            
-            timelineSlider.addEventListener('input', function() {
-                const value = parseInt(this.value);
-                timelineValue.textContent = value + (value === 1 ? " month" : " months");
-            });
-            
-            // Tool options click
-            document.querySelectorAll('.tool-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const checkbox = this.querySelector('input');
-                    checkbox.checked = !checkbox.checked;
-                    
-                    if (checkbox.checked) {
-                        this.style.backgroundColor = 'rgba(26, 188, 156, 0.1)';
-                        this.style.borderLeft = '4px solid var(--accent)';
-                    } else {
-                        this.style.backgroundColor = 'rgba(44, 62, 80, 0.05)';
-                        this.style.borderLeft = 'none';
+                
+                let text = '';
+                const recommendations = {
+                    'describe': {
+                        'qualitative': 'Good choice. Qualitative designs like case studies or ethnography are excellent for rich descriptions.',
+                        'default': 'Consider qualitative or mixed methods for descriptive studies to capture detailed context.'
+                    },
+                    'explore': {
+                        'qualitative': 'Excellent choice. Qualitative designs are ideal for exploratory research of new topics.',
+                        'default': 'For exploration, qualitative approaches often work best initially, followed by quantitative validation.'
+                    },
+                    'explain': {
+                        'quantitative': 'Good choice. Quantitative experimental designs are strong for explanatory research.',
+                        'default': 'Consider quantitative or mixed methods to establish causal explanations.'
+                    },
+                    'predict': {
+                        'quantitative': 'Excellent choice. Quantitative designs with statistical modeling are ideal for prediction.',
+                        'default': 'Quantitative approaches are generally strongest for predictive research.'
+                    },
+                    'improve': {
+                        'mixed': 'Great choice. Mixed methods are excellent for action research and improvement studies.',
+                        'default': 'Consider mixed methods to both measure outcomes and understand processes.'
                     }
-                    
-                    // Update analysis recommendation
-                    updateAnalysisRecommendation();
+                };
+                
+                if (recommendations[goal] && recommendations[goal][design]) {
+                    text = recommendations[goal][design];
+                } else if (recommendations[goal]) {
+                    text = recommendations[goal].default;
+                }
+                
+                recommendation.innerHTML = `<p><strong>Recommendation:</strong> ${text}</p>`;
+            },
+            
+            updateAnalysisRecommendation() {
+                const selectedTools = [];
+                document.querySelectorAll('.tool-option input:checked').forEach(cb => {
+                    selectedTools.push(cb.id.replace('tool-', ''));
                 });
-            });
-            
-            // Export project
-            document.getElementById('export-project-btn').addEventListener('click', exportProject);
-            
-            // Initialize analysis recommendation
-            updateAnalysisRecommendation();
-        }
-        
-        function showBuilderStep(stepNumber) {
-            // Hide all steps
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById(`builder-step${i}`).style.display = 'none';
-                document.getElementById(`step${i}`).classList.remove('active', 'completed');
-            }
-            
-            // Show current step
-            document.getElementById(`builder-step${stepNumber}`).style.display = 'block';
-            document.getElementById(`step${stepNumber}`).classList.add('active');
-            
-            // Mark previous steps as completed
-            for (let i = 1; i < stepNumber; i++) {
-                document.getElementById(`step${i}`).classList.add('completed');
-            }
-        }
-        
-        function generateResearchProblem() {
-            const level = document.getElementById('education-level').value;
-            const subject = document.getElementById('subject-area').value;
-            const challenge = document.getElementById('research-challenge').value;
-            
-            if (!level || !subject || !challenge) {
-                alert("Please fill in all fields to generate a research problem.");
-                return;
-            }
-            
-            const levelText = {
-                'preschool': 'preschool/early childhood',
-                'primary': 'primary/elementary school',
-                'secondary': 'secondary school',
-                'higher': 'higher education',
-                'adult': 'adult education'
-            }[level] || level;
-            
-            const subjectText = {
-                'language': 'language/literacy education',
-                'stem': 'STEM education',
-                'assessment': 'assessment practices',
-                'technology': 'technology integration',
-                'classroom': 'classroom management',
-                'equity': 'educational equity',
-                'curriculum': 'curriculum development',
-                'professional': 'professional development'
-            }[subject] || subject;
-            
-            const problem = `Despite the importance of ${subjectText} in ${levelText}, there is a persistent challenge of ${challenge}. This study aims to investigate this issue and identify effective strategies to address it, contributing to improved educational practice in this context.`;
-            
-            document.getElementById('research-problem-output').value = problem;
-        }
-        
-        function updateDesignRecommendation(goal, design) {
-            const recommendation = document.getElementById('approach-recommendation');
-            
-            if (!goal) {
-                recommendation.innerHTML = '<p>Select a research goal to see recommendations</p>';
-                return;
-            }
-            
-            let text = '';
-            switch(goal) {
-                case 'describe':
-                    text = design === 'qualitative' ? 
-                        'Good choice. Qualitative designs like case studies or ethnography are excellent for rich descriptions.' :
-                        'Consider qualitative or mixed methods for descriptive studies to capture detailed context.';
-                    break;
-                case 'explore':
-                    text = design === 'qualitative' ?
-                        'Excellent choice. Qualitative designs are ideal for exploratory research of new topics.' :
-                        'For exploration, qualitative approaches often work best initially, followed by quantitative validation.';
-                    break;
-                case 'explain':
-                    text = design === 'quantitative' ?
-                        'Good choice. Quantitative experimental designs are strong for explanatory research.' :
-                        'Consider quantitative or mixed methods to establish causal explanations.';
-                    break;
-                case 'predict':
-                    text = design === 'quantitative' ?
-                        'Excellent choice. Quantitative designs with statistical modeling are ideal for prediction.' :
-                        'Quantitative approaches are generally strongest for predictive research.';
-                    break;
-                case 'improve':
-                    text = design === 'mixed' ?
-                        'Great choice. Mixed methods are excellent for action research and improvement studies.' :
-                        'Consider mixed methods to both measure outcomes and understand processes.';
-                    break;
-            }
-            
-            recommendation.innerHTML = `<p><strong>Recommendation:</strong> ${text}</p>`;
-        }
-        
-        function updateAnalysisRecommendation() {
-            const selectedTools = [];
-            document.querySelectorAll('.tool-option input:checked').forEach(cb => {
-                selectedTools.push(cb.id.replace('tool-', ''));
-            });
-            
-            const recommendation = document.getElementById('analysis-recommendation');
-            
-            if (selectedTools.length === 0) {
-                recommendation.innerHTML = '<p>Select data collection tools to see analysis recommendations</p>';
-                return;
-            }
-            
-            let analysisTypes = [];
-            
-            if (selectedTools.includes('interview') || selectedTools.includes('observation')) {
-                analysisTypes.push('thematic analysis', 'content analysis');
-            }
-            
-            if (selectedTools.includes('survey') || selectedTools.includes('test')) {
-                analysisTypes.push('descriptive statistics', 'inferential tests');
-            }
-            
-            if (analysisTypes.length > 0) {
-                recommendation.innerHTML = `<p><strong>Suggested analysis:</strong> ${analysisTypes.join(', ')}</p>`;
-            } else {
-                recommendation.innerHTML = '<p>Select data collection tools to see analysis recommendations</p>';
-            }
-        }
-        
-        function exportProject() {
-            const title = document.getElementById('project-title').value || "Educational Research Project";
-            
-            // Collect project data
-            const projectData = {
-                title: title,
-                problem: document.getElementById('research-problem-output').value,
-                design: document.getElementById('selected-design').value,
-                tools: Array.from(document.querySelectorAll('.tool-option input:checked')).map(cb => cb.id.replace('tool-', '')),
-                sampleSize: document.getElementById('sample-size').value,
-                timeline: document.getElementById('timeline').value + " months",
-                ethics: {
-                    consent: document.getElementById('ethics-consent').checked,
-                    confidential: document.getElementById('ethics-confidential').checked,
-                    minimal: document.getElementById('ethics-minimal').checked,
-                    approval: document.getElementById('ethics-approval').checked
+                
+                const recommendation = document.getElementById('analysis-recommendation');
+                
+                if (selectedTools.length === 0) {
+                    recommendation.innerHTML = '<p>Select data collection tools to see analysis recommendations</p>';
+                    return;
                 }
-            };
+                
+                let analysisTypes = [];
+                
+                if (selectedTools.includes('interview') || selectedTools.includes('observation')) {
+                    analysisTypes.push('thematic analysis', 'content analysis');
+                }
+                
+                if (selectedTools.includes('survey') || selectedTools.includes('test')) {
+                    analysisTypes.push('descriptive statistics', 'inferential tests');
+                }
+                
+                if (analysisTypes.length > 0) {
+                    recommendation.innerHTML = `<p><strong>Suggested analysis:</strong> ${analysisTypes.join(', ')}</p>`;
+                } else {
+                    recommendation.innerHTML = '<p>Select data collection tools to see analysis recommendations</p>';
+                }
+            },
             
-            // Create download content
-            let content = `EDUCATIONAL RESEARCH PROJECT PLAN\n`;
-            content += `================================\n\n`;
-            content += `Title: ${projectData.title}\n\n`;
-            content += `Research Problem:\n${projectData.problem}\n\n`;
-            content += `Research Design: ${projectData.design}\n\n`;
-            content += `Data Collection Tools: ${projectData.tools.join(', ')}\n`;
-            content += `Sample Size: ${projectData.sampleSize}\n`;
-            content += `Timeline: ${projectData.timeline}\n\n`;
-            content += `Ethical Considerations:\n`;
-            content += `- Informed Consent: ${projectData.ethics.consent ? 'Yes' : 'No'}\n`;
-            content += `- Confidentiality: ${projectData.ethics.confidential ? 'Yes' : 'No'}\n`;
-            content += `- Minimal Disruption: ${projectData.ethics.minimal ? 'Yes' : 'No'}\n`;
-            content += `- Institutional Approval: ${projectData.ethics.approval ? 'Yes' : 'No'}\n\n`;
-            content += `Generated: ${new Date().toLocaleDateString()}\n`;
+            exportProject() {
+                const title = document.getElementById('project-title').value || "Educational Research Project";
+                
+                const projectData = {
+                    title: title,
+                    problem: document.getElementById('research-problem-output').value,
+                    design: document.getElementById('selected-design').value,
+                    tools: Array.from(document.querySelectorAll('.tool-option input:checked')).map(cb => cb.id.replace('tool-', '')),
+                    sampleSize: document.getElementById('sample-size').value,
+                    timeline: document.getElementById('timeline').value + " months"
+                };
+                
+                let content = `EDUCATIONAL RESEARCH PROJECT PLAN\n`;
+                content += `================================\n\n`;
+                content += `Title: ${projectData.title}\n\n`;
+                content += `Research Problem:\n${projectData.problem}\n\n`;
+                content += `Research Design: ${projectData.design}\n\n`;
+                content += `Data Collection Tools: ${projectData.tools.join(', ')}\n`;
+                content += `Sample Size: ${projectData.sampleSize}\n`;
+                content += `Timeline: ${projectData.timeline}\n\n`;
+                content += `Generated: ${new Date().toLocaleDateString()}\n`;
+                
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `research-project-plan-${Date.now()}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert("Project plan exported successfully!");
+            },
             
-            // Create download link
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `research-project-plan-${Date.now()}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            alert("Project plan exported successfully!");
-        }
-        
-        // Real Applications - Idea Generator
-        document.getElementById('generate-idea-btn').addEventListener('click', function() {
-            const level = document.getElementById('idea-level').value;
-            const topic = document.getElementById('idea-topic').value;
-            
-            if (!level || !topic) {
-                alert("Please select both options to generate a research idea.");
-                return;
+            // ====== RESEARCH IDEA GENERATOR ======
+            generateResearchIdea() {
+                const level = document.getElementById('idea-level').value;
+                const topic = document.getElementById('idea-topic').value;
+                
+                if (!level || !topic) {
+                    alert("Please select both options to generate a research idea.");
+                    return;
+                }
+                
+                const ideas = {
+                    'elementary-engagement': "How do gamified learning activities affect engagement in elementary math classes?",
+                    'elementary-assessment': "What is the impact of formative assessment strategies on reading progress in 2nd grade?",
+                    'elementary-technology': "How does tablet use in science lessons influence inquiry skills in 4th grade?",
+                    'elementary-inclusion': "What strategies are most effective for including students with diverse learning needs in elementary classrooms?",
+                    
+                    'secondary-engagement': "What factors influence student engagement in online learning environments at the high school level?",
+                    'secondary-assessment': "How do different types of feedback affect student motivation and achievement in secondary English classes?",
+                    'secondary-technology': "What is the relationship between social media use and academic performance in middle school students?",
+                    'secondary-inclusion': "How do differentiated instruction strategies impact learning outcomes in diverse secondary classrooms?",
+                    
+                    'college-engagement': "What teaching strategies increase student engagement in large lecture courses at the university level?",
+                    'college-assessment': "How does peer assessment influence learning outcomes in college writing courses?",
+                    'college-technology': "What are the benefits and challenges of using learning analytics to support student success in higher education?",
+                    'college-inclusion': "How do universal design for learning principles impact accessibility and success in college courses?",
+                    
+                    'teachers-engagement': "What professional development approaches are most effective for increasing teacher engagement with new instructional strategies?",
+                    'teachers-assessment': "How do teachers' assessment literacy and practices evolve through collaborative professional learning communities?",
+                    'teachers-technology': "What factors influence teachers' adoption and integration of educational technology in their classrooms?",
+                    'teachers-inclusion': "How do teachers' beliefs about inclusion affect their instructional practices and student outcomes?"
+                };
+                
+                const key = `${level}-${topic}`;
+                const idea = ideas[key] || "How does [topic] affect [level] students' learning outcomes and experiences?";
+                
+                document.getElementById('idea-text').textContent = idea;
+                document.getElementById('research-idea-output').style.display = 'block';
             }
-            
-            const ideas = {
-                'elementary-engagement': "How do gamified learning activities affect engagement in elementary math classes?",
-                'elementary-assessment': "What is the impact of formative assessment strategies on reading progress in 2nd grade?",
-                'elementary-technology': "How does tablet use in science lessons influence inquiry skills in 4th grade?",
-                'elementary-inclusion': "What strategies are most effective for including students with diverse learning needs in elementary classrooms?",
-                
-                'secondary-engagement': "What factors influence student engagement in online learning environments at the high school level?",
-                'secondary-assessment': "How do different types of feedback affect student motivation and achievement in secondary English classes?",
-                'secondary-technology': "What is the relationship between social media use and academic performance in middle school students?",
-                'secondary-inclusion': "How do differentiated instruction strategies impact learning outcomes in diverse secondary classrooms?",
-                
-                'college-engagement': "What teaching strategies increase student engagement in large lecture courses at the university level?",
-                'college-assessment': "How does peer assessment influence learning outcomes in college writing courses?",
-                'college-technology': "What are the benefits and challenges of using learning analytics to support student success in higher education?",
-                'college-inclusion': "How do universal design for learning principles impact accessibility and success in college courses?",
-                
-                'teachers-engagement': "What professional development approaches are most effective for increasing teacher engagement with new instructional strategies?",
-                'teachers-assessment': "How do teachers' assessment literacy and practices evolve through collaborative professional learning communities?",
-                'teachers-technology': "What factors influence teachers' adoption and integration of educational technology in their classrooms?",
-                'teachers-inclusion': "How do teachers' beliefs about inclusion affect their instructional practices and student outcomes?"
-            };
-            
-            const key = `${level}-${topic}`;
-            const idea = ideas[key] || "How does [topic] affect [level] students' learning outcomes and experiences?";
-            
-            document.getElementById('idea-text').textContent = idea;
-            document.getElementById('research-idea-output').style.display = 'block';
+        };
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            App.init();
         });
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize components
-            initializeBuilder();
-            
-            // Make all tables responsive by adding data labels
-            document.querySelectorAll('.stack-table td').forEach(td => {
-                if (!td.hasAttribute('data-label')) {
-                    const th = td.closest('table').querySelectorAll('th')[td.cellIndex];
-                    if (th) {
-                        td.setAttribute('data-label', th.textContent);
-                    }
-                }
-            });
-            
-            // Add responsive behavior to tables on window resize
-            // Add this to your existing JavaScript, inside the DOMContentLoaded event listener
-// Replace the existing window resize event handler
-
-window.addEventListener('resize', function() {
-    const isVerySmallScreen = window.innerWidth <= 400;
-    
-    document.querySelectorAll('table').forEach(table => {
-        if (isVerySmallScreen) {
-            // Force all tables to use stacked layout
-            table.classList.add('stack-table');
-            
-            // Add data labels if missing
-            const ths = table.querySelectorAll('th');
-            table.querySelectorAll('td').forEach((td, index) => {
-                const thIndex = index % ths.length;
-                if (ths[thIndex] && !td.hasAttribute('data-label')) {
-                    td.setAttribute('data-label', ths[thIndex].textContent);
-                }
-            });
-        } else {
-            // Remove stacked layout on larger screens
-            table.classList.remove('stack-table');
-        }
-    });
-    
-    // Adjust navigation for small screens
-    const navTabs = document.querySelector('.nav-tabs');
-    if (isVerySmallScreen && navTabs) {
-        navTabs.style.overflowX = 'auto';
-        navTabs.style.flexWrap = 'nowrap';
-    } else if (navTabs) {
-        navTabs.style.overflowX = 'visible';
-        navTabs.style.flexWrap = 'wrap';
-    }
-});
-
-// Initialize on load
-window.dispatchEvent(new Event('resize'));
     </script>
 </body>
 </html>
