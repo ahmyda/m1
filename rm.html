@@ -694,6 +694,169 @@
                 margin-top: 15px;
             }
         }
+        /* Add these media queries at the end of your CSS */
+
+@media (max-width: 400px) {
+    /* Make tables even more compact */
+    .stack-table td {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .stack-table td:before {
+        font-size: 0.8rem;
+        left: 10px;
+    }
+    
+    /* Reduce card padding */
+    .section-card, .quiz-container, .case-card {
+        padding: 15px 12px;
+    }
+    
+    /* Smaller section titles */
+    .section-title {
+        font-size: 1.2rem;
+        padding-bottom: 8px;
+    }
+    
+    .section-title i {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    /* Smaller subsection titles */
+    .subsection-title {
+        font-size: 1.1rem;
+        margin: 20px 0 10px;
+    }
+    
+    /* Compact quiz elements */
+    .quiz-question {
+        font-size: 1rem;
+        padding: 12px;
+    }
+    
+    .quiz-option {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .option-letter {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    /* Compact buttons */
+    .toggle-btn, .quiz-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Stack header elements vertically */
+    header h1 {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 1.4rem;
+    }
+    
+    .header-controls {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 15px;
+        justify-content: center;
+    }
+    
+    /* Make navigation tabs scrollable */
+    .nav-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap;
+    }
+    
+    .tab-btn {
+        min-width: 100px;
+        padding: 15px 8px;
+        font-size: 0.8rem;
+    }
+    
+    /* Reduce case study grid gaps */
+    .case-study-grid {
+        gap: 15px;
+    }
+    
+    /* Make form elements more compact */
+    .form-select, .form-input, .form-textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Adjust builder steps for very small screens */
+    .step {
+        min-width: 80px;
+    }
+    
+    .step-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    /* Reduce spacing in lists */
+    ul, ol {
+        padding-left: 20px;
+        margin: 10px 0;
+    }
+    
+    li {
+        margin-bottom: 6px;
+    }
+}
+
+@media (max-width: 350px) {
+    /* Extra small phone optimization */
+    .stack-table td {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .tab-btn {
+        min-width: 90px;
+        padding: 12px 5px;
+        font-size: 0.75rem;
+    }
+    
+    .tab-btn i {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+    
+    .quiz-controls {
+        flex-direction: column;
+    }
+    
+    .quiz-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Single column for very small grids */
+    .case-study-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Hide non-essential elements if needed */
+    .badge {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+}
     </style>
 </head>
 <body>
@@ -2434,19 +2597,44 @@
             });
             
             // Add responsive behavior to tables on window resize
-            window.addEventListener('resize', function() {
-                document.querySelectorAll('.stack-table').forEach(table => {
-                    if (window.innerWidth <= 640) {
-                        table.classList.add('stack-table');
-                    } else {
-                        table.classList.remove('stack-table');
-                    }
-                });
-            });
+            // Add this to your existing JavaScript, inside the DOMContentLoaded event listener
+// Replace the existing window resize event handler
+
+window.addEventListener('resize', function() {
+    const isVerySmallScreen = window.innerWidth <= 400;
+    
+    document.querySelectorAll('table').forEach(table => {
+        if (isVerySmallScreen) {
+            // Force all tables to use stacked layout
+            table.classList.add('stack-table');
             
-            // Trigger initial resize check
-            window.dispatchEvent(new Event('resize'));
-        });
+            // Add data labels if missing
+            const ths = table.querySelectorAll('th');
+            table.querySelectorAll('td').forEach((td, index) => {
+                const thIndex = index % ths.length;
+                if (ths[thIndex] && !td.hasAttribute('data-label')) {
+                    td.setAttribute('data-label', ths[thIndex].textContent);
+                }
+            });
+        } else {
+            // Remove stacked layout on larger screens
+            table.classList.remove('stack-table');
+        }
+    });
+    
+    // Adjust navigation for small screens
+    const navTabs = document.querySelector('.nav-tabs');
+    if (isVerySmallScreen && navTabs) {
+        navTabs.style.overflowX = 'auto';
+        navTabs.style.flexWrap = 'nowrap';
+    } else if (navTabs) {
+        navTabs.style.overflowX = 'visible';
+        navTabs.style.flexWrap = 'wrap';
+    }
+});
+
+// Initialize on load
+window.dispatchEvent(new Event('resize'));
     </script>
 </body>
 </html>
