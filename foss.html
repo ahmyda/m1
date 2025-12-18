@@ -319,6 +319,7 @@
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
+            user-select: none;
         }
 
         .dark-mode .option {
@@ -326,14 +327,32 @@
             border-color: #334155;
         }
 
-        .option:hover, .option.selected {
+        .option:hover:not(.disabled), .option.selected {
             border-color: #4361ee;
             background: rgba(67, 97, 238, 0.1);
+        }
+
+        .option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
         }
 
         .option-label {
             font-weight: 600;
             color: #4361ee;
+        }
+
+        .option.correct .option-label {
+            color: #10b981;
+        }
+
+        .option.incorrect .option-label {
+            color: #ef4444;
         }
 
         .quiz-controls {
@@ -395,7 +414,6 @@
             border-radius: 1rem;
             padding: 1.5rem;
             margin: 1.5rem 0;
-            display: none;
         }
 
         .score {
@@ -404,6 +422,29 @@
             color: #4361ee;
             text-align: center;
             margin-bottom: 1rem;
+        }
+
+        /* Feedback */
+        .feedback {
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #4361ee;
+        }
+
+        .dark-mode .feedback {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .feedback.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .feedback.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
         }
 
         /* Example & Exercise */
@@ -990,7 +1031,7 @@
         <!-- QUIZ CONTENT -->
         <section id="quiz" class="tab-content hidden">
             <h1>📝 Knowledge Check Quiz</h1>
-            <p>Test your understanding with 10 randomly selected questions. Try to score at least 7/10!</p>
+            <p>Test your understanding with one random question. Get immediate feedback!</p>
             
             <div class="quiz-container">
                 <div class="progress-bar">
@@ -998,47 +1039,38 @@
                 </div>
                 
                 <div id="question-container">
-                    <div class="question" id="question-text">What does FOSS stand for?</div>
+                    <div class="question" id="question-text">Loading question...</div>
                     
                     <div class="options" id="options-container">
                         <!-- Options will be loaded by JavaScript -->
                     </div>
                     
-                    <div id="answer-feedback" class="hidden">
+                    <div id="answer-feedback" class="feedback hidden">
                         <!-- Feedback will be shown here -->
                     </div>
                 </div>
                 
                 <div class="quiz-controls">
-                    <div class="question-counter">
-                        Question <span id="current-question">1</span>/<span id="total-questions">10</span>
+                    <div id="score-display" class="score-display">
+                        Score: <span id="current-score">0</span>
                     </div>
                     
                     <div class="quiz-buttons">
-                        <button class="btn btn-primary" id="prev-btn">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </button>
-                        <button class="btn btn-primary" id="next-btn">
-                            Next <i class="fas fa-arrow-right"></i>
+                        <button class="btn btn-warning" id="new-question-btn">
+                            <i class="fas fa-sync-alt"></i> New Question
                         </button>
                     </div>
                 </div>
                 
-                <div class="mt-2">
-                    <button class="btn btn-success" id="submit-quiz">
-                        <i class="fas fa-paper-plane"></i> Submit Quiz
-                    </button>
-                    <button class="btn btn-warning" id="restart-quiz">
-                        <i class="fas fa-redo"></i> New Quiz
-                    </button>
-                </div>
-                
-                <div id="results" class="results hidden">
-                    <div class="score" id="score-display">0/10</div>
-                    <p id="score-message" class="text-center"></p>
-                    <div id="review-questions" class="mt-2"></div>
-                    <button class="btn btn-primary mt-2" id="try-again-btn">
-                        <i class="fas fa-redo"></i> Try Another Quiz
+                <div id="results" class="results mt-2">
+                    <h3 class="text-center">Quiz Statistics</h3>
+                    <div class="text-center mt-2">
+                        <div>Questions Attempted: <span id="total-attempted">0</span></div>
+                        <div>Correct Answers: <span id="total-correct">0</span></div>
+                        <div>Accuracy: <span id="accuracy-rate">0%</span></div>
+                    </div>
+                    <button class="btn btn-primary mt-2" id="reset-stats-btn">
+                        <i class="fas fa-trash-alt"></i> Reset Statistics
                     </button>
                 </div>
             </div>
@@ -1253,6 +1285,11 @@
                 const tabId = this.getAttribute('data-tab');
                 document.getElementById(tabId).classList.remove('hidden');
                 
+                // If quiz tab is selected, initialize quiz
+                if (tabId === 'quiz') {
+                    loadRandomQuestion();
+                }
+                
                 // Scroll to top
                 window.scrollTo(0, 0);
             });
@@ -1420,34 +1457,67 @@
             }
         ];
 
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizSubmitted = false;
+        // Quiz statistics
+        let quizStats = {
+            attempted: 0,
+            correct: 0,
+            lastQuestion: null
+        };
 
-        function initializeQuiz() {
-            // Select 5 random questions (reduced for mobile)
-            currentQuestions = [...quizQuestions]
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 5);
-            
-            currentQuestionIndex = 0;
-            userAnswers = new Array(5).fill(null);
-            quizSubmitted = false;
-            
-            document.getElementById('results').classList.add('hidden');
-            document.getElementById('submit-quiz').style.display = 'flex';
-            document.getElementById('restart-quiz').style.display = 'flex';
-            
-            displayQuestion();
-            updateQuestionCounter();
-            updateProgressBar();
+        // Load statistics from localStorage
+        if (localStorage.getItem('quizStats')) {
+            quizStats = JSON.parse(localStorage.getItem('quizStats'));
         }
 
-        function displayQuestion() {
-            const question = currentQuestions[currentQuestionIndex];
+        // Update statistics display
+        function updateStatsDisplay() {
+            document.getElementById('total-attempted').textContent = quizStats.attempted;
+            document.getElementById('total-correct').textContent = quizStats.correct;
             
-            document.getElementById('question-text').textContent = `${currentQuestionIndex + 1}. ${question.question}`;
+            const accuracy = quizStats.attempted > 0 
+                ? Math.round((quizStats.correct / quizStats.attempted) * 100) 
+                : 0;
+            document.getElementById('accuracy-rate').textContent = `${accuracy}%`;
+            
+            // Update current score display
+            document.getElementById('current-score').textContent = quizStats.correct;
+            
+            // Update progress bar
+            const progress = quizStats.attempted > 0 
+                ? (quizStats.correct / quizStats.attempted) * 100 
+                : 0;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+        }
+
+        // Save statistics to localStorage
+        function saveStats() {
+            localStorage.setItem('quizStats', JSON.stringify(quizStats));
+        }
+
+        // Load a random question
+        function loadRandomQuestion() {
+            let availableQuestions = quizQuestions.filter(q => q !== quizStats.lastQuestion);
+            if (availableQuestions.length === 0) {
+                availableQuestions = [...quizQuestions];
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+            const question = availableQuestions[randomIndex];
+            quizStats.lastQuestion = question;
+            
+            displayQuestion(question);
+            
+            // Hide feedback if any
+            document.getElementById('answer-feedback').classList.add('hidden');
+            document.getElementById('answer-feedback').innerHTML = '';
+            
+            // Update stats display
+            updateStatsDisplay();
+        }
+
+        // Display a question
+        function displayQuestion(question) {
+            document.getElementById('question-text').textContent = question.question;
             
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
@@ -1455,113 +1525,74 @@
             question.options.forEach((option, index) => {
                 const optionElement = document.createElement('div');
                 optionElement.className = 'option';
-                if (userAnswers[currentQuestionIndex] === index) {
-                    optionElement.classList.add('selected');
-                }
                 optionElement.innerHTML = `
                     <span class="option-label">${String.fromCharCode(65 + index)}</span>
                     <span>${option}</span>
                 `;
-                optionElement.addEventListener('click', () => selectOption(index));
+                optionElement.addEventListener('click', () => selectOption(question, index));
                 optionsContainer.appendChild(optionElement);
             });
+        }
+
+        // Handle option selection
+        function selectOption(question, selectedIndex) {
+            const options = document.querySelectorAll('.option');
+            const feedbackElement = document.getElementById('answer-feedback');
             
-            // Clear feedback
-            document.getElementById('answer-feedback').innerHTML = '';
-            document.getElementById('answer-feedback').classList.add('hidden');
-        }
-
-        function selectOption(index) {
-            if (quizSubmitted) return;
+            // Disable all options
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                opt.style.pointerEvents = 'none';
+            });
             
-            userAnswers[currentQuestionIndex] = index;
-            displayQuestion();
-        }
-
-        function updateQuestionCounter() {
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = currentQuestions.length;
-            
-            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
-            document.getElementById('next-btn').disabled = currentQuestionIndex === currentQuestions.length - 1;
-        }
-
-        function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-            document.getElementById('quiz-progress').style.width = `${progress}%`;
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < currentQuestions.length - 1) {
-                currentQuestionIndex++;
-                displayQuestion();
-                updateQuestionCounter();
-                updateProgressBar();
-            }
-        }
-
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion();
-                updateQuestionCounter();
-                updateProgressBar();
-            }
-        }
-
-        function submitQuiz() {
-            quizSubmitted = true;
-            
-            let score = 0;
-            for (let i = 0; i < currentQuestions.length; i++) {
-                if (userAnswers[i] === currentQuestions[i].correct) {
-                    score++;
+            // Mark correct and incorrect answers
+            options.forEach((opt, index) => {
+                if (index === question.correct) {
+                    opt.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    opt.classList.add('incorrect');
                 }
+            });
+            
+            // Update statistics
+            quizStats.attempted++;
+            if (selectedIndex === question.correct) {
+                quizStats.correct++;
             }
             
-            document.getElementById('score-display').textContent = `${score}/${currentQuestions.length}`;
+            // Save statistics
+            saveStats();
             
-            let message = "";
-            if (score >= 4) {
-                message = "Excellent! You have a strong understanding of FOSS concepts.";
-            } else if (score >= 3) {
-                message = "Good! You understand most key concepts.";
-            } else {
-                message = "Keep studying! Review the lecture materials.";
-            }
+            // Show feedback
+            const isCorrect = selectedIndex === question.correct;
+            feedbackElement.innerHTML = `
+                <h4>${isCorrect ? '✅ Correct!' : '❌ Incorrect'}</h4>
+                <p><strong>Explanation:</strong> ${question.explanation}</p>
+                <p><strong>Topic:</strong> ${question.topic}</p>
+            `;
+            feedbackElement.classList.remove('hidden');
+            feedbackElement.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
             
-            document.getElementById('score-message').textContent = message;
-            
-            // Show review
-            let reviewHTML = "<h4>Review:</h4>";
-            for (let i = 0; i < currentQuestions.length; i++) {
-                const q = currentQuestions[i];
-                const isCorrect = userAnswers[i] === q.correct;
-                
-                reviewHTML += `
-                    <div style="margin: 1rem 0; padding: 1rem; background: ${isCorrect ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)'}; border-radius: 0.5rem;">
-                        <strong>Q${i+1}:</strong> ${q.question}<br>
-                        <span style="color: ${isCorrect ? '#10b981' : '#ef4444'}">
-                            ${isCorrect ? '✓ Correct' : '✗ Incorrect'} - ${q.explanation}
-                        </span>
-                    </div>
-                `;
-            }
-            
-            document.getElementById('review-questions').innerHTML = reviewHTML;
-            document.getElementById('results').classList.remove('hidden');
-            document.getElementById('submit-quiz').style.display = 'none';
+            // Update stats display
+            updateStatsDisplay();
         }
 
-        // Initialize quiz
-        initializeQuiz();
+        // Initialize quiz when page loads
+        if (document.getElementById('quiz')) {
+            loadRandomQuestion();
+        }
 
-        // Quiz event listeners
-        document.getElementById('next-btn').addEventListener('click', nextQuestion);
-        document.getElementById('prev-btn').addEventListener('click', prevQuestion);
-        document.getElementById('submit-quiz').addEventListener('click', submitQuiz);
-        document.getElementById('restart-quiz').addEventListener('click', initializeQuiz);
-        document.getElementById('try-again-btn').addEventListener('click', initializeQuiz);
+        // Event listeners for quiz buttons
+        document.getElementById('new-question-btn').addEventListener('click', loadRandomQuestion);
+        
+        document.getElementById('reset-stats-btn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to reset all quiz statistics?')) {
+                quizStats = { attempted: 0, correct: 0, lastQuestion: null };
+                saveStats();
+                updateStatsDisplay();
+                loadRandomQuestion();
+            }
+        });
 
         // Save exercises
         document.getElementById('save-exercises').addEventListener('click', () => {
@@ -1582,6 +1613,9 @@
             el.style.cursor = 'pointer';
             el.style.userSelect = 'none';
         });
+
+        // Initialize stats display
+        updateStatsDisplay();
     </script>
 </body>
 </html>
