@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Revision – Modules</title>
+  <style>
+    :root {
+      --primary: #3f51b5;
+      --primary-light: #5c6bc0;
+      --bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --text: #2c2c2c;
+      --muted: #6b7280;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+      --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #f9fafb 100%);
+      color: var(--text);
+      padding: 24px 16px;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin: 24px auto 40px;
+      max-width: 700px;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .module-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 30px 24px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .module-card:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+    }
+
+    .module-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(63, 81, 181, 0.06),
+        transparent
+      );
+      transition: left 0.6s ease;
+    }
+
+    .module-card:hover,
+    .module-card:focus {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .module-card:hover::after {
+      left: 100%;
+    }
+
+    .module-card span {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .module-card small {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+      }
+
+      .modules-grid {
+        gap: 18px;
+      }
+
+      .module-card {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .module-card,
+      .module-card::after {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Final Revision</h1>
+    <p class="subtitle">Quick access to all modules for exam preparation</p>
+  </header>
+
+  <nav aria-label="Module navigation">
+    <div class="modules-grid">
+      <a class="module-card" href="did.html">
+        <span>Didactics</span>
+        <small>Teaching methods & classroom practice</small>
+      </a>
+      <a class="module-card" href="rm.html">
+        <span>Research Methodology</span>
+        <small>Design, tools & analysis</small>
+      </a>
+      <a class="module-card" href="lit.html">
+        <span>Applied Linguistics</span>
+        <small>Language in real contexts</small>
+      </a>
+      <a class="module-card" href="esp.html">
+        <span>ESP</span>
+        <small>English for specific purposes</small>
+      </a>
+      <a class="module-card" href="et.html">
+        <span>Ethics</span>
+        <small>Academic & professional conduct</small>
+      </a>
+      <a class="module-card" href="in.html">
+        <span>Interculturity</span>
+        <small>Culture & communication</small>
+      </a>
+      <a class="module-card" href="sl.html">
+        <span>Sociolinguistics</span>
+        <small>Language & society</small>
+      </a>
+      <a class="module-card" href="foss.html">
+        <span>FOSS</span>
+        <small>Fluency & fossilization</small>
+      </a>
+      <a class="module-card" href="sla.html">
+        <span>SLA</span>
+        <small>Second language acquisition</small>
+      </a>
+    </div>
+  </nav>
+</body>
+</html>
