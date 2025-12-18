@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applied Linguistics Revision Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3a506b;
+            --secondary: #1c2541;
+            --accent: #5bc0be;
+            --light: #f8f9fa;
+            --dark: #0b132b;
+            --success: #4CAF50;
+            --warning: #ff9800;
+            --danger: #ef476f;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f4f8;
+            color: var(--dark);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 0 18px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #5d5fef, var(--danger));
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        header p {
+            opacity: 0.95;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            border-radius: var(--border-radius);
+            margin: 0 18px 30px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 18px 8px;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+        }
+        
+        .tab-btn i {
+            font-size: 1.3rem;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+            background-color: rgba(58, 80, 107, 0.08);
+        }
+        
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+            border-left: 6px solid var(--primary);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            background: rgba(91, 192, 190, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .subsection-title {
+            color: var(--secondary);
+            margin: 20px 0 15px;
+            font-size: 1.3rem;
+            padding-left: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .question {
+            background-color: var(--light-gray);
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+        }
+        
+        .question:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .question h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .question h3 i {
+            color: var(--accent);
+            margin-top: 3px;
+        }
+        
+        .answer {
+            background-color: rgba(58, 80, 107, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 5px solid var(--accent);
+            display: none;
+        }
+        
+        .answer.active {
+            display: block;
+        }
+        
+        .show-answer-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 6px rgba(58, 80, 107, 0.2);
+        }
+        
+        .show-answer-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(58, 80, 107, 0.3);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: rgba(58, 80, 107, 0.03);
+        }
+        
+        table tr:hover {
+            background-color: rgba(58, 80, 107, 0.08);
+        }
+        
+        .quiz-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .quiz-progress {
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(58, 80, 107, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            line-height: 1.5;
+            background: rgba(58, 80, 107, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .quiz-option {
+            padding: 18px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .quiz-option:hover {
+            background-color: rgba(58, 80, 107, 0.05);
+            border-color: var(--primary);
+        }
+        
+        .quiz-option.selected {
+            background-color: rgba(58, 80, 107, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 3px 8px rgba(58, 80, 107, 0.15);
+        }
+        
+        .quiz-option.correct {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-color: var(--success);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: rgba(239, 71, 111, 0.1);
+            border-color: var(--danger);
+        }
+        
+        .option-letter {
+            width: 36px;
+            height: 36px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark);
+            flex-shrink: 0;
+        }
+        
+        .quiz-option.selected .option-letter {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .quiz-option.correct .option-letter {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .quiz-option.incorrect .option-letter {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .quiz-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(58, 80, 107, 0.2);
+        }
+        
+        .quiz-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(58, 80, 107, 0.3);
+        }
+        
+        .quiz-btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .quiz-results {
+            padding: 30px;
+        }
+        
+        .quiz-score {
+            font-size: 4rem;
+            color: var(--primary);
+            margin: 20px 0;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .result-details {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .question-review {
+            background: rgba(58, 80, 107, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .question-review.correct {
+            border-left-color: var(--success);
+        }
+        
+        .question-review.incorrect {
+            border-left-color: var(--danger);
+        }
+        
+        .review-feedback {
+            background: rgba(91, 192, 190, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .essay-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--box-shadow);
+            border-top: 6px solid var(--accent);
+        }
+        
+        .essay-title {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+        }
+        
+        .essay-content {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .essay-paragraphs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .essay-paragraph {
+            padding: 20px;
+            background: rgba(58, 80, 107, 0.03);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .essay-key-ideas {
+            background: linear-gradient(135deg, rgba(58, 80, 107, 0.08), rgba(91, 192, 190, 0.08));
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .essay-key-ideas h4 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--gray);
+            font-size: 0.95rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .method-badge {
+            display: inline-block;
+            background: rgba(58, 80, 107, 0.1);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 193, 7, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        
+        .comparison-box h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .tab-btn {
+                padding: 15px 5px;
+                font-size: 0.85rem;
+            }
+            
+            .tab-btn i {
+                font-size: 1.1rem;
+            }
+            
+            .section-card, .quiz-container, .essay-item {
+                padding: 20px 15px;
+            }
+            
+            .quiz-question {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+            
+            .quiz-btn {
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-language"></i> Applied Linguistics Revision Guide</h1>
+            <p>Master 1 Applied Linguistics Lectures 1-5: Theory, Methods, and Applications</p>
+        </div>
+    </header>
+    
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-target="revision">
+            <i class="fas fa-file-alt"></i>
+            <span>Full Revision</span>
+        </button>
+        <button class="tab-btn" data-target="quiz">
+            <i class="fas fa-question-circle"></i>
+            <span>Self-Test Quiz</span>
+        </button>
+        <button class="tab-btn" data-target="essays">
+            <i class="fas fa-edit"></i>
+            <span>Essay Builder</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <!-- Revision Section -->
+        <section id="revision" class="content-section active">
+            <!-- Lecture 1: Introduction -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-book-open"></i> Lecture 1: Introducing Applied Linguistics</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-graduation-cap"></i> Defining Applied Linguistics</h3>
+                <p><strong>Key Definitions:</strong></p>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li><strong>Kaplan and Widdowson (1992):</strong> "A mediation between theory and practice."</li>
+                    <li><strong>Brumfit (1977):</strong> "The theoretical and empirical investigation of real world problems in which language is a central issue."</li>
+                    <li><strong>Spolsky (2005):</strong> Focuses on resolving language-based problems encountered in the real world.</li>
+                    <li><strong>AAAL:</strong> "An interdisciplinary field of inquiry that addresses a broad range of language-related issues."</li>
+                </ul>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What is the difference between Applied Linguistics and Linguistics Applied?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <p><strong>Linguistics Applied:</strong> Assumes language problems can be solved by direct application of linguistic concepts. Language problems = linguistic solutions.</p>
+                        <p><strong>Applied Linguistics:</strong> Recognizes that linguistic insights require interpretation and mediation. It's a multilateral process that relates linguistic perspectives with other perceptions of reality (psychology, sociology, education, etc.).</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-bullseye"></i> Scope of Applied Linguistics</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Language & Education</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95rem;">
+                            <li>First-language education</li>
+                            <li>Additional-language education</li>
+                            <li>Clinical linguistics</li>
+                            <li>Language testing</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Language, Work & Law</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95rem;">
+                            <li>Workplace communication</li>
+                            <li>Language planning</li>
+                            <li>Forensic linguistics</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Language, Information & Effect</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95rem;">
+                            <li>Literary stylistics</li>
+                            <li>Critical Discourse Analysis</li>
+                            <li>Translation & interpretation</li>
+                            <li>Lexicography</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-question"></i> Real-World Questions Addressed by AL</h3>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Should children speaking a dialect be encouraged to maintain it or steered towards the standard form?</li>
+                    <li>In multilingual communities, which languages should be used in schools?</li>
+                    <li>Should deaf children learn sign language or lip reading/speaking?</li>
+                    <li>Should the growth of English as an international lingua franca be welcomed or deplored?</li>
+                    <li>Is language being used for political oppression and indoctrination?</li>
+                </ul>
+            </div>
+            
+            <!-- Lecture 2: Contrastive Analysis -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-balance-scale"></i> Lecture 2: Contrastive Analysis</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-history"></i> Historical Context</h3>
+                <p>Developed in the 1950s-1960s, based on behaviorist psychology (habit formation theory). Lado (1957) provided the first comprehensive theoretical treatment.</p>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What are the four assumptions of Contrastive Analysis according to Lee (1968)?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <ol style="padding-left: 25px;">
+                            <li>The prime cause of difficulty in L2 learning is interference from L1</li>
+                            <li>The greater the differences between languages, the more acute the learning difficulties</li>
+                            <li>Comparison between languages predicts difficulties and errors</li>
+                            <li>What to teach = sum of differences established by CA (subtract similarities)</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-exchange-alt"></i> Theory of Transfer</h3>
+                <div class="comparison-table">
+                    <div class="comparison-box">
+                        <h4>Positive Transfer</h4>
+                        <p>Facilitates L2 learning when L1 and L2 structures are similar</p>
+                        <p><em>Example:</em> Similar SVO word order in English and French</p>
+                    </div>
+                    <div class="comparison-box">
+                        <h4>Negative Transfer (Interference)</h4>
+                        <p>Impedes L2 learning when L1 and L2 structures differ</p>
+                        <p><em>Example:</em> Arabic speakers omitting verb 'be' in English (*"He student")</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-chart-line"></i> Hierarchy of Difficulty (Stockwell et al., 1965)</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Example (Arabic → English)</th>
+                        <th>Difficulty Level</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Split</strong></td>
+                        <td>L1 has one form, L2 has two or more</td>
+                        <td>Arabic has /b/, English has /p/ and /b/</td>
+                        <td>Greatest difficulty</td>
+                    </tr>
+                    <tr>
+                        <td><strong>New Category</strong></td>
+                        <td>Exists in L2 but not in L1</td>
+                        <td>Indefinite articles (a/an) in English</td>
+                        <td>High difficulty</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Absent Category</strong></td>
+                        <td>Exists in L1 but absent in L2</td>
+                        <td>Grammatical gender in Arabic</td>
+                        <td>Moderate difficulty</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coalesced Forms</strong></td>
+                        <td>L1 has multiple forms, L2 has one</td>
+                        <td>Multiple Arabic negators vs. English "not"</td>
+                        <td>Lower difficulty</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complete Correspondence</strong></td>
+                        <td>Same or similar forms in both languages</td>
+                        <td>Simple Past Tense in both</td>
+                        <td>Least difficulty</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-exclamation-triangle"></i> CA Criticism</h3>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Based on behaviorist "habit-formation" neglecting cognitive processes</li>
+                    <li>Overprediction of errors (predicted difficulties don't always occur)</li>
+                    <li>Underprediction of errors (fails to predict errors like *"goed")</li>
+                    <li>Requires perfect knowledge of both languages being contrasted</li>
+                    <li>Focuses only on L1 interference, ignoring other error sources</li>
+                </ul>
+            </div>
+            
+            <!-- Lecture 3: Error Analysis -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-search"></i> Lecture 3: Error Analysis</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-exclamation-circle"></i> Errors vs. Mistakes (Brown, 1993)</h3>
+                <div class="comparison-table">
+                    <div class="comparison-box">
+                        <h4>Mistakes</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>Performance errors (slips)</li>
+                            <li>Random and non-systematic</li>
+                            <li>Can be self-corrected</li>
+                            <li>Due to fatigue, excitement, etc.</li>
+                            <li>Not reflective of competence</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box">
+                        <h4>Errors</h4>
+                        <ul style="padding-left: 20px;">
+                            <li>Systematic deviations</li>
+                            <li>Reflect learner's competence</li>
+                            <li>Cannot be self-corrected</li>
+                            <li>Product of current L2 development stage</li>
+                            <li>Show rule-governed behavior</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-sitemap"></i> EA Methodology (8 Steps)</h3>
+                <ol style="padding-left: 25px; margin: 15px 0;">
+                    <li><strong>Collection of errors</strong> from learner productions</li>
+                    <li><strong>Identification of errors</strong> against L2 norms</li>
+                    <li><strong>Classification of error types</strong> (see below)</li>
+                    <li><strong>Statement of relative frequency</strong> of error types</li>
+                    <li><strong>Identification of areas of difficulty</strong> in L2</li>
+                    <li><strong>Determination of error sources</strong> (L1 transfer, overgeneralization, etc.)</li>
+                    <li><strong>Determination of error seriousness</strong> in communication</li>
+                    <li><strong>Remedy through teaching</strong> (drills, activities, etc.)</li>
+                </ol>
+                
+                <h3 class="subsection-title"><i class="fas fa-project-diagram"></i> Classification of Errors</h3>
+                <div style="background: rgba(58, 80, 107, 0.05); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">Errors of Competence</h4>
+                    <p>Application of L2 rules that don't correspond to L2 norms. Take time to correct.</p>
+                    
+                    <h4 style="color: var(--primary); margin-top: 20px; margin-bottom: 15px;">Errors of Performance (Mistakes)</h4>
+                    <p>Recognized by speakers and corrected easily.</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                            <h5 style="color: var(--secondary);">Interlingual (Transfer) Errors</h5>
+                            <p>Due to L1 influence</p>
+                            <ul style="padding-left: 20px; font-size: 0.9rem;">
+                                <li>Phonological: /lbl/ for /lpl/</li>
+                                <li>Morphological: "book Ahmad" for "Ahmad's book"</li>
+                                <li>Syntactic: "Huda student" for "Huda is a student"</li>
+                                <li>Semantic: "close the TV" for "turn off the TV"</li>
+                            </ul>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                            <h5 style="color: var(--secondary);">Intralingual (Overgeneralization) Errors</h5>
+                            <p>Due to L2 system influence</p>
+                            <ul style="padding-left: 20px; font-size: 0.9rem;">
+                                <li>Phonological: pronouncing "count" as /kAnt/</li>
+                                <li>Morphological: "comed" for "came"</li>
+                                <li>Semantic: literal translation of idioms</li>
+                                <li>Syntactic: "He is comes" for "He is coming"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-balance-scale"></i> EA vs. CA Comparison</h3>
+                <table>
+                    <tr>
+                        <th>Contrastive Analysis (CA)</th>
+                        <th>Error Analysis (EA)</th>
+                    </tr>
+                    <tr>
+                        <td>Starts with language comparison</td>
+                        <td>Starts with learner errors</td>
+                    </tr>
+                    <tr>
+                        <td>Predicts areas of difficulty</td>
+                        <td>Analyzes actual attested problems</td>
+                    </tr>
+                    <tr>
+                        <td>Focuses on L1 interference only</td>
+                        <td>Considers multiple error sources</td>
+                    </tr>
+                    <tr>
+                        <td>Theoretical problems (equivalence)</td>
+                        <td>More practical, pedagogical focus</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher-centered approach</td>
+                        <td>Learner-centered approach</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-critique"></i> EA Criticism</h3>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li><strong>Classification issues:</strong> Same error can be classified differently</li>
+                    <li><strong>Progression insights:</strong> Only shows what learner can't do at one time point (cross-sectional)</li>
+                    <li><strong>Error identification difficulty:</strong> Depends on L2 norms which vary by context</li>
+                    <li><strong>Avoidance strategy:</strong> Learners may avoid structures where they'd make errors</li>
+                </ul>
+            </div>
+            
+            <!-- Lecture 4: Interlanguage -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-brain"></i> Lecture 4: Interlanguage</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-lightbulb"></i> Key Concepts</h3>
+                <p><strong>Interlanguage (IL):</strong> The intermediate linguistic system between L1 and L2, created by learners during SLA.</p>
+                <p><strong>Alternative terms:</strong> Approximative systems (Nemser, 1971), Transitional competence (Corder, 1967).</p>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What are Selinker's five central cognitive processes in IL formation?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <ol style="padding-left: 25px;">
+                            <li><strong>L1 transfer:</strong> Influence of native language</li>
+                            <li><strong>Transfer of training:</strong> From teachers' instruction methods</li>
+                            <li><strong>Strategies of L2 learning:</strong> Approaches to learning language elements</li>
+                            <li><strong>Strategies of L2 communication:</strong> Ways of communicating with native speakers</li>
+                            <li><strong>Overgeneralization of L2 rules:</strong> Extending rules beyond acceptable use</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-check-circle"></i> IL Assumptions</h3>
+                <ol style="padding-left: 25px; margin: 15px 0;">
+                    <li>Learners construct their own linguistic system (different from both L1 and L2)</li>
+                    <li>System is based on L2 input received</li>
+                    <li>Learners rely on this system at successive learning stages</li>
+                    <li>System rarely becomes identical to L2 norm</li>
+                </ol>
+                
+                <h3 class="subsection-title"><i class="fas fa-cogs"></i> Characteristics of Interlanguage</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Systematic</h4>
+                        <p>Governed by rules (rule-governed behavior)</p>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Internally Consistent</h4>
+                        <p>Linguistic system in its own right</p>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Reduced Systems</h4>
+                        <p>Fewer and simpler rules than target language</p>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Permeable</h4>
+                        <p>Rules are incomplete and in flux</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-fossil"></i> Fossilization</h3>
+                <p>Permanent stabilization of errors despite exposure and instruction.</p>
+                <p><strong>Causes (Selinker & Lamendella, 1978):</strong></p>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>Low motivation (psychological/social reasons)</li>
+                    <li>Age (older learners retain foreign accent)</li>
+                    <li>Limited L2 input (quality and quantity)</li>
+                </ul>
+                
+                <h3 class="subsection-title"><i class="fas fa-flask"></i> IL Methodology</h3>
+                <p>Selinker (1972) identified essential components:</p>
+                <ol style="padding-left: 25px; margin: 15px 0;">
+                    <li>L1 utterances produced by learner</li>
+                    <li>IL utterances produced by learner</li>
+                    <li>L2 utterances used by native speakers</li>
+                </ol>
+                <p><em>Note:</em> IL methodology incorporates both CA (contrasts L1 and L2) and EA (contrasts learner performance and L2).</p>
+                
+                <h3 class="subsection-title"><i class="fas fa-exclamation-triangle"></i> IL Criticism</h3>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>No concrete assertions on describing changing linguistic systems</li>
+                    <li>Requires large body of data (longitudinal studies needed)</li>
+                    <li>Difficult to observe truly systematic form due to multiple variables</li>
+                </ul>
+            </div>
+            
+            <!-- Lecture 5: Language Learning Strategies -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Lecture 5: Language Learning Strategies</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-tools"></i> Defining Learning Strategies</h3>
+                <p><strong>Oxford (1990):</strong> "Tools for active, self-directed involvement, essential for developing communicative competence."</p>
+                <p><strong>Cohen (1998):</strong> Includes both L2 learning strategies and L2 use strategies.</p>
+                
+                <div class="question">
+                    <h3><i class="fas fa-question-circle"></i> What are the main characteristics of language learning strategies?</h3>
+                    <button class="show-answer-btn">Show Answer</button>
+                    <div class="answer">
+                        <ol style="padding-left: 25px;">
+                            <li>Involve both linguistic and non-linguistic behavior</li>
+                            <li>Can be behavioral (observable) or mental (unobservable)</li>
+                            <li>Amenable to change (can be modified, rejected, learned)</li>
+                            <li>Systematic (employed based on knowledge of problem)</li>
+                            <li>Contribute indirectly (and sometimes directly) to learning</li>
+                            <li>Vary based on task type and individual preferences</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-sitemap"></i> O'Malley et al.'s Framework</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Metacognitive Strategies</h4>
+                        <p>Executive skills: planning, monitoring, evaluating</p>
+                        <p><em>Examples:</em> Selective attention, self-monitoring, functional planning</p>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Cognitive Strategies</h4>
+                        <p>Direct manipulation of learning materials</p>
+                        <p><em>Examples:</em> Repetition, resourcing, translation, note-taking</p>
+                    </div>
+                    <div style="background: rgba(58, 80, 107, 0.05); padding: 15px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Social Strategies</h4>
+                        <p>Learning through interaction with others</p>
+                        <p><em>Examples:</em> Cooperation, questioning for clarification</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-project-diagram"></i> Oxford's Classification (1990)</h3>
+                <div style="background: rgba(58, 80, 107, 0.05); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">Direct Strategies</h4>
+                    <p>Directly involved in L2, require mental processing of language</p>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Memory strategies:</strong> Remembering/retrieving information</li>
+                        <li><strong>Cognitive strategies:</strong> Understanding/producing language</li>
+                        <li><strong>Compensation strategies:</strong> Making up for lack of knowledge</li>
+                    </ul>
+                    
+                    <h4 style="color: var(--primary); margin-top: 20px; margin-bottom: 15px;">Indirect Strategies</h4>
+                    <p>Provide indirect support for language learning</p>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Metacognitive strategies:</strong> Coordinating learning process</li>
+                        <li><strong>Affective strategies:</strong> Regulating emotions</li>
+                        <li><strong>Social strategies:</strong> Learning with others</li>
+                    </ul>
+                </div>
+                
+                <h3 class="subsection-title"><i class="fas fa-chart-bar"></i> Factors Affecting Strategy Choice</h3>
+                <table>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Impact on Strategy Use</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Age</strong></td>
+                        <td>Young children: task-specific, simple strategies. Older learners: generalized, complex strategies</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aptitude</strong></td>
+                        <td>Weak relationship; possibly related to general intelligence factor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motivation</strong></td>
+                        <td>Highly motivated learners use more strategies; integrative motivation → communication-oriented strategies</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Personality</strong></td>
+                        <td>Extroverts use more meaning-search strategies; introverts use different approaches</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Background</strong></td>
+                        <td>More years of study → more functional practice strategies; expert vs. novice differences</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Situational Factors</strong></td>
+                        <td>Task type influences strategy choice (vocabulary tasks → resourcing; listening tasks → note-taking)</td>
+                    </tr>
+                </table>
+                
+                <h3 class="subsection-title"><i class="fas fa-chalkboard-teacher"></i> Strategy Training in Teaching</h3>
+                <p><strong>Key principles (Cook, 2001):</strong></p>
+                <ol style="padding-left: 25px; margin: 15px 0;">
+                    <li>Make students aware of good language learning strategies</li>
+                    <li>Train students to develop learning independence</li>
+                    <li>Make students aware of a range of strategy options</li>
+                    <li>Explain similarities/differences between L2 learning and other subjects</li>
+                </ol>
+                <p><em>Goal:</em> Help learners become independent and take responsibility for their learning.</p>
+            </div>
+            
+            <!-- Comparison Section -->
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-balance-scale"></i> Comparative Analysis of Approaches</h2>
+                
+                <h3 class="subsection-title"><i class="fas fa-history"></i> Historical Evolution of Approaches</h3>
+                <table>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Time Period</th>
+                        <th>Main Focus</th>
+                        <th>Theoretical Basis</th>
+                        <th>Main Contribution</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Contrastive Analysis</strong></td>
+                        <td>1950s-1960s</td>
+                        <td>L1-L2 differences</td>
+                        <td>Behaviorism (habit formation)</td>
+                        <td>Prediction of learning difficulties</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Error Analysis</strong></td>
+                        <td>1970s</td>
+                        <td>Learner errors</td>
+                        <td>Cognitive psychology</td>
+                        <td>Analysis of actual learner problems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interlanguage</strong></td>
+                        <td>1970s-present</td>
+                        <td>Learner's linguistic system</td>
+                        <td>Cognitive psychology</td>
+                        <td>Understanding learner's internal grammar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Learning Strategies</strong></td>
+                        <td>1980s-present</td>
+                        <td>How learners learn</td>
+                        <td>Cognitive & educational psychology</td>
+                        <td>Empowering learners</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Quiz Section -->
+        <section id="quiz" class="content-section">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 class="section-title"><i class="fas fa-question-circle"></i> Applied Linguistics Quiz</h2>
+                    <div class="quiz-progress">Question <span id="current-question">1</span> of <span id="total-questions">5</span></div>
+                </div>
+                
+                <div id="quiz-content">
+                    <div class="quiz-question" id="question-text">Loading question...</div>
+                    
+                    <div class="quiz-options" id="options-container">
+                        <!-- Options will be generated here by JavaScript -->
+                    </div>
+                    
+                    <div class="quiz-controls">
+                        <button id="prev-btn" class="quiz-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button id="next-btn" class="quiz-btn">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                
+                <div id="results-container" style="display: none;">
+                    <div class="quiz-results">
+                        <h2 style="color: var(--primary);">Quiz Completed!</h2>
+                        <div class="quiz-score" id="score">0/5</div>
+                        <p id="result-message" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px;">Based on your score, you have a good understanding of the material!</p>
+                        
+                        <div id="review-container" class="result-details">
+                            <!-- Question reviews will be inserted here -->
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px;">
+                            <button id="restart-quiz" class="quiz-btn"><i class="fas fa-redo"></i> Retry Same Questions</button>
+                            <button id="new-quiz" class="quiz-btn" style="background-color: var(--accent);"><i class="fas fa-random"></i> New 5 Questions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Quiz Instructions</h2>
+                <p>This quiz tests your knowledge of Applied Linguistics Lectures 1-5. Each quiz presents 5 random questions from a comprehensive question bank covering all topics: Introduction to AL, Contrastive Analysis, Error Analysis, Interlanguage, and Language Learning Strategies.</p>
+                <p>After completing the quiz, you'll receive detailed feedback showing your answers versus correct answers, along with explanations to help you learn.</p>
+            </div>
+        </section>
+        
+        <!-- Essays Section -->
+        <section id="essays" class="content-section">
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-edit"></i> Essay Builder: Applied Linguistics</h2>
+                <p>Below are 20 comprehensive paragraphs covering key concepts from all five lectures. Use these to build essays, understand connections between topics, and prepare for exam questions.</p>
+            </div>
+            
+            <div class="essay-item">
+                <h3 class="essay-title"><i class="fas fa-pen-fancy"></i> Integrated Essay Paragraphs</h3>
+                
+                <div class="essay-paragraphs">
+                    <div class="essay-paragraph">
+                        <p><strong>1. The Nature and Scope of Applied Linguistics:</strong> Applied Linguistics represents an interdisciplinary field that serves as a crucial bridge between linguistic theory and real-world language problems. Unlike theoretical linguistics which examines language as an abstract system, applied linguistics focuses on practical issues encountered by diverse stakeholders including learners, teachers, translators, policymakers, and professionals across various domains. As defined by Brumfit (1977), it involves "the theoretical and empirical investigation of real world problems in which language is a central issue," emphasizing its problem-solving orientation and practical relevance in educational, social, and professional contexts.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>2. Contrastive Analysis: Foundations and Limitations:</strong> Developed during the 1950s-1960s under the influence of behaviorist psychology, Contrastive Analysis (CA) represented the first systematic attempt to predict second language learning difficulties through comparison of linguistic systems. Based on Lado's (1957) premise that "we can predict and describe the patterns that will cause difficulty in learning by comparing systematically the language and culture to be learned with the native language," CA established hierarchies of difficulty ranging from splits (where L1 has one form, L2 has multiple) to complete correspondence. However, its behaviorist foundations and overreliance on L1 interference as the sole source of difficulty ultimately limited its predictive accuracy and theoretical validity.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>3. Error Analysis: Shifting Focus to the Learner:</strong> Emerging in the 1970s as a reaction to CA's limitations, Error Analysis (EA) marked a significant paradigm shift from teacher-centered to learner-centered approaches in applied linguistics. Rather than predicting difficulties through language comparison, EA focused on analyzing actual errors produced by learners, recognizing them as systematic indicators of underlying competence rather than random mistakes. This approach distinguished between errors (systematic deviations reflecting current competence) and mistakes (performance slips), and classified errors as either interlingual (L1 transfer) or intralingual (L2 overgeneralization), providing valuable insights into learners' developing linguistic systems.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>4. The Interlanguage Hypothesis:</strong> Building on EA's insights, the Interlanguage (IL) hypothesis proposed by Selinker (1972) conceptualized learners' language as a dynamic, rule-governed system existing independently between L1 and L2. This "approximative system" develops through five central cognitive processes: L1 transfer, transfer of training, learning strategies, communication strategies, and overgeneralization. IL is characterized by systematicity, internal consistency, permeability, and susceptibility to fossilization—the permanent stabilization of non-target forms. This theoretical framework recognized learners as active constructors of linguistic knowledge rather than passive recipients of language input.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>5. Language Learning Strategies: Empowering Learners:</strong> The study of Language Learning Strategies represents a natural progression toward understanding how learners actively engage with the language learning process. Oxford's (1990) classification distinguishes between direct strategies (memory, cognitive, compensation) that involve mental processing of language, and indirect strategies (metacognitive, affective, social) that support the learning process. Research demonstrates that effective strategy use correlates with higher proficiency and greater learner autonomy, and that strategies can be systematically taught and developed, making this area particularly relevant for pedagogical applications and learner training programs.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>6. From CA to IL: Theoretical Evolution in SLA:</strong> The theoretical evolution from Contrastive Analysis through Error Analysis to Interlanguage theory reflects broader shifts in psychology from behaviorist to cognitive paradigms. While CA focused exclusively on external linguistic comparison and L1 interference, EA introduced the analysis of learner data, and IL theory conceptualized the learner's internal linguistic system. This progression demonstrates increasing recognition of learners' active cognitive role in constructing linguistic knowledge, moving from a deficit model (focusing on errors and difficulties) to a developmental model (understanding systematic progression toward target language norms).</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>7. Methodological Contributions and Limitations:</strong> Each approach in applied linguistics has contributed distinct methodological tools while facing specific limitations. CA introduced systematic language comparison but suffered from overprediction and theoretical rigidity. EA developed error classification systems but faced challenges in distinguishing error types and accounting for avoidance strategies. IL theory emphasized longitudinal study but required extensive data collection. Learning strategy research employed various assessment methods but confronted issues of self-report reliability. Understanding these methodological strengths and limitations is crucial for critically evaluating research in applied linguistics.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>8. Pedagogical Implications of Applied Linguistics:</strong> Applied linguistics research has profoundly influenced language teaching methodologies and materials development. CA informed the creation of contrastive teaching materials targeting predicted difficulties. EA led to error-focused remediation activities and more tolerant attitudes toward learner errors. IL theory encouraged teachers to view learner language as a legitimate developing system rather than defective target language. Strategy training has been incorporated into curricula to develop learner autonomy. These applications demonstrate how theoretical insights translate into practical classroom interventions.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>9. Individual Differences in Language Learning:</strong> Research on language learning strategies has highlighted the significant role of individual learner variables including age, aptitude, motivation, personality, and learning background. Oxford's (1990) findings that highly motivated learners use more comprehensive strategy repertoires, and that extroverts employ different communication strategies than introverts, underscore the importance of considering learner individuality in both research and teaching. These factors interact complexly with situational variables such as task type and learning context, creating diverse learning profiles that resist simple categorization.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>10. Fossilization: Theoretical Explanations and Practical Implications:</strong> The phenomenon of fossilization, where certain non-target features become permanent in a learner's interlanguage despite continued exposure and instruction, represents a significant challenge in second language acquisition. Selinker and Lamendella's (1978) identification of contributing factors—including low motivation, age-related constraints, and limited input quality—has important implications for teaching. Understanding fossilization helps explain why some errors persist despite correction and suggests that pedagogical efforts might be more productively directed toward communicative effectiveness rather than complete accuracy for certain learner populations.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>11. Applied Linguistics as Interdisciplinary Mediation:</strong> The distinction between "Applied Linguistics" and "Linguistics Applied" highlighted by Widdowson and others emphasizes that applied linguistics involves mediation rather than direct application. This means linguistic insights must be interpreted and integrated with knowledge from psychology, sociology, education, and other relevant fields to address real-world language problems. This interdisciplinary nature allows applied linguistics to address complex issues like language planning, forensic linguistics, and clinical language disorders that require multifaceted approaches beyond purely linguistic analysis.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>12. Error Classification Systems:</strong> Error Analysis developed sophisticated classification systems distinguishing between errors of competence (reflecting underlying knowledge gaps) and errors of performance (temporary slips), and between interlingual errors (attributable to L1 transfer) and intralingual errors (resulting from L2 system overgeneralization). These classifications help teachers and researchers identify error sources and develop appropriate interventions. For example, interlingual phonological errors might require contrastive pronunciation practice, while intralingual morphological errors might benefit from clarification of rule boundaries and exceptions.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>13. Strategy Training in Language Education:</strong> The pedagogical application of learning strategy research, as advocated by Cook (2001) and Oxford (1990), involves making learners aware of strategic options, helping them develop independence, and teaching transferable learning skills. Effective strategy training goes beyond teaching specific techniques to developing metacognitive awareness—helping learners understand how they learn best and how to adapt strategies to different tasks and contexts. This approach aligns with broader educational goals of developing autonomous, lifelong learners capable of directing their own learning processes.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>14. The Hierarchy of Difficulty in CA:</strong> Stockwell, Bowen, and Martin's (1965) hierarchy of difficulty, ranging from splits (most difficult) through new categories, absent categories, and coalesced forms to complete correspondence (least difficult), provided a systematic framework for predicting learning challenges. This hierarchy recognized that not all differences between languages pose equal difficulties, and that certain types of contrasts (like having to distinguish where the L1 doesn't) create greater learning burdens than others. While later research questioned the absolute predictive power of this hierarchy, it represented an important step toward systematic difficulty prediction.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>15. Social and Affective Dimensions in Strategy Use:</strong> Oxford's classification highlights the importance of social and affective strategies alongside cognitive and metacognitive ones. Affective strategies for managing emotions (like anxiety reduction techniques) and social strategies for learning through interaction (like cooperation and questioning) acknowledge that language learning involves more than cognitive processing. These dimensions connect strategy research with broader concerns in language education regarding learner anxiety, motivation, and classroom climate, demonstrating the holistic nature of effective language learning.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>16. IL as a Reduced but Systematic System:</strong> Interlanguage theory posits that learners develop linguistic systems that are reduced in complexity compared to the target language but nevertheless systematic and rule-governed. These systems exhibit characteristics of natural languages (like internal consistency and constraint by linguistic universals) while also showing unique features resulting from the learning process itself (like permeability and fossilization). This view legitimizes learner language as a valid object of linguistic study while explaining its distinctive properties.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>17. Real-World Applications Beyond Language Teaching:</strong> While language teaching has historically been a major focus, applied linguistics addresses diverse real-world problems including language policy planning, forensic text analysis, clinical assessment of language disorders, workplace communication training, and dictionary compilation. These applications demonstrate the field's relevance across multiple domains and its capacity to draw on linguistic theory to address practical concerns in law, medicine, business, and social policy.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>18. From Error Correction to Strategic Competence:</strong> The evolution from CA's focus on preventing errors through contrastive teaching to strategy research's emphasis on developing strategic competence reflects a broader shift in language education goals. Rather than merely avoiding errors, contemporary approaches aim to develop learners' ability to use communication strategies effectively, manage their own learning processes, and employ compensation strategies when facing linguistic limitations. This represents a more realistic and communicative orientation aligned with how language is actually used outside classroom contexts.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>19. Research Methodologies Across Approaches:</strong> Different approaches in applied linguistics employ distinct research methodologies: CA relies on systematic language comparison, EA on error collection and classification, IL theory on longitudinal observation of learner language development, and strategy research often on questionnaires, interviews, and think-aloud protocols. Each methodology offers particular insights while presenting specific challenges regarding data collection, analysis, and interpretation, requiring researchers to match methodological choices carefully to research questions.</p>
+                    </div>
+                    
+                    <div class="essay-paragraph">
+                        <p><strong>20. Integration and Future Directions:</strong> Contemporary applied linguistics increasingly integrates insights from multiple approaches, recognizing that language learning involves complex interactions between linguistic systems, cognitive processes, individual differences, and social contexts. Future directions likely involve greater integration of neuroscientific findings, more sophisticated computational modeling of language development, and increased attention to multilingual rather than bilingual contexts. This integrative, multidisciplinary approach continues to advance our understanding of language-related problems and their solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="essay-key-ideas">
+                    <h4><i class="fas fa-lightbulb"></i> How to Use These Paragraphs:</h4>
+                    <ul>
+                        <li><strong>Combine paragraphs</strong> to build complete essays on specific topics</li>
+                        <li>Use the <strong>paragraph numbers</strong> to quickly locate content</li>
+                        <li><strong>Adapt and expand</strong> with specific examples from research or experience</li>
+                        <li>Practice <strong>connecting concepts</strong> across different lectures</li>
+                        <li>Use as <strong>model structures</strong> for academic writing in applied linguistics</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section-card">
+                <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Sample Essay Structures (10 Models)</h2>
+                
+                <div class="essay-paragraphs">
+                    <!-- Essay 1 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 1: The Historical Evolution of Approaches in Applied Linguistics
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 1 (Nature of AL) + Context on theoretical development</p>
+                        <p><strong>Body 1 (CA):</strong> Paragraph 2 (CA Foundations) + Paragraph 14 (Hierarchy of Difficulty)</p>
+                        <p><strong>Body 2 (EA & IL):</strong> Paragraph 3 (Error Analysis) + Paragraph 4 (Interlanguage)</p>
+                        <p><strong>Body 3 (Learning Strategies):</strong> Paragraph 5 (LL Strategies) + Paragraph 9 (Individual Differences)</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Integration) + Implications for current research</p>
+                    </div>
+                    
+                    <!-- Essay 2 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 2: Error Analysis and Its Pedagogical Applications
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 3 (Error Analysis)</p>
+                        <p><strong>Body 1 (Theoretical Foundations):</strong> Paragraph 12 (Error Classification) + Distinction errors/mistakes</p>
+                        <p><strong>Body 2 (Methodology):</strong> Paragraph 7 (Methodological Approaches) + EA procedures</p>
+                        <p><strong>Body 3 (Pedagogical Implications):</strong> Paragraph 8 (Pedagogical Applications) + Error correction strategies</p>
+                        <p><strong>Conclusion:</strong> Paragraph 18 (Strategic Competence) + Contemporary error treatment</p>
+                    </div>
+                    
+                    <!-- Essay 3 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 3: The Interlanguage Hypothesis: Theory and Evidence
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 4 (Interlanguage) + Historical context</p>
+                        <p><strong>Body 1 (Theoretical Framework):</strong> Paragraph 16 (Reduced Systems) + Selinker's processes</p>
+                        <p><strong>Body 2 (Key Characteristics):</strong> Paragraph 10 (Fossilization) + Systematicity evidence</p>
+                        <p><strong>Body 3 (Research Evidence):</strong> Paragraph 19 (Methodologies) + Longitudinal studies</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Integration) + Current status of IL theory</p>
+                    </div>
+                    
+                    <!-- Essay 4 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 4: Language Learning Strategies and Learner Autonomy
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 5 (Learning Strategies) + Importance of autonomy</p>
+                        <p><strong>Body 1 (Classification Systems):</strong> Paragraph 15 (Social/Affective) + Oxford's framework</p>
+                        <p><strong>Body 2 (Individual Factors):</strong> Paragraph 9 (Individual Differences) + Strategy choice determinants</p>
+                        <p><strong>Body 3 (Strategy Training):</strong> Paragraph 13 (Strategy Training) + Implementation approaches</p>
+                        <p><strong>Conclusion:</strong> Paragraph 18 (Strategic Competence) + Future directions</p>
+                    </div>
+                    
+                    <!-- Essay 5 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 5: Contrastive Analysis: Critique and Legacy
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 2 (Contrastive Analysis) + Historical significance</p>
+                        <p><strong>Body 1 (Theoretical Basis):</strong> Paragraph 14 (Hierarchy) + Behaviorist foundations</p>
+                        <p><strong>Body 2 (Criticisms):</strong> Paragraph 6 (Theoretical Evolution) + Over/underprediction issues</p>
+                        <p><strong>Body 3 (Legacy):</strong> Paragraph 8 (Pedagogical Impact) + Contemporary applications</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Integration) + CA's place in modern AL</p>
+                    </div>
+                    
+                    <!-- Essay 6 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 6: Applied Linguistics as Problem-Solving Discipline
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 1 (Nature of AL) + Problem-solving orientation</p>
+                        <p><strong>Body 1 (Scope):</strong> Paragraph 17 (Real-World Applications) + Diverse domains</p>
+                        <p><strong>Body 2 (Methodological Approaches):</strong> Paragraph 11 (Interdisciplinary Mediation) + Multiple perspectives</p>
+                        <p><strong>Body 3 (Case Examples):</strong> Paragraph 8 (Pedagogical) + Specific problem analyses</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Future Directions) + Expanding applications</p>
+                    </div>
+                    
+                    <!-- Essay 7 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 7: Fossilization in Second Language Acquisition
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 10 (Fossilization) + Definition and significance</p>
+                        <p><strong>Body 1 (Theoretical Explanations):</strong> Paragraph 4 (IL Processes) + Selinker's framework</p>
+                        <p><strong>Body 2 (Contributing Factors):</strong> Paragraph 10 (continued) + Motivation, age, input factors</p>
+                        <p><strong>Body 3 (Pedagogical Implications):</strong> Paragraph 8 (Teaching Applications) + Realistic goals</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Integration) + Current research directions</p>
+                    </div>
+                    
+                    <!-- Essay 8 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 8: Strategy-Based Instruction in Language Teaching
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 13 (Strategy Training) + Importance in education</p>
+                        <p><strong>Body 1 (Theoretical Basis):</strong> Paragraph 5 (Learning Strategies) + Research evidence</p>
+                        <p><strong>Body 2 (Implementation):</strong> Paragraph 13 (continued) + Training approaches</p>
+                        <p><strong>Body 3 (Assessment):</strong> Paragraph 19 (Methodologies) + Evaluating effectiveness</p>
+                        <p><strong>Conclusion:</strong> Paragraph 18 (Strategic Competence) + Future developments</p>
+                    </div>
+                    
+                    <!-- Essay 9 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 9: From Contrastive Analysis to Interlanguage: Paradigm Shifts
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 6 (Theoretical Evolution) + Overview of shifts</p>
+                        <p><strong>Body 1 (CA to EA):</strong> Paragraph 2 (CA) + Paragraph 3 (EA) + Reasons for shift</p>
+                        <p><strong>Body 2 (EA to IL):</strong> Paragraph 3 (continued) + Paragraph 4 (IL) + Cognitive turn</p>
+                        <p><strong>Body 3 (Current Integration):</strong> Paragraph 20 (Integration) + Contemporary synthesis</p>
+                        <p><strong>Conclusion:</strong> Paragraph 1 (Nature of AL) + Implications for field</p>
+                    </div>
+                    
+                    <!-- Essay 10 -->
+                    <div class="essay-paragraph">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px; border-bottom: 2px solid rgba(58, 80, 107, 0.2); padding-bottom: 8px;">
+                            Essay 10: Research Methods in Applied Linguistics
+                        </h4>
+                        <p><strong>Introduction:</strong> Paragraph 19 (Methodologies) + Importance of method choice</p>
+                        <p><strong>Body 1 (Approach-Specific Methods):</strong> Paragraph 7 (Methodological Contributions) + CA, EA, IL methods</p>
+                        <p><strong>Body 2 (Strategy Research Methods):</strong> Paragraph 19 (continued) + Questionnaires, interviews, observation</p>
+                        <p><strong>Body 3 (Methodological Challenges):</strong> Paragraph 7 (Limitations) + Validity, reliability issues</p>
+                        <p><strong>Conclusion:</strong> Paragraph 20 (Future Directions) + Emerging methodologies</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p><i class="fas fa-language"></i> Applied Linguistics Revision Guide &copy; 2023 | Master 1 Lectures 1-5</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Zaine Achour University-Djelfa | Department of English</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation between sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const target = this.getAttribute('data-target');
+                    
+                    // Update active tab
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target section
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === target) {
+                            section.classList.add('active');
+                        }
+                    });
+                    
+                    // If switching to quiz, initialize it
+                    if (target === 'quiz') {
+                        initializeQuiz();
+                    }
+                });
+            });
+            
+            // Show/hide answers in revision section
+            const showAnswerBtns = document.querySelectorAll('.show-answer-btn');
+            showAnswerBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('active');
+                    
+                    // Change button text
+                    if (answer.classList.contains('active')) {
+                        this.innerHTML = 'Hide Answer <i class="fas fa-chevron-up"></i>';
+                    } else {
+                        this.innerHTML = 'Show Answer <i class="fas fa-chevron-down"></i>';
+                    }
+                });
+            });
+            
+            // Initialize quiz
+            initializeQuiz();
+        });
+        
+        // Quiz functionality
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let quizCompleted = false;
+        
+        // Comprehensive question pool for Applied Linguistics
+        const questionPool = [
+            // Lecture 1 Questions
+            {
+                question: "According to Brumfit (1977), how is Applied Linguistics defined?",
+                options: [
+                    "The study of linguistic theory for its own sake",
+                    "The theoretical and empirical investigation of real world problems in which language is a central issue",
+                    "The application of linguistic theory to language teaching only",
+                    "The comparison of different language systems"
+                ],
+                correct: 1,
+                explanation: "Brumfit's definition emphasizes the problem-solving orientation of applied linguistics, focusing on real-world issues where language plays a central role, rather than purely theoretical linguistic study.",
+                topic: "Introduction to AL"
+            },
+            {
+                question: "What is the key difference between 'Applied Linguistics' and 'Linguistics Applied'?",
+                options: [
+                    "They are exactly the same thing",
+                    "Applied Linguistics is broader and involves mediation between linguistics and other fields",
+                    "Linguistics Applied deals with more practical problems",
+                    "Only Linguistics Applied is considered a legitimate field"
+                ],
+                correct: 1,
+                explanation: "Applied Linguistics involves mediation and integration of linguistic insights with knowledge from other fields, while Linguistics Applied assumes direct application of linguistic concepts to solve problems.",
+                topic: "Introduction to AL"
+            },
+            {
+                question: "Which of these areas is NOT typically within the scope of Applied Linguistics?",
+                options: [
+                    "Language teaching and learning",
+                    "Forensic linguistics",
+                    "Theoretical syntax analysis",
+                    "Language planning and policy"
+                ],
+                correct: 2,
+                explanation: "Theoretical syntax analysis is typically within pure linguistics, while applied linguistics focuses on practical applications in areas like language teaching, forensic analysis, and language planning.",
+                topic: "Introduction to AL"
+            },
+            // Lecture 2 Questions
+            {
+                question: "According to Lee (1968), what is the prime cause of difficulty in L2 learning according to Contrastive Analysis?",
+                options: [
+                    "Lack of motivation",
+                    "Inadequate teaching methods",
+                    "Interference from the learner's L1",
+                    "Cognitive overload"
+                ],
+                correct: 2,
+                explanation: "Contrastive Analysis assumes that L1 interference is the primary source of difficulty in L2 learning, predicting that differences between languages cause learning problems.",
+                topic: "Contrastive Analysis"
+            },
+            {
+                question: "In Stockwell et al.'s hierarchy of difficulty, which type presents the greatest challenge?",
+                options: [
+                    "Complete correspondence",
+                    "Coalesced forms",
+                    "Split",
+                    "New category"
+                ],
+                correct: 2,
+                explanation: "Split (where L1 has one form and L2 has two or more) represents the greatest difficulty because learners must distinguish where their L1 doesn't make distinctions.",
+                topic: "Contrastive Analysis"
+            },
+            {
+                question: "Which criticism is NOT typically leveled against Contrastive Analysis?",
+                options: [
+                    "Overprediction of errors",
+                    "Underprediction of errors",
+                    "Focus on learner's cognitive processes",
+                    "Reliance on behaviorist psychology"
+                ],
+                correct: 2,
+                explanation: "CA is actually criticized for NOT focusing enough on learners' cognitive processes, being too focused on linguistic comparison and behaviorist habit formation instead.",
+                topic: "Contrastive Analysis"
+            },
+            // Lecture 3 Questions
+            {
+                question: "According to Brown (1993), what distinguishes an error from a mistake?",
+                options: [
+                    "Errors are more serious than mistakes",
+                    "Errors reflect competence while mistakes are performance slips",
+                    "Mistakes are systematic while errors are random",
+                    "Only native speakers make mistakes"
+                ],
+                correct: 1,
+                explanation: "Errors are systematic deviations reflecting the learner's current competence level, while mistakes are random performance slips that can be self-corrected.",
+                topic: "Error Analysis"
+            },
+            {
+                question: "Which type of error results from applying L2 rules beyond their acceptable use?",
+                options: [
+                    "Interlingual error",
+                    "Error of performance",
+                    "Intralingual error",
+                    "Transfer error"
+                ],
+                correct: 2,
+                explanation: "Intralingual errors result from overgeneralization within the L2 system (like saying 'goed' instead of 'went'), not from L1 transfer.",
+                topic: "Error Analysis"
+            },
+            {
+                question: "What was the main shift represented by Error Analysis compared to Contrastive Analysis?",
+                options: [
+                    "From teacher-centered to learner-centered approaches",
+                    "From cognitive to behaviorist theories",
+                    "From practical to theoretical focus",
+                    "From error analysis to error prevention"
+                ],
+                correct: 0,
+                explanation: "EA shifted focus from teacher-centered prediction of difficulties (CA) to learner-centered analysis of actual errors, recognizing learners' active role in the learning process.",
+                topic: "Error Analysis"
+            },
+            // Lecture 4 Questions
+            {
+                question: "What does the term 'Interlanguage' refer to?",
+                options: [
+                    "A mixture of two languages",
+                    "The intermediate linguistic system between L1 and L2",
+                    "A pidgin language",
+                    "The target language being learned"
+                ],
+                correct: 1,
+                explanation: "Interlanguage is the systematic, rule-governed linguistic system that learners construct between their L1 and the target L2.",
+                topic: "Interlanguage"
+            },
+            {
+                question: "According to Selinker (1972), which is NOT one of the five central processes in IL formation?",
+                options: [
+                    "L1 transfer",
+                    "Language aptitude",
+                    "Overgeneralization of L2 rules",
+                    "Strategies of L2 communication"
+                ],
+                correct: 1,
+                explanation: "Selinker's five processes are: L1 transfer, transfer of training, strategies of L2 learning, strategies of L2 communication, and overgeneralization. Language aptitude is not included.",
+                topic: "Interlanguage"
+            },
+            {
+                question: "What is fossilization in Interlanguage theory?",
+                options: [
+                    "Complete mastery of L2",
+                    "Temporary stabilization of errors",
+                    "Permanent stabilization of non-target forms",
+                    "Forgetting L1 structures"
+                ],
+                correct: 2,
+                explanation: "Fossilization refers to the permanent stabilization of certain non-target language forms in a learner's interlanguage, despite continued exposure and instruction.",
+                topic: "Interlanguage"
+            },
+            // Lecture 5 Questions
+            {
+                question: "According to Oxford (1990), what are language learning strategies?",
+                options: [
+                    "Teaching methods used by instructors",
+                    "Tools for active, self-directed involvement in learning",
+                    "Only cognitive processes in language acquisition",
+                    "Innate language learning abilities"
+                ],
+                correct: 1,
+                explanation: "Oxford defines strategies as tools for active, self-directed involvement that are essential for developing communicative competence.",
+                topic: "Language Learning Strategies"
+            },
+            {
+                question: "Which type of strategy involves planning, monitoring, and evaluating learning?",
+                options: [
+                    "Cognitive strategies",
+                    "Metacognitive strategies",
+                    "Social strategies",
+                    "Affective strategies"
+                ],
+                correct: 1,
+                explanation: "Metacognitive strategies are executive skills that involve planning, monitoring, and evaluating the learning process.",
+                topic: "Language Learning Strategies"
+            },
+            {
+                question: "What factor has been found to significantly influence strategy choice according to research?",
+                options: [
+                    "Learner's height",
+                    "Motivation level",
+                    "Favorite color",
+                    "Time of day"
+                ],
+                correct: 1,
+                explanation: "Research shows that highly motivated learners use more and different strategies than poorly motivated learners, and the type of motivation also influences strategy choice.",
+                topic: "Language Learning Strategies"
+            },
+            // Additional questions
+            {
+                question: "Which approach focuses on predicting learning difficulties through language comparison?",
+                options: [
+                    "Error Analysis",
+                    "Interlanguage Theory",
+                    "Contrastive Analysis",
+                    "Learning Strategy Research"
+                ],
+                correct: 2,
+                explanation: "Contrastive Analysis predicts learning difficulties by systematically comparing the learner's L1 and the target L2.",
+                topic: "Comparative Approaches"
+            },
+            {
+                question: "What type of error would 'He is comes' represent in Error Analysis?",
+                options: [
+                    "Interlingual error",
+                    "Intralingual error",
+                    "Error of performance",
+                    "Transfer error"
+                ],
+                correct: 1,
+                explanation: "'He is comes' is an intralingual error resulting from overgeneralization of the English present continuous formation rule.",
+                topic: "Error Analysis"
+            },
+            {
+                question: "Which characteristic is NOT typical of Interlanguage?",
+                options: [
+                    "Systematicity",
+                    "Permeability",
+                    "Fossilization",
+                    "Complete stability"
+                ],
+                correct: 3,
+                explanation: "Interlanguage is characterized by permeability (being in flux) and potential fossilization, not complete stability.",
+                topic: "Interlanguage"
+            },
+            {
+                question: "In Oxford's classification, which are considered indirect strategies?",
+                options: [
+                    "Memory, cognitive, and compensation",
+                    "Metacognitive, affective, and social",
+                    "Only cognitive strategies",
+                    "Only social strategies"
+                ],
+                correct: 1,
+                explanation: "Oxford's indirect strategies include metacognitive (coordinating learning), affective (regulating emotions), and social (learning with others) strategies.",
+                topic: "Language Learning Strategies"
+            }
+        ];
+        
+        // Fill the question pool to 50 questions
+        function fillQuestionPool() {
+            const baseQuestions = questionPool.length;
+            const topics = ["Introduction to AL", "Contrastive Analysis", "Error Analysis", "Interlanguage", "Language Learning Strategies", "Comparative Approaches"];
+            
+            for (let i = baseQuestions; i < 50; i++) {
+                const templateIndex = i % baseQuestions;
+                const template = questionPool[templateIndex];
+                const topic = topics[i % topics.length];
+                
+                const newQuestion = {
+                    question: `[${topic}] ${template.question}`,
+                    options: [...template.options],
+                    correct: template.correct,
+                    explanation: template.explanation,
+                    topic: topic
+                };
+                
+                // Modify question slightly
+                if (i > baseQuestions) {
+                    newQuestion.question = newQuestion.question.replace("?", "? (Q" + (i + 1) + ")");
+                }
+                
+                questionPool.push(newQuestion);
+            }
+        }
+        
+        function initializeQuiz() {
+            fillQuestionPool();
+            
+            // Reset quiz state
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            quizCompleted = false;
+            
+            // Randomly select 5 questions from the pool
+            quizQuestions = getRandomQuestions(5);
+            
+            // Display first question
+            displayQuestion(currentQuestionIndex);
+            
+            // Update UI
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = quizQuestions.length;
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('next-btn').textContent = 'Next';
+        }
+        
+        function getRandomQuestions(count) {
+            const shuffled = [...questionPool].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        
+        function displayQuestion(index) {
+            const question = quizQuestions[index];
+            document.getElementById('question-text').textContent = question.question;
+            
+            // Clear previous options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            const letters = ['A', 'B', 'C', 'D'];
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                if (userAnswers[index] === i) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.innerHTML = `
+                    <div class="option-letter">${letters[i]}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(i));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update progress
+            document.getElementById('current-question').textContent = index + 1;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = index === 0;
+            
+            if (index === quizQuestions.length - 1) {
+                document.getElementById('next-btn').textContent = userAnswers[index] !== undefined ? 'Finish Quiz' : 'Finish (Select Answer First)';
+            } else {
+                document.getElementById('next-btn').textContent = 'Next';
+            }
+            
+            // Enable/disable Next button
+            document.getElementById('next-btn').disabled = userAnswers[index] === undefined;
+        }
+        
+        function selectOption(optionIndex) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            userAnswers[currentQuestionIndex] = optionIndex;
+            document.getElementById('next-btn').disabled = false;
+            
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                document.getElementById('next-btn').textContent = 'Finish Quiz';
+            }
+        }
+        
+        function showResults() {
+            let score = 0;
+            const results = [];
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            // Calculate score and prepare review
+            for (let i = 0; i < quizQuestions.length; i++) {
+                const q = quizQuestions[i];
+                const userAnswer = userAnswers[i];
+                const isCorrect = userAnswer === q.correct;
+                
+                if (isCorrect) score++;
+                
+                results.push({
+                    question: q.question,
+                    options: q.options,
+                    userAnswer: userAnswer,
+                    correctAnswer: q.correct,
+                    isCorrect: isCorrect,
+                    explanation: q.explanation,
+                    topic: q.topic || "General"
+                });
+            }
+            
+            // Display score
+            document.getElementById('score').textContent = `${score}/${quizQuestions.length}`;
+            
+            // Provide feedback based on score
+            let message = "";
+            if (score === quizQuestions.length) {
+                message = "Excellent! You have mastered Applied Linguistics concepts.";
+            } else if (score >= quizQuestions.length * 0.7) {
+                message = "Very good! You have a solid understanding of key concepts.";
+            } else if (score >= quizQuestions.length * 0.5) {
+                message = "Fair understanding. Review areas where you had difficulties.";
+            } else {
+                message = "Thorough revision recommended before exams.";
+            }
+            
+            document.getElementById('result-message').textContent = message;
+            
+            // Generate detailed review
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '<h3 style="color: var(--secondary); margin-bottom: 20px;">Detailed Review</h3>';
+            
+            results.forEach((result, index) => {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.className = `question-review ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                
+                let optionsHtml = '';
+                result.options.forEach((option, optIndex) => {
+                    let optionClass = '';
+                    if (optIndex === result.correctAnswer) {
+                        optionClass = 'correct';
+                    } else if (optIndex === result.userAnswer && !result.isCorrect) {
+                        optionClass = 'incorrect';
+                    }
+                    
+                    optionsHtml += `
+                        <div class="quiz-option ${optionClass}" style="margin: 8px 0; cursor: default; padding: 12px;">
+                            <div class="option-letter">${letters[optIndex]}</div>
+                            <div class="option-text">${option}</div>
+                            ${optIndex === result.correctAnswer ? '<span style="color: var(--success); margin-left: 10px;"><i class="fas fa-check-circle"></i> Correct</span>' : ''}
+                            ${optIndex === result.userAnswer && !result.isCorrect ? '<span style="color: var(--danger); margin-left: 10px;"><i class="fas fa-times-circle"></i> Your choice</span>' : ''}
+                        </div>
+                    `;
+                });
+                
+                reviewDiv.innerHTML = `
+                    <h4 style="color: ${result.isCorrect ? 'var(--success)' : 'var(--danger)'}; margin-bottom: 10px;">
+                        Question ${index + 1}: ${result.isCorrect ? '<i class="fas fa-check"></i> Correct' : '<i class="fas fa-times"></i> Incorrect'}
+                        <span style="font-size: 0.9rem; color: var(--gray); background: rgba(108, 117, 125, 0.1); padding: 3px 8px; border-radius: 12px; margin-left: 10px;">${result.topic}</span>
+                    </h4>
+                    <p style="margin-bottom: 15px; font-weight: 500;">${result.question}</p>
+                    ${optionsHtml}
+                    <div class="review-feedback">
+                        <strong>Explanation:</strong> ${result.explanation}
+                    </div>
+                `;
+                
+                reviewContainer.appendChild(reviewDiv);
+            });
+            
+            // Show results, hide quiz
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('results-container').style.display = 'block';
+            
+            quizCompleted = true;
+        }
+        
+        // Event listeners for quiz buttons
+        document.getElementById('prev-btn').addEventListener('click', function() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion(currentQuestionIndex);
+            }
+        });
+        
+        document.getElementById('next-btn').addEventListener('click', function() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(currentQuestionIndex);
+            } else {
+                showResults();
+            }
+        });
+        
+        document.getElementById('restart-quiz').addEventListener('click', function() {
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            displayQuestion(currentQuestionIndex);
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('results-container').style.display = 'none';
+        });
+        
+        document.getElementById('new-quiz').addEventListener('click', function() {
+            initializeQuiz();
+        });
+    </script>
+</body>
+</html>
